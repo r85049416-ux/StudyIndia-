@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyIndia - Mind Exercise</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 12px 35px rgba(37,99,235,.10);
+}
+
+body.dark{
+    --bg:#0b1020;
+    --card:#151c30;
+    --text:#f5f7ff;
+    --muted:#aab3c5;
+    --border:#29334d;
+    --shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(37,99,235,.10),transparent 25%),
+        radial-gradient(circle at 90% 20%,rgba(124,58,237,.10),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font:inherit;
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:100px;
+}
+
+/* HEADER */
+
+header{
+    margin:14px;
+    padding:18px;
+    border-radius:24px;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+    animation:fadeDown .6s ease;
+}
+
+.header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    display:grid;
+    place-items:center;
+    font-size:27px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+}
+
+.brand h1{
+    font-size:22px;
+}
+
+.brand p{
+    font-size:12px;
+    opacity:.85;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    color:white;
+    background:rgba(255,255,255,.16);
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.25);
+}
+
+.hero{
+    margin-top:22px;
+    padding:5px;
+}
+
+.hero h2{
+    font-size:29px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    opacity:.9;
+    font-size:14px;
+}
+
+/* GAME SELECT */
+
+.section{
+    padding:14px;
+}
+
+.section-title{
+    margin:8px 2px 16px;
+}
+
+.section-title h2{
+    font-size:22px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
+
+.games{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.game-card{
+    position:relative;
+    overflow:hidden;
+    padding:20px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+    animation:fadeUp .55s ease both;
+}
+
+.game-card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    right:-35px;
+    top:-35px;
+    background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(124,58,237,.08));
+}
+
+.game-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 45px rgba(37,99,235,.16);
+}
+
+.game-icon{
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:17px;
+    font-size:28px;
+    background:linear-gradient(135deg,#eff6ff,#ede9fe);
+    margin-bottom:14px;
+}
+
+body.dark .game-icon{
+    background:#202943;
+}
+
+.game-card h3{
+    font-size:17px;
+    margin-bottom:6px;
+}
+
+.game-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    min-height:40px;
+}
+
+.play-btn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border-radius:13px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    transition:.25s;
+}
+
+.play-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+/* GAME SCREEN */
+
+#gameScreen{
+    display:none;
+    padding:14px;
+    animation:fadeUp .45s ease;
+}
+
+.game-panel{
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:25px;
+    box-shadow:var(--shadow);
+    padding:20px;
+}
+
+.game-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.game-name{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.big-game-icon{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    display:grid;
+    place-items:center;
+    font-size:27px;
+    background:linear-gradient(135deg,#eff6ff,#ede9fe);
+}
+
+.game-name h2{
+    font-size:20px;
+}
+
+.game-name p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.back-btn{
+    padding:10px 13px;
+    border-radius:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.stats{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.stat{
+    flex:1;
+    text-align:center;
+    padding:11px 6px;
+    border-radius:14px;
+    background:var(--bg);
+    border:1px solid var(--border);
+}
+
+.stat span{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.stat strong{
+    display:block;
+    margin-top:3px;
+    font-size:16px;
+}
+
+.challenge{
+    min-height:300px;
+    padding:22px 10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.challenge-title{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.challenge-main{
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.options{
+    width:100%;
+    max-width:600px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.option{
+    padding:15px;
+    border-radius:15px;
+    border:2px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-weight:bold;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:var(--primary);
+    transform:translateY(-2px);
+}
+
+.option.correct{
+    border-color:var(--success);
+    background:rgba(22,163,74,.12);
+    color:var(--success);
+}
+
+.option.wrong{
+    border-color:var(--danger);
+    background:rgba(220,38,38,.10);
+    color:var(--danger);
+}
+
+.action-row{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+}
+
+.main-btn{
+    padding:13px 24px;
+    border-radius:14px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    transition:.25s;
+}
+
+.main-btn:hover{
+    transform:translateY(-2px);
+}
+
+.secondary-btn{
+    padding:13px 20px;
+    border-radius:14px;
+    color:var(--text);
+    background:var(--bg);
+    border:1px solid var(--border);
+}
+
+/* MEMORY */
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(4,70px);
+    gap:10px;
+    justify-content:center;
+}
+
+.memory-box{
+    width:70px;
+    height:70px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.memory-box:hover{
+    transform:scale(1.05);
+}
+
+.memory-box.reveal{
+    background:var(--card);
+    color:var(--text);
+    border:2px solid var(--primary);
+}
+
+.memory-box.selected{
+    background:var(--primary);
+    color:white;
+}
+
+/* PATTERN */
+
+.pattern-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:25px;
+}
+
+.pattern-item{
+    min-width:55px;
+    padding:12px;
+    border-radius:14px;
+    background:var(--bg);
+    border:1px solid var(--border);
+}
+
+.question-mark{
+    color:var(--secondary);
+}
+
+/* RESULT */
+
+.result-box{
+    display:none;
+    text-align:center;
+    margin-top:20px;
+    padding:22px;
+    border-radius:18px;
+    background:var(--bg);
+    border:1px solid var(--border);
+}
+
+.result-score{
+    font-size:42px;
+    font-weight:bold;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.result-box p{
+    color:var(--muted);
+    margin:6px 0 15px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    z-index:20;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:min(500px,calc(100% - 24px));
+    padding:8px;
+    display:flex;
+    justify-content:space-around;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(18px);
+    border-radius:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+body.dark .bottom-nav{
+    background:rgba(21,28,48,.9);
+}
+
+.nav-btn{
+    flex:1;
+    padding:9px;
+    border-radius:13px;
+    background:transparent;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.nav-btn.active{
+    color:var(--primary);
+    background:rgba(37,99,235,.10);
+    font-weight:bold;
+}
+
+/* TIMER */
+
+.timer{
+    color:var(--primary);
+}
+
+.timer.warning{
+    color:var(--danger);
+    animation:pulse .7s infinite;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.08)}
+}
+
+@media(max-width:650px){
+
+    .games{
+        grid-template-columns:1fr;
+    }
+
+    .header-top{
+        align-items:flex-start;
+    }
+
+    .hero h2{
+        font-size:25px;
+    }
+
+    .game-top{
+        align-items:flex-start;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .memory-grid{
+        grid-template-columns:repeat(4,60px);
+    }
+
+    .memory-box{
+        width:60px;
+        height:60px;
+    }
+
+    .challenge-main{
+        font-size:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+    <div class="header-top">
+
+        <div class="brand">
+            <div class="logo">🧠</div>
+            <div>
+                <h1>StudyIndia</h1>
+                <p>Learn • Practice • Grow</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" onclick="goHome()">←</button>
+            <button class="icon-btn" onclick="toggleDark()">🌙</button>
+        </div>
+
+    </div>
+
+    <div class="hero">
+        <h2>🧠 Mind Exercise</h2>
+        <p>Train your brain with a new challenge every time.</p>
+    </div>
+
+</header>
+
+
+<section id="homeScreen" class="section">
+
+    <div class="section-title">
+        <h2>Choose Your Challenge</h2>
+        <p>हर बार नया challenge automatically generate होगा।</p>
+    </div>
+
+    <div class="games">
+
+        <div class="game-card">
+            <div class="game-icon">🧠</div>
+            <h3>Memory Challenge</h3>
+            <p>Sequence को याद करो और सही order में दोहराओ।</p>
+            <button class="play-btn" onclick="startGame('memory')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🔢</div>
+            <h3>Number Sequence</h3>
+            <p>Pattern पहचानो और अगला number खोजो।</p>
+            <button class="play-btn" onclick="startGame('sequence')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🔷</div>
+            <h3>Pattern Master</h3>
+            <p>Shapes और symbols का hidden pattern पहचानो।</p>
+            <button class="play-btn" onclick="startGame('pattern')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">⚡</div>
+            <h3>Quick Math</h3>
+            <p>Time limit में calculation solve करो।</p>
+            <button class="play-btn" onclick="startGame('math')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🔤</div>
+            <h3>Word Logic</h3>
+            <p>Words के relation और logic को समझो।</p>
+            <button class="play-btn" onclick="startGame('word')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🎯</div>
+            <h3>Odd One Out</h3>
+            <p>चार options में अलग item खोजो।</p>
+            <button class="play-btn" onclick="startGame('odd')">Play Game</button>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🧩</div>
+            <h3>Logic Puzzle</h3>
+            <p>Situation को समझकर सही answer चुनो।</p>
+            <button class="play-btn" onclick="startGame('logic')">Play Game</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="gameScreen">
+
+    <div class="game-panel">
+
+        <div class="game-top">
+
+            <div class="game-name">
+                <div id="gameIcon" class="big-game-icon">🧠</div>
+
+                <div>
+                    <h2 id="gameTitle">Mind Game</h2>
+                    <p id="gameDescription">Challenge</p>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="showHome()">← Games</button>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <span>Round</span>
+                <strong id="round">1/10</strong>
+            </div>
+
+            <div class="stat">
+                <span>Score</span>
+                <strong id="score">0</strong>
+            </div>
+
+            <div class="stat">
+                <span>Time</span>
+                <strong id="timer" class="timer">30</strong>
+            </div>
+
+        </div>
+
+
+        <div id="challenge" class="challenge"></div>
+
+
+        <div id="resultBox" class="result-box">
+
+            <div class="result-score" id="finalScore">0</div>
+
+            <p id="resultMessage">
+                Great job!
+            </p>
+
+            <div class="action-row">
+
+                <button class="main-btn" onclick="restartGame()">
+                    🔄 Play Again
+                </button>
+
+                <button class="secondary-btn" onclick="showHome()">
+                    Games
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<div class="bottom-nav">
+
+    <button class="nav-btn" onclick="goHome()">
+        🏠<br>Home
+    </button>
+
+    <button class="nav-btn active" onclick="showHome()">
+        🧠<br>Mind
+    </button>
+
+    <button class="nav-btn" onclick="goClasses()">
+        📚<br>Classes
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   GLOBAL GAME STATE
+========================================= */
+
+let currentGame = "";
+let round = 0;
+let score = 0;
+let totalRounds = 10;
+let currentAnswer = null;
+let locked = false;
+let timer = 30;
+let timerInterval = null;
+
+
+/* =========================================
+   RANDOM HELPERS
+========================================= */
+
+function randomInt(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function randomChoice(array){
+    return array[Math.floor(Math.random()*array.length)];
+}
+
+function shuffle(array){
+    let arr=[...array];
+
+    for(let i=arr.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+
+    return arr;
+}
+
+function uniqueNumbers(count,min,max){
+
+    let set=new Set();
+
+    while(set.size<count){
+        set.add(randomInt(min,max));
+    }
+
+    return [...set];
+}
+
+
+/* =========================================
+   GAME START
+========================================= */
+
+function startGame(type){
+
+    currentGame=type;
+    round=0;
+    score=0;
+    locked=false;
+
+    clearInterval(timerInterval);
+
+    document.getElementById("homeScreen").style.display="none";
+    document.getElementById("gameScreen").style.display="block";
+    document.getElementById("resultBox").style.display="none";
+
+    setupGameInfo(type);
+
+    nextRound();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function setupGameInfo(type){
+
+    const data={
+
+        memory:{
+            icon:"🧠",
+            title:"Memory Challenge",
+            desc:"Remember the sequence"
+        },
+
+        sequence:{
+            icon:"🔢",
+            title:"Number Sequence",
+            desc:"Find the hidden pattern"
+        },
+
+        pattern:{
+            icon:"🔷",
+            title:"Pattern Master",
+            desc:"Complete the visual pattern"
+        },
+
+        math:{
+            icon:"⚡",
+            title:"Quick Math",
+            desc:"Calculate as fast as you can"
+        },
+
+        word:{
+            icon:"🔤",
+            title:"Word Logic",
+            desc:"Find the word relationship"
+        },
+
+        odd:{
+            icon:"🎯",
+            title:"Odd One Out",
+            desc:"Find what does not belong"
+        },
+
+        logic:{
+            icon:"🧩",
+            title:"Logic Puzzle",
+            desc:"Think and solve"
+        }
+
+    };
+
+    document.getElementById("gameIcon").textContent=data[type].icon;
+    document.getElementById("gameTitle").textContent=data[type].title;
+    document.getElementById("gameDescription").textContent=data[type].desc;
+}
+
+
+/* =========================================
+   NEXT ROUND
+========================================= */
+
+function nextRound(){
+
+    round++;
+
+    if(round>totalRounds){
+
+        finishGame();
+
+        return;
+    }
+
+    locked=false;
+    currentAnswer=null;
+
+    document.getElementById("round").textContent=
+        round+"/"+totalRounds;
+
+    document.getElementById("score").textContent=score;
+
+    startTimer();
+
+    switch(currentGame){
+
+        case "memory":
+            generateMemory();
+            break;
+
+        case "sequence":
+            generateSequence();
+            break;
+
+        case "pattern":
+            generatePattern();
+            break;
+
+        case "math":
+            generateMath();
+            break;
+
+        case "word":
+            generateWord();
+            break;
+
+        case "odd":
+            generateOdd();
+            break;
+
+        case "logic":
+            generateLogic();
+            break;
+
+    }
+}
+
+
+/* =========================================
+   TIMER
+========================================= */
+
+function startTimer(){
+
+    clearInterval(timerInterval);
+
+    timer=30;
+
+    if(currentGame==="memory"){
+        timer=35;
+    }
+
+    if(currentGame==="math"){
+        timer=20;
+    }
+
+    updateTimer();
+
+    timerInterval=setInterval(()=>{
+
+        timer--;
+
+        updateTimer();
+
+        if(timer<=0){
+
+            clearInterval(timerInterval);
+
+            if(!locked){
+
+                locked=true;
+                showTimeUp();
+
+                setTimeout(nextRound,900);
+            }
+
+        }
+
+    },1000);
+}
+
+
+function updateTimer(){
+
+    const el=document.getElementById("timer");
+
+    el.textContent=timer;
+
+    el.classList.toggle(
+        "warning",
+        timer<=5
+    );
+}
+
+
+function showTimeUp(){
+
+    const challenge=document.getElementById("challenge");
+
+    challenge.innerHTML+=`
+        <div style="
+            margin-top:15px;
+            color:var(--danger);
+            font-weight:bold;
+        ">
+            ⏰ Time Up!
+        </div>
+    `;
+}
+
+
+/* =========================================
+   ANSWER SYSTEM
+========================================= */
+
+function chooseAnswer(answer,button){
+
+    if(locked) return;
+
+    locked=true;
+
+    clearInterval(timerInterval);
+
+    const buttons=document.querySelectorAll(".option");
+
+    buttons.forEach(btn=>{
+        btn.disabled=true;
+    });
+
+    if(answer===currentAnswer){
+
+        score++;
+
+        button.classList.add("correct");
+
+    }else{
+
+        button.classList.add("wrong");
+
+        buttons.forEach(btn=>{
+
+            if(btn.dataset.answer==currentAnswer){
+                btn.classList.add("correct");
+            }
+
+        });
+
+    }
+
+    document.getElementById("score").textContent=score;
+
+    setTimeout(nextRound,750);
+}
+
+
+/* =========================================
+   1. MEMORY CHALLENGE
+========================================= */
+
+function generateMemory(){
+
+    const length=randomInt(4,7);
+
+    const numbers=uniqueNumbers(length,1,9);
+
+    currentAnswer=numbers.join("");
+
+    let html=`
+        <div class="challenge-title">
+            याद रखो — ${length} numbers
+        </div>
+
+        <div class="challenge-main">
+            ${numbers.join(" • ")}
+        </div>
+
+        <p style="color:var(--muted);font-size:13px;">
+            Sequence को याद कर लिया?
+        </p>
+
+        <button class="main-btn"
+            onclick="hideMemory(${JSON.stringify(numbers)})">
+            I Remember
+        </button>
+    `;
+
+    document.getElementById("challenge").innerHTML=html;
+}
+
+
+function hideMemory(numbers){
+
+    const challenge=document.getElementById("challenge");
+
+    challenge.innerHTML=`
+        <div class="challenge-title">
+            अब सही sequence चुनो
+        </div>
+
+        <div class="options" id="memoryOptions"></div>
+    `;
+
+    let correct=numbers.join("");
+
+    let choices=[
+        correct
+    ];
+
+    while(choices.length<4){
+
+        let fake=shuffle(numbers).join("");
+
+        if(!choices.includes(fake)){
+            choices.push(fake);
+        }
+
+    }
+
+    choices=shuffle(choices);
+
+    const box=document.getElementById("memoryOptions");
+
+    choices.forEach(choice=>{
+
+        const btn=document.createElement("button");
+
+        btn.className="option";
+        btn.textContent=choice;
+        btn.dataset.answer=choice;
+
+        btn.onclick=()=>chooseAnswer(choice,btn);
+
+        box.appendChild(btn);
+    });
+
+    currentAnswer=correct;
+    locked=false;
+
+    startTimer();
+}
+
+
+/* =========================================
+   2. NUMBER SEQUENCE
+========================================= */
+
+function generateSequence(){
+
+    const types=[
+        "addition",
+        "subtraction",
+        "multiplication",
+        "alternating",
+        "squares"
+    ];
+
+    const type=randomChoice(types);
+
+    let nums=[];
+    let answer;
+
+    if(type==="addition"){
+
+        let start=randomInt(2,30);
+        let step=randomInt(2,12);
+
+        for(let i=0;i<5;i++){
+            nums.push(start+i*step);
+        }
+
+        answer=start+5*step;
+    }
+
+    else if(type==="subtraction"){
+
+        let start=randomInt(50,100);
+        let step=randomInt(2,10);
+
+        for(let i=0;i<5;i++){
+            nums.push(start-i*step);
+        }
+
+        answer=start-5*step;
+    }
+
+    else if(type==="multiplication"){
+
+        let start=randomInt(1,5);
+        let multiplier=randomInt(2,4);
+
+        for(let i=0;i<5;i++){
+            nums.push(start*Math.pow(multiplier,i));
+        }
+
+        answer=start*Math.pow(multiplier,5);
+    }
+
+    else if(type==="alternating"){
+
+        let a=randomInt(2,10);
+        let add=randomInt(3,8);
+        let mult=randomInt(2,3);
+
+        nums=[a];
+
+        for(let i=1;i<5;i++){
+
+            if(i%2===1){
+                nums.push(nums[i-1]+add);
+            }else{
+                nums.push(nums[i-1]*mult);
+            }
+
+        }
+
+        answer=(5%2===1)
+            ? nums[4]+add
+            : nums[4]*mult;
+    }
+
+    else{
+
+        let start=randomInt(1,5);
+
+        for(let i=1;i<=5;i++){
+            nums.push((start+i-1)**2);
+        }
+
+        answer=(start+5)**2;
+    }
+
+    currentAnswer=answer;
+
+    let choices=[
+        answer
+    ];
+
+    while(choices.length<4){
+
+        let fake=answer+randomInt(-15,15);
+
+        if(fake>0 && !choices.includes(fake)){
+            choices.push(fake);
+        }
+
+    }
+
+    choices=shuffle(choices);
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            What comes next?
+        </div>
+
+        <div class="challenge-main">
+            ${nums.join(" → ")} → ?
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(choices);
+}
+
+
+/* =========================================
+   3. PATTERN MASTER
+========================================= */
+
+function generatePattern(){
+
+    const shapes=[
+        "🔵","🔺","🟩","⭐","🔶","❤️"
+    ];
+
+    let a=randomChoice(shapes);
+
+    let b=randomChoice(
+        shapes.filter(x=>x!==a)
+    );
+
+    let patternType=randomInt(1,3);
+
+    let sequence=[];
+    let answer;
+
+    if(patternType===1){
+
+        sequence=[
+            a,b,a,b,a,"?"
+        ];
+
+        answer=b;
+
+    }else if(patternType===2){
+
+        sequence=[
+            a,a,b,a,a,b,a,"?"
+        ];
+
+        answer=a;
+
+    }else{
+
+        sequence=[
+            a,b,b,a,b,b,a,"?"
+        ];
+
+        answer=b;
+    }
+
+    currentAnswer=answer;
+
+    let choices=shuffle([
+        answer,
+        randomChoice(shapes.filter(x=>x!==answer)),
+        randomChoice(shapes.filter(x=>x!==answer)),
+        randomChoice(shapes.filter(x=>x!==answer))
+    ]);
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            Which symbol comes next?
+        </div>
+
+        <div class="challenge-main pattern-row">
+            ${sequence.map(x=>`
+                <div class="pattern-item ${x==="?"?"question-mark":""}">
+                    ${x}
+                </div>
+            `).join("")}
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(choices);
+}
+
+
+/* =========================================
+   4. QUICK MATH
+========================================= */
+
+function generateMath(){
+
+    let a=randomInt(5,50);
+    let b=randomInt(2,30);
+
+    const operations=["+","-","×"];
+
+    let op=randomChoice(operations);
+
+    let answer;
+
+    if(op==="+"){
+        answer=a+b;
+    }
+
+    if(op==="-"){
+        if(b>a){
+            [a,b]=[b,a];
+        }
+
+        answer=a-b;
+    }
+
+    if(op==="×"){
+        a=randomInt(2,15);
+        b=randomInt(2,12);
+
+        answer=a*b;
+    }
+
+    currentAnswer=answer;
+
+    let choices=[answer];
+
+    while(choices.length<4){
+
+        let fake=answer+randomInt(-20,20);
+
+        if(fake>=0 && !choices.includes(fake)){
+            choices.push(fake);
+        }
+
+    }
+
+    choices=shuffle(choices);
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            Solve quickly
+        </div>
+
+        <div class="challenge-main">
+            ${a} ${op} ${b} = ?
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(choices);
+}
+
+
+/* =========================================
+   5. WORD LOGIC
+========================================= */
+
+function generateWord(){
+
+    const sets=[
+
+        {
+            q:"Book is to Reading as Fork is to ?",
+            correct:"Eating",
+            options:["Eating","Writing","Sleeping","Running"]
+        },
+
+        {
+            q:"Bird is to Fly as Fish is to ?",
+            correct:"Swim",
+            options:["Jump","Swim","Walk","Run"]
+        },
+
+        {
+            q:"Teacher is to School as Doctor is to ?",
+            correct:"Hospital",
+            options:["Market","Hospital","Park","Bank"]
+        },
+
+        {
+            q:"Hot is to Cold as Day is to ?",
+            correct:"Night",
+            options:["Morning","Night","Sun","Light"]
+        },
+
+        {
+            q:"Puppy is to Dog as Kitten is to ?",
+            correct:"Cat",
+            options:["Tiger","Cat","Cow","Horse"]
+        },
+
+        {
+            q:"Pen is to Write as Knife is to ?",
+            correct:"Cut",
+            options:["Cut","Read","Draw","Sing"]
+        }
+
+    ];
+
+    const item=randomChoice(sets);
+
+    currentAnswer=item.correct;
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            Complete the relationship
+        </div>
+
+        <div class="challenge-main">
+            ${item.q}
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(shuffle(item.options));
+}
+
+
+/* =========================================
+   6. ODD ONE OUT
+========================================= */
+
+function generateOdd(){
+
+    const sets=[
+
+        ["Apple","Mango","Banana","Carrot"],
+        ["Lion","Tiger","Elephant","Rose"],
+        ["Monday","Friday","Sunday","January"],
+        ["Red","Blue","Green","Chair"],
+        ["Circle","Square","Triangle","Apple"],
+        ["Gold","Silver","Copper","Water"],
+        ["Cricket","Football","Hockey","Table"],
+        ["Pen","Pencil","Eraser","Banana"],
+        ["India","Japan","France","Amazon"],
+        ["Dog","Cat","Cow","Eagle"]
+
+    ];
+
+    const set=randomChoice(sets);
+
+    let answer;
+
+    if(set.includes("Carrot")) answer="Carrot";
+    else if(set.includes("Rose")) answer="Rose";
+    else if(set.includes("January")) answer="January";
+    else if(set.includes("Chair")) answer="Chair";
+    else if(set.includes("Apple")) answer="Apple";
+    else if(set.includes("Water")) answer="Water";
+    else if(set.includes("Table")) answer="Table";
+    else if(set.includes("Banana")) answer="Banana";
+    else if(set.includes("Amazon")) answer="Amazon";
+    else answer="Eagle";
+
+    currentAnswer=answer;
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            Find the odd one out
+        </div>
+
+        <div class="challenge-main">
+            Which one does NOT belong?
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(shuffle(set));
+}
+
+
+/* =========================================
+   7. LOGIC PUZZLE
+========================================= */
+
+function generateLogic(){
+
+    const puzzles=[
+
+        {
+            q:"A clock shows 3:00. What is the angle between the hands?",
+            correct:"90°",
+            options:["30°","60°","90°","180°"]
+        },
+
+        {
+            q:"If 5 cats catch 5 mice in 5 minutes, how many cats are needed to catch 1 mouse in 5 minutes?",
+            correct:"1",
+            options:["1","2","5","10"]
+        },
+
+        {
+            q:"You have 3 apples and take away 2. How many apples do you have?",
+            correct:"2",
+            options:["1","2","3","0"]
+        },
+
+        {
+            q:"Which number should replace ? : 2, 4, 8, 16, ?",
+            correct:"32",
+            options:["20","24","30","32"]
+        },
+
+        {
+            q:"A farmer has 10 sheep. All but 3 run away. How many remain?",
+            correct:"3",
+            options:["7","3","10","0"]
+        },
+
+        {
+            q:"If yesterday was Monday, what day is tomorrow?",
+            correct:"Wednesday",
+            options:["Monday","Tuesday","Wednesday","Thursday"]
+        },
+
+        {
+            q:"Which is heavier: 1 kg of iron or 1 kg of cotton?",
+            correct:"Same weight",
+            options:["Iron","Cotton","Same weight","Cannot tell"]
+        },
+
+        {
+            q:"A bus has 20 passengers. 5 get off and 7 get on. How many passengers now?",
+            correct:"22",
+            options:["18","20","22","25"]
+        }
+
+    ];
+
+    const item=randomChoice(puzzles);
+
+    currentAnswer=item.correct;
+
+    document.getElementById("challenge").innerHTML=`
+
+        <div class="challenge-title">
+            Think carefully
+        </div>
+
+        <div class="challenge-main">
+            ${item.q}
+        </div>
+
+        <div class="options" id="options"></div>
+    `;
+
+    renderOptions(shuffle(item.options));
+}
+
+
+/* =========================================
+   OPTIONS
+========================================= */
+
+function renderOptions(options){
+
+    const box=document.getElementById("options");
+
+    box.innerHTML="";
+
+    options.forEach(option=>{
+
+        const button=document.createElement("button");
+
+        button.className="option";
+        button.textContent=option;
+        button.dataset.answer=option;
+
+        button.onclick=()=>{
+            chooseAnswer(option,button);
+        };
+
+        box.appendChild(button);
+
+    });
+}
+
+
+/* =========================================
+   GAME FINISH
+========================================= */
+
+function finishGame(){
+
+    clearInterval(timerInterval);
+
+    document.getElementById("round").textContent=
+        totalRounds+"/"+totalRounds;
+
+    document.getElementById("finalScore").textContent=
+        score+" / "+totalRounds;
+
+    let message="";
+
+    if(score===10){
+        message="🏆 Perfect! Your brain is on fire!";
+    }
+    else if(score>=8){
+        message="🔥 Excellent! Very strong thinking!";
+    }
+    else if(score>=6){
+        message="👏 Great work! Keep training your brain.";
+    }
+    else if(score>=4){
+        message="💪 Good try! Practice will make you faster.";
+    }
+    else{
+        message="🧠 Keep playing. Your brain gets stronger with practice!";
+    }
+
+    document.getElementById("resultMessage").textContent=message;
+
+    document.getElementById("resultBox").style.display="block";
+
+    document.getElementById("challenge").innerHTML=`
+        <div class="challenge-title">
+            Challenge Complete
+        </div>
+
+        <div class="challenge-main">
+            🎉 Well Played!
+        </div>
+    `;
+
+    saveBestScore();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================
+   PLAY AGAIN
+========================================= */
+
+function restartGame(){
+
+    startGame(currentGame);
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+function showHome(){
+
+    clearInterval(timerInterval);
+
+    document.getElementById("gameScreen").style.display="none";
+    document.getElementById("homeScreen").style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function goHome(){
+
+    window.location.href="index.html";
+}
+
+
+function goClasses(){
+
+    window.location.href="lesson.html";
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        document.body.classList.contains("dark")
+            ? "1"
+            : "0"
+    );
+}
+
+
+function applyDarkMode(){
+
+    if(localStorage.getItem("studyIndiaDark")==="1"){
+        document.body.classList.add("dark");
+    }
+}
+
+
+/* =========================================
+   BEST SCORE
+========================================= */
+
+function saveBestScore(){
+
+    const key="studyIndiaMind_"+currentGame;
+
+    const old=Number(
+        localStorage.getItem(key)||0
+    );
+
+    if(score>old){
+
+        localStorage.setItem(
+            key,
+            score
+        );
+    }
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+applyDarkMode();
+
+</script>
+
+</body>
+</html>

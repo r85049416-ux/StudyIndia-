@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>StudyIndia - AI Study Helper</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --user:#2563eb;
+    --shadow:0 12px 35px rgba(37,99,235,.10);
+}
+
+body.dark{
+    --bg:#0b1020;
+    --card:#151c30;
+    --text:#f5f7ff;
+    --muted:#aab3c5;
+    --border:#29334d;
+    --shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+body{
+    min-height:100vh;
+    color:var(--text);
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(37,99,235,.10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(124,58,237,.10),
+            transparent 25%
+        ),
+        var(--bg);
+    transition:.3s;
+}
+
+button,
+textarea{
+    font:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.app{
+    width:min(1100px,100%);
+    margin:auto;
+    padding-bottom:95px;
+}
+
+
+/* ================= HEADER ================= */
+
+header{
+    margin:14px;
+    padding:18px;
+    border-radius:24px;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+    box-shadow:
+        0 15px 35px rgba(37,99,235,.25);
+    animation:fadeDown .6s ease;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    font-size:27px;
+    background:rgba(255,255,255,.18);
+}
+
+.brand h1{
+    font-size:22px;
+}
+
+.brand p{
+    font-size:12px;
+    opacity:.85;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    color:white;
+    background:rgba(255,255,255,.16);
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.27);
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    margin-top:22px;
+}
+
+.hero h2{
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.9;
+}
+
+
+/* ================= QUICK HELP ================= */
+
+.quick-section{
+    margin:14px;
+    animation:fadeUp .6s ease;
+}
+
+.section-title{
+    margin:8px 2px 12px;
+}
+
+.section-title h3{
+    font-size:18px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.quick-prompts{
+    display:flex;
+    gap:9px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    scrollbar-width:none;
+}
+
+.quick-prompts::-webkit-scrollbar{
+    display:none;
+}
+
+.quick-btn{
+    flex-shrink:0;
+    padding:10px 13px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    color:var(--text);
+    background:var(--card);
+    transition:.25s;
+}
+
+.quick-btn:hover{
+    border-color:var(--primary);
+    transform:translateY(-2px);
+}
+
+
+/* ================= CHAT ================= */
+
+.chat-box{
+    margin:14px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    animation:fadeUp .7s ease;
+}
+
+.chat-header{
+    padding:15px 17px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+}
+
+.ai-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.ai-avatar{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    color:white;
+    font-size:22px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+}
+
+.ai-status strong{
+    display:block;
+    font-size:14px;
+}
+
+.online{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    color:var(--success);
+    font-size:11px;
+    margin-top:3px;
+}
+
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--success);
+    animation:pulse 1.4s infinite;
+}
+
+.clear-btn{
+    padding:9px 12px;
+    border-radius:11px;
+    color:var(--muted);
+    background:var(--bg);
+    border:1px solid var(--border);
+}
+
+
+/* ================= MESSAGES ================= */
+
+.messages{
+    height:500px;
+    overflow-y:auto;
+    padding:18px;
+    scroll-behavior:smooth;
+}
+
+.message{
+    display:flex;
+    margin-bottom:15px;
+    animation:messageIn .35s ease;
+}
+
+.message.user{
+    justify-content:flex-end;
+}
+
+.bubble{
+    max-width:min(82%,650px);
+    padding:13px 15px;
+    border-radius:18px;
+    font-size:14px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+
+.message.ai .bubble{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-bottom-left-radius:5px;
+}
+
+.message.user .bubble{
+    color:white;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+    border-bottom-right-radius:5px;
+}
+
+.message-time{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:5px;
+}
+
+.message.user .message-time{
+    text-align:right;
+}
+
+
+/* ================= WELCOME ================= */
+
+.welcome{
+    text-align:center;
+    padding:50px 15px;
+}
+
+.welcome-icon{
+    width:78px;
+    height:78px;
+    margin:0 auto 15px;
+    display:grid;
+    place-items:center;
+    border-radius:23px;
+    font-size:40px;
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #ede9fe
+        );
+}
+
+body.dark .welcome-icon{
+    background:#202943;
+}
+
+.welcome h2{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.welcome p{
+    max-width:520px;
+    margin:auto;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.7;
+}
+
+
+/* ================= TYPING ================= */
+
+.typing{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.typing span{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--muted);
+    animation:typing 1s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.3s;
+}
+
+
+/* ================= INPUT ================= */
+
+.input-area{
+    padding:13px;
+    border-top:1px solid var(--border);
+    background:var(--card);
+}
+
+.input-wrap{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+}
+
+textarea{
+    flex:1;
+    min-height:50px;
+    max-height:150px;
+    resize:none;
+    padding:13px 14px;
+    border-radius:15px;
+    outline:none;
+    border:1px solid var(--border);
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.45;
+}
+
+textarea:focus{
+    border-color:var(--primary);
+}
+
+.send-btn{
+    width:50px;
+    height:50px;
+    flex-shrink:0;
+    border-radius:15px;
+    color:white;
+    font-size:19px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+    transition:.25s;
+}
+
+.send-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 7px 20px rgba(37,99,235,.3);
+}
+
+.send-btn:disabled{
+    opacity:.5;
+    transform:none;
+}
+
+.input-help{
+    margin-top:7px;
+    padding:0 4px;
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:10px;
+}
+
+
+/* ================= MODES ================= */
+
+.mode-row{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.mode-btn{
+    padding:8px 11px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    color:var(--muted);
+    background:var(--bg);
+    font-size:11px;
+    transition:.2s;
+}
+
+.mode-btn:hover{
+    transform:translateY(-1px);
+}
+
+.mode-btn.active{
+    color:var(--primary);
+    border-color:var(--primary);
+    background:rgba(37,99,235,.08);
+}
+
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+    position:fixed;
+    z-index:30;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:min(500px,calc(100% - 24px));
+    padding:8px;
+    display:flex;
+    justify-content:space-around;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(18px);
+    border-radius:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+body.dark .bottom-nav{
+    background:rgba(21,28,48,.9);
+}
+
+.nav-btn{
+    flex:1;
+    padding:9px;
+    border-radius:13px;
+    background:transparent;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.nav-btn.active{
+    color:var(--primary);
+    background:rgba(37,99,235,.10);
+    font-weight:bold;
+}
+
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(8px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes typing{
+    0%,100%{
+        opacity:.3;
+        transform:translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateY(-4px);
+    }
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.35);
+        opacity:.6;
+    }
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+    .hero h2{
+        font-size:24px;
+    }
+
+    .messages{
+        height:55vh;
+        min-height:390px;
+    }
+
+    .bubble{
+        max-width:88%;
+    }
+
+    .brand h1{
+        font-size:20px;
+    }
+
+    .mode-row{
+        overflow-x:auto;
+    }
+
+    .welcome{
+        padding:40px 10px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="header-top">
+
+        <div class="brand">
+
+            <div class="logo">
+                🤖
+            </div>
+
+            <div>
+                <h1>StudyIndia</h1>
+                <p>Learn • Practice • Grow</p>
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-btn"
+                onclick="goBack()">
+                ←
+            </button>
+
+            <button
+                class="icon-btn"
+                onclick="toggleDark()">
+                🌙
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero">
+
+        <h2>🤖 AI Study Helper</h2>
+
+        <p>
+            Ask anything. Learn step-by-step.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- ================= QUICK HELP ================= -->
+
+<section class="quick-section">
+
+    <div class="section-title">
+
+        <h3>✨ Quick Help</h3>
+
+        <p>
+            Tap a suggestion or ask your own question.
+        </p>
+
+    </div>
+
+
+    <div class="quick-prompts">
+
+        <button
+            class="quick-btn"
+            onclick="usePrompt(
+                'Explain this topic in very simple language.'
+            )">
+            📖 Explain Topic
+        </button>
+
+
+        <button
+            class="quick-btn"
+            onclick="usePrompt(
+                'Give me a hint, but do not tell me the final answer.'
+            )">
+            💡 Give Hint
+        </button>
+
+
+        <button
+            class="quick-btn"
+            onclick="usePrompt(
+                'Give me 5 practice questions.'
+            )">
+            📝 Practice
+        </button>
+
+
+        <button
+            class="quick-btn"
+            onclick="usePrompt(
+                'Teach me this topic like a teacher.'
+            )">
+            👨‍🏫 Teach Me
+        </button>
+
+
+        <button
+            class="quick-btn"
+            onclick="usePrompt(
+                'Make a short quiz for me.'
+            )">
+            🎯 Make Quiz
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHAT ================= -->
+
+<section class="chat-box">
+
+
+    <div class="chat-header">
+
+        <div class="ai-status">
+
+            <div class="ai-avatar">
+                🤖
+            </div>
+
+            <div>
+
+                <strong>StudyIndia AI</strong>
+
+                <div class="online">
+
+                    <span class="dot"></span>
+
+                    Ready to help
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearChat()">
+            🗑 Clear
+        </button>
+
+    </div>
+
+
+    <div
+        id="messages"
+        class="messages">
+
+
+        <div class="welcome">
+
+            <div class="welcome-icon">
+                🤖
+            </div>
+
+
+            <h2>
+                Hi! I'm your Study Helper 👋
+            </h2>
+
+
+            <p>
+                Mujhse koi bhi study-related question
+                poochho. Main topics ko simple language
+                mein samjhane, hints dene, calculations
+                solve karne aur practice karane mein
+                help karunga.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= INPUT ================= -->
+
+    <div class="input-area">
+
+
+        <div class="input-wrap">
+
+            <textarea
+                id="questionInput"
+                maxlength="1500"
+                placeholder="Apna question yahan likho..."
+                oninput="updateCounter()"
+                onkeydown="handleKey(event)">
+            </textarea>
+
+
+            <button
+                id="sendBtn"
+                class="send-btn"
+                onclick="sendQuestion()">
+                ➤
+            </button>
+
+        </div>
+
+
+        <div class="input-help">
+
+            <span>
+                Enter = Send • Shift + Enter = New line
+            </span>
+
+            <span id="counter">
+                0/1500
+            </span>
+
+        </div>
+
+
+        <div class="mode-row">
+
+            <button
+                id="normalMode"
+                class="mode-btn active"
+                onclick="setMode('normal')">
+                💬 Explain
+            </button>
+
+
+            <button
+                id="hintMode"
+                class="mode-btn"
+                onclick="setMode('hint')">
+                💡 Hint Only
+            </button>
+
+
+            <button
+                id="quizMode"
+                class="mode-btn"
+                onclick="setMode('quiz')">
+                📝 Quiz
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-btn"
+        onclick="goHome()">
+        🏠<br>Home
+    </button>
+
+
+    <button
+        class="nav-btn active"
+        onclick="window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        })">
+        🤖<br>AI
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="goClasses()">
+        📚<br>Classes
+    </button>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   STUDYINDIA AI STUDY HELPER
+   SMART LOCAL FALLBACK
+===================================================== */
+
+
+/* ================= STATE ================= */
+
+let currentMode="normal";
+
+let isTyping=false;
+
+let conversation=[];
+
+
+/* ================= DOM ================= */
+
+const messages=
+    document.getElementById("messages");
+
+const input=
+    document.getElementById("questionInput");
+
+const sendBtn=
+    document.getElementById("sendBtn");
+
+
+/* ================= MODE ================= */
+
+function setMode(mode){
+
+    currentMode=mode;
+
+    document
+        .querySelectorAll(".mode-btn")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+
+    if(mode==="normal"){
+
+        document
+            .getElementById("normalMode")
+            .classList.add("active");
+
+    }
+
+
+    if(mode==="hint"){
+
+        document
+            .getElementById("hintMode")
+            .classList.add("active");
+
+    }
+
+
+    if(mode==="quiz"){
+
+        document
+            .getElementById("quizMode")
+            .classList.add("active");
+
+    }
+
+}
+
+
+/* ================= QUICK PROMPT ================= */
+
+function usePrompt(text){
+
+    input.value=text;
+
+    updateCounter();
+
+    input.focus();
+
+}
+
+
+/* ================= COUNTER ================= */
+
+function updateCounter(){
+
+    document
+        .getElementById("counter")
+        .textContent=
+        input.value.length+"/1500";
+
+}
+
+
+/* ================= KEYBOARD ================= */
+
+function handleKey(event){
+
+    if(
+        event.key==="Enter" &&
+        !event.shiftKey
+    ){
+
+        event.preventDefault();
+
+        sendQuestion();
+
+    }
+
+}
+
+
+/* ================= SEND ================= */
+
+async function sendQuestion(){
+
+    if(isTyping) return;
+
+
+    const question=
+        input.value.trim();
+
+
+    if(!question) return;
+
+
+    addMessage(
+        "user",
+        question
+    );
+
+
+    conversation.push({
+        role:"user",
+        content:question
+    });
+
+
+    input.value="";
+
+    updateCounter();
+
+
+    isTyping=true;
+
+    sendBtn.disabled=true;
+
+
+    showTyping();
+
+
+    /*
+       REAL AI API HOOK
+
+       Later a backend/API can replace
+       getAIResponse() without changing
+       the UI.
+    */
+
+    const answer=
+        await getAIResponse(
+            question
+        );
+
+
+    removeTyping();
+
+
+    addMessage(
+        "ai",
+        answer
+    );
+
+
+    conversation.push({
+        role:"assistant",
+        content:answer
+    });
+
+
+    isTyping=false;
+
+    sendBtn.disabled=false;
+
+    input.focus();
+
+}
+
+
+/* ================= AI RESPONSE ================= */
+
+async function getAIResponse(question){
+
+    await delay(
+        450+
+        Math.random()*650
+    );
+
+
+    return localAI(question);
+
+}
+
+
+/* =====================================================
+   SMART LOCAL AI
+===================================================== */
+
+function localAI(question){
+
+    const q=
+        question
+        .toLowerCase()
+        .trim();
+
+
+    /* ================= HINT ================= */
+
+    if(currentMode==="hint"){
+
+        return generateHint(q);
+
+    }
+
+
+    /* ================= QUIZ ================= */
+
+    if(
+        currentMode==="quiz" ||
+        containsAny(q,[
+            "quiz",
+            "test me",
+            "mcq",
+            "practice questions"
+        ])
+    ){
+
+        return generateQuiz(q);
+
+    }
+
+
+    /* ================= GREETING ================= */
+
+    if(
+        containsAny(q,[
+            "hello",
+            "hi",
+            "hey",
+            "namaste",
+            "नमस्ते"
+        ])
+    ){
+
+        return `
+👋 Hello!
+
+Main tumhara StudyIndia AI Study Helper hoon.
+
+Tum mujhse:
+
+📚 Topic explanation
+🧮 Maths questions
+💡 Hints
+📝 Practice questions
+🎯 Quiz
+💻 Coding
+🔤 English grammar
+🇮🇳 Hindi grammar
+
+ke baare mein pooch sakte ho.
+
+Apna question bhejo. 😊
+        `.trim();
+
+    }
+
+
+    /* ================= MATH ================= */
+
+    if(looksLikeMath(q)){
+
+        const answer=
+            solveSimpleMath(q);
+
+        if(answer){
+
+            return answer;
+
+        }
+
+    }
+
+
+    /* ================= PHOTOSYNTHESIS ================= */
+
+    if(
+        containsAny(q,[
+            "photosynthesis",
+            "प्रकाश संश्लेषण"
+        ])
+    ){
+
+        return `
+🌱 Photosynthesis
+
+Photosynthesis वह process है जिसमें green plants
+sunlight की मदद से अपना food बनाते हैं।
+
+इसके लिए मुख्य चीजें हैं:
+
+☀️ Sunlight
+💧 Water
+🌬️ Carbon dioxide
+🌿 Chlorophyll
+
+Plant इनकी मदद से food बनाता है और oxygen
+release करता है।
+
+🧠 आसान तरीके से याद रखो:
+
+Sunlight + Water + Carbon dioxide
+→ Food + Oxygen
+
+अगर चाहो तो मैं इसका diagram भी
+समझा सकता हूँ।
+        `.trim();
+
+    }
+
+
+    /* ================= GRAVITY ================= */
+
+    if(
+        containsAny(q,[
+            "gravity",
+            "गुरुत्वाकर्षण"
+        ])
+    ){
+
+        return `
+🌍 Gravity
+
+Gravity एक force है जो objects को एक-दूसरे की
+तरफ खींचती है।
+
+Earth की gravity की वजह से:
+
+• हम जमीन पर रहते हैं।
+• Ball नीचे गिरती है।
+• बारिश नीचे आती है।
+• हम हवा में float नहीं करते।
+
+🧠 याद रखो:
+
+Gravity = Pull
+
+Example:
+Ball को ऊपर फेंको → वह वापस नीचे आती है।
+        `.trim();
+
+    }
+
+
+    /* ================= SCIENCE ================= */
+
+    if(
+        containsAny(q,[
+            "cell",
+            "atom",
+            "force",
+            "motion",
+            "energy",
+            "matter",
+            "sound",
+            "science"
+        ])
+    ){
+
+        return scienceFallback(q);
+
+    }
+
+
+    /* ================= ENGLISH ================= */
+
+    if(
+        containsAny(q,[
+            "grammar",
+            "tense",
+            "noun",
+            "verb",
+            "adjective",
+            "pronoun",
+            "preposition",
+            "english"
+        ])
+    ){
+
+        return englishFallback(q);
+
+    }
+
+
+    /* ================= HINDI ================= */
+
+    if(
+        containsAny(q,[
+            "हिंदी",
+            "संधि",
+            "समास",
+            "अलंकार",
+            "मुहावरा",
+            "पर्यायवाची",
+            "विलोम"
+        ])
+    ){
+
+        return hindiFallback(q);
+
+    }
+
+
+    /* ================= COMPUTER ================= */
+
+    if(
+        containsAny(q,[
+            "computer",
+            "html",
+            "css",
+            "javascript",
+            "python",
+            "internet",
+            "algorithm",
+            "coding"
+        ])
+    ){
+
+        return computerFallback(q);
+
+    }
+
+
+    /* ================= GENERAL WHAT/HOW ================= */
+
+    if(
+        q.startsWith("what") ||
+        q.startsWith("why") ||
+        q.startsWith("how") ||
+        q.includes("kya hai") ||
+        q.includes("kaise")
+    ){
+
+        return genericExplanation(
+            question
+        );
+
+    }
+
+
+    /* ================= DEFAULT ================= */
+
+    return `
+🤖 मैं तुम्हारे question को समझने की कोशिश कर रहा हूँ।
+
+तुम अपना सवाल थोड़ा और specific करके पूछ सकते हो।
+
+उदाहरण:
+
+• "Photosynthesis क्या है?"
+• "25 × 16 solve करो"
+• "Tense आसान भाषा में समझाओ"
+• "HTML क्या है?"
+• "मुझे hint दो"
+• "इस topic पर quiz बनाओ"
+• "इसे example से समझाओ"
+
+💡 तुम Hindi, English या Hinglish में
+question पूछ सकते हो।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   HINT
+===================================================== */
+
+function generateHint(q){
+
+    if(looksLikeMath(q)){
+
+        return `
+💡 Hint
+
+Question को छोटे steps में तोड़ो:
+
+1️⃣ Given numbers पहचानो।
+2️⃣ पूछा क्या गया है, देखो।
+3️⃣ सही mathematical operation चुनो।
+4️⃣ फिर calculation करो।
+
+मैं अभी final answer नहीं बता रहा हूँ।
+पहले खुद solve करने की कोशिश करो। 💪
+        `.trim();
+
+    }
+
+
+    if(
+        q.includes("photosynthesis") ||
+        q.includes("प्रकाश संश्लेषण")
+    ){
+
+        return `
+💡 Hint
+
+Plants अपना food खुद बनाते हैं।
+
+सोचो:
+
+☀️ Sunlight
+💧 Water
+🌬️ Carbon dioxide
+
+इन तीनों का plant में क्या role है?
+
+अब answer खुद बनाने की कोशिश करो। 🌱
+        `.trim();
+
+    }
+
+
+    return `
+💡 Hint
+
+Question में important keywords पहचानो।
+
+फिर:
+
+1️⃣ Topic पहचानो।
+2️⃣ जो facts तुम्हें याद हैं उन्हें सोचो।
+3️⃣ Question को अपने शब्दों में समझो।
+4️⃣ Answer खुद बनाने की कोशिश करो।
+
+अगर पूरा question भेजोगे,
+तो मैं step-by-step hints दे सकता हूँ।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+function generateQuiz(q){
+
+    const quizzes=[
+
+        {
+            question:"What is 12 × 5?",
+            options:[
+                "A) 50",
+                "B) 55",
+                "C) 60",
+                "D) 70"
+            ]
+        },
+
+        {
+            question:
+                "Which gas do plants use for photosynthesis?",
+            options:[
+                "A) Oxygen",
+                "B) Carbon dioxide",
+                "C) Nitrogen",
+                "D) Hydrogen"
+            ]
+        },
+
+        {
+            question:
+                "What is the basic unit of life?",
+            options:[
+                "A) Atom",
+                "B) Tissue",
+                "C) Cell",
+                "D) Organ"
+            ]
+        },
+
+        {
+            question:
+                "What is the past tense of 'go'?",
+            options:[
+                "A) Goes",
+                "B) Going",
+                "C) Gone",
+                "D) Went"
+            ]
+        },
+
+        {
+            question:
+                "Which word is a noun?",
+            options:[
+                "A) School",
+                "B) Quickly",
+                "C) Run",
+                "D) Beautiful"
+            ]
+        },
+
+        {
+            question:
+                "‘दिन’ का विलोम क्या है?",
+            options:[
+                "A) सुबह",
+                "B) रात",
+                "C) प्रकाश",
+                "D) समय"
+            ]
+        }
+
+    ];
+
+
+    const quiz=
+        quizzes[
+            Math.floor(
+                Math.random()*quizzes.length
+            )
+        ];
+
+
+    return `
+📝 Quick Quiz
+
+${quiz.question}
+
+${quiz.options.join("\n")}
+
+👉 अपना answer A, B, C या D में भेजो।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   SCIENCE
+===================================================== */
+
+function scienceFallback(q){
+
+    if(q.includes("cell")){
+
+        return `
+🔬 Cell
+
+Cell को life की basic structural और functional
+unit कहा जाता है।
+
+Simple language में:
+
+हमारा body बहुत सारी tiny cells से बना है।
+
+मुख्य parts:
+
+• Cell membrane
+• Cytoplasm
+• Nucleus
+
+🧠 याद रखो:
+
+Cell = Basic unit of life.
+        `.trim();
+
+    }
+
+
+    if(q.includes("atom")){
+
+        return `
+⚛️ Atom
+
+Atom matter की बहुत छोटी unit है जो किसी element
+की identity को बनाए रखती है।
+
+मुख्य particles:
+
+🔴 Proton → Positive
+⚪ Neutron → Neutral
+🔵 Electron → Negative
+
+Easy trick:
+
+P = Positive
+N = Neutral
+E = Electron
+        `.trim();
+
+    }
+
+
+    if(
+        q.includes("force") ||
+        q.includes("बल")
+    ){
+
+        return `
+💪 Force
+
+Force का मतलब Push या Pull है।
+
+Examples:
+
+🚪 Door को push करना
+⚽ Ball को kick करना
+🎒 Bag को उठाना
+
+Force object की:
+
+• Speed
+• Direction
+• Motion
+
+को बदल सकती है।
+
+🧠 Force = Push or Pull
+        `.trim();
+
+    }
+
+
+    if(q.includes("energy")){
+
+        return `
+⚡ Energy
+
+Energy का मतलब काम करने की क्षमता है।
+
+Examples:
+
+☀️ Sun → Solar energy
+🔋 Battery → Electrical energy
+🍎 Food → Chemical energy
+
+Energy अलग-अलग forms में हो सकती है।
+        `.trim();
+
+    }
+
+
+    return `
+🔬 Science Help
+
+Science को समझने का best तरीका है:
+
+Concept → Example → Practice
+
+तुम किसी भी science topic का नाम भेजो,
+जैसे:
+
+• Cell
+• Atom
+• Force
+• Motion
+• Energy
+• Matter
+• Sound
+
+और मैं उसे आसान भाषा में समझाऊँगा।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   ENGLISH
+===================================================== */
+
+function englishFallback(q){
+
+    if(q.includes("noun")){
+
+        return `
+🔤 Noun
+
+A noun is a naming word.
+
+It can name:
+
+👤 Person
+📍 Place
+🐶 Animal
+📚 Thing
+💭 Idea
+
+Examples:
+
+Rahul
+India
+Dog
+Book
+
+🧠 Noun = Naming word.
+        `.trim();
+
+    }
+
+
+    if(q.includes("verb")){
+
+        return `
+🔤 Verb
+
+A verb usually shows an action or state.
+
+Examples:
+
+🏃 run
+🍎 eat
+✍️ write
+⚽ play
+😴 sleep
+
+Example:
+
+"Riya plays cricket."
+
+Here "plays" is the verb.
+        `.trim();
+
+    }
+
+
+    if(q.includes("tense")){
+
+        return `
+⏰ Tense
+
+Tense tells us when an action happens.
+
+Three basic types:
+
+1️⃣ Present
+I play.
+
+2️⃣ Past
+I played.
+
+3️⃣ Future
+I will play.
+
+🧠 Remember:
+
+Present = Now
+Past = Before
+Future = Later
+        `.trim();
+
+    }
+
+
+    if(q.includes("adjective")){
+
+        return `
+🔤 Adjective
+
+An adjective describes a noun.
+
+Examples:
+
+🌹 beautiful flower
+🏠 big house
+🍎 red apple
+👦 smart boy
+
+Here beautiful, big, red and smart
+are adjectives.
+        `.trim();
+
+    }
+
+
+    return `
+🔤 English Help
+
+मैं English grammar को examples के साथ
+step-by-step समझा सकता हूँ।
+
+पूछ सकते हो:
+
+• What is a noun?
+• What is a verb?
+• Explain tense.
+• What is an adjective?
+• Correct my sentence.
+• Make practice questions.
+    `.trim();
+
+}
+
+
+/* =====================================================
+   HINDI
+===================================================== */
+
+function hindiFallback(q){
+
+    if(q.includes("पर्यायवाची")){
+
+        return `
+🇮🇳 पर्यायवाची शब्द
+
+जिन शब्दों के अर्थ समान या लगभग समान होते हैं,
+उन्हें पर्यायवाची शब्द कहते हैं।
+
+Examples:
+
+जल → पानी, नीर
+सूर्य → रवि, भानु
+पृथ्वी → धरती, भूमि
+
+🧠 पर्यायवाची = समान अर्थ वाले शब्द।
+        `.trim();
+
+    }
+
+
+    if(q.includes("विलोम")){
+
+        return `
+🇮🇳 विलोम शब्द
+
+जिन शब्दों के अर्थ एक-दूसरे के विपरीत होते हैं,
+उन्हें विलोम शब्द कहते हैं।
+
+Examples:
+
+दिन ↔ रात
+अच्छा ↔ बुरा
+सुख ↔ दुख
+बड़ा ↔ छोटा
+
+🧠 विलोम = Opposite meaning.
+        `.trim();
+
+    }
+
+
+    if(q.includes("मुहावरा")){
+
+        return `
+🇮🇳 मुहावरा
+
+मुहावरा ऐसा विशेष वाक्यांश होता है जिसका अर्थ
+उसके सामान्य शब्दार्थ से अलग होता है।
+
+Example:
+
+"नाक में दम करना"
+
+अर्थ:
+बहुत परेशान करना।
+
+Example sentence:
+"शोर मचाकर बच्चों ने सबकी नाक में दम कर दिया।"
+        `.trim();
+
+    }
+
+
+    if(q.includes("संधि")){
+
+        return `
+🇮🇳 संधि
+
+दो वर्णों के मेल से होने वाले परिवर्तन को
+संधि कहते हैं।
+
+संधि के मुख्य प्रकार:
+
+• स्वर संधि
+• व्यंजन संधि
+• विसर्ग संधि
+
+अगर चाहो तो मैं संधि को examples के साथ
+step-by-step समझा सकता हूँ।
+        `.trim();
+
+    }
+
+
+    return `
+🇮🇳 Hindi Help
+
+तुम Hindi grammar के किसी भी topic के बारे में
+पूछ सकते हो।
+
+जैसे:
+
+• पर्यायवाची
+• विलोम
+• मुहावरे
+• संधि
+• समास
+• अलंकार
+• शब्द-भेद
+
+मैं simple examples के साथ समझाऊँगा।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   COMPUTER
+===================================================== */
+
+function computerFallback(q){
+
+    if(q.includes("html")){
+
+        return `
+💻 HTML
+
+HTML का पूरा नाम:
+
+HyperText Markup Language
+
+HTML webpage की structure बनाने के लिए
+use होता है।
+
+Example:
+
+<h1>Hello</h1>
+
+यह एक heading बनाता है।
+
+🧠 याद रखो:
+
+HTML = Structure
+CSS = Design
+JavaScript = Behaviour
+        `.trim();
+
+    }
+
+
+    if(q.includes("css")){
+
+        return `
+🎨 CSS
+
+CSS webpage की styling और design के लिए
+use होता है।
+
+CSS से हम:
+
+🎨 Colors
+📏 Size
+📦 Layout
+↔️ Spacing
+✨ Animation
+
+बना सकते हैं।
+
+🧠 CSS = Style
+        `.trim();
+
+    }
+
+
+    if(q.includes("python")){
+
+        return `
+🐍 Python
+
+Python एक programming language है।
+
+Example:
+
+print("Hello")
+
+यह screen पर:
+
+Hello
+
+दिखाएगा।
+
+Python का use:
+
+🤖 AI
+📊 Data Science
+⚙️ Automation
+🌐 Web Development
+
+में होता है।
+        `.trim();
+
+    }
+
+
+    if(q.includes("algorithm")){
+
+        return `
+🧠 Algorithm
+
+Algorithm किसी problem को solve करने के
+step-by-step instructions होते हैं।
+
+Example:
+
+Tea बनाने का simple algorithm:
+
+1. पानी गर्म करो।
+2. चाय पत्ती डालो।
+3. दूध डालो।
+4. चीनी डालो।
+5. चाय तैयार।
+
+Computer algorithms भी इसी तरह
+step-by-step काम करते हैं।
+        `.trim();
+
+    }
+
+
+    return `
+💻 Computer Help
+
+तुम Computer और Coding के topics पूछ सकते हो:
+
+• HTML
+• CSS
+• JavaScript
+• Python
+• Algorithm
+• Internet
+• AI
+• Programming
+
+मैं उन्हें beginner-friendly तरीके से समझाऊँगा।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   GENERIC
+===================================================== */
+
+function genericExplanation(question){
+
+    return `
+📚 चलो इसे आसान तरीके से समझते हैं।
+
+तुमने पूछा:
+
+"${question}"
+
+किसी भी नए topic को समझने के लिए
+हम 3 steps use कर सकते हैं:
+
+1️⃣ Basic meaning
+2️⃣ Simple example
+3️⃣ Real-life use
+
+💡 अगर तुम चाहो तो अपने question के साथ
+"example दो" लिखो, मैं उसे daily-life example
+से समझाऊँगा।
+
+और अगर answer खुद ढूँढना चाहते हो तो
+"hint दो" लिखो।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   SIMPLE MATH ENGINE
+===================================================== */
+
+function looksLikeMath(q){
+
+    return (
+        /-?\d+(?:\.\d+)?\s*[\+\-\*\/x×÷]\s*-?\d+/.test(q) ||
+        q.includes("solve") ||
+        q.includes("calculate") ||
+        q.includes("गणना") ||
+        q.includes("हल करो")
+    );
+
+}
+
+
+function solveSimpleMath(q){
+
+    const match=
+        q.match(
+            /(-?\d+(?:\.\d+)?)\s*([\+\-\*\/x×÷])\s*(-?\d+(?:\.\d+)?)/
+        );
+
+
+    if(!match){
+
+        return null;
+
+    }
+
+
+    const a=
+        Number(match[1]);
+
+    const op=
+        match[2];
+
+    const b=
+        Number(match[3]);
+
+
+    let result;
+
+
+    switch(op){
+
+        case "+":
+
+            result=a+b;
+
+            break;
+
+
+        case "-":
+
+            result=a-b;
+
+            break;
+
+
+        case "*":
+        case "x":
+        case "×":
+
+            result=a*b;
+
+            break;
+
+
+        case "/":
+        case "÷":
+
+            if(b===0){
+
+                return `
+❌ किसी number को 0 से divide नहीं किया जा सकता।
+                `.trim();
+
+            }
+
+            result=a/b;
+
+            break;
+
+
+        default:
+
+            return null;
+
+    }
+
+
+    return `
+🧮 Step-by-Step Solution
+
+Question:
+
+${a} ${op} ${b}
+
+Operation:
+
+${op}
+
+Calculation:
+
+${a} ${op} ${b} = ${result}
+
+✅ Answer: ${result}
+
+अगर चाहो तो मैं इसी type का
+practice question भी दे सकता हूँ।
+    `.trim();
+
+}
+
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+
+function containsAny(text,words){
+
+    return words.some(
+        word=>text.includes(word)
+    );
+
+}
+
+
+function delay(ms){
+
+    return new Promise(
+        resolve=>setTimeout(resolve,ms)
+    );
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function addMessage(type,text){
+
+    const welcome=
+        messages.querySelector(".welcome");
+
+
+    if(welcome){
+
+        welcome.remove();
+
+    }
+
+
+    const wrapper=
+        document.createElement("div");
+
+
+    wrapper.className=
+        "message "+type;
+
+
+    const inner=
+        document.createElement("div");
+
+
+    const bubble=
+        document.createElement("div");
+
+
+    bubble.className="bubble";
+
+    bubble.textContent=text;
+
+
+    const time=
+        document.createElement("div");
+
+
+    time.className="message-time";
+
+    time.textContent=
+        new Date().toLocaleTimeString(
+            [],
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+
+    inner.appendChild(bubble);
+
+    inner.appendChild(time);
+
+    wrapper.appendChild(inner);
+
+    messages.appendChild(wrapper);
+
+
+    scrollChat();
+
+}
+
+
+/* =====================================================
+   TYPING
+===================================================== */
+
+function showTyping(){
+
+    const wrapper=
+        document.createElement("div");
+
+
+    wrapper.id=
+        "typingMessage";
+
+
+    wrapper.className=
+        "message ai";
+
+
+    wrapper.innerHTML=`
+
+        <div>
+
+            <div class="bubble">
+
+                <div class="typing">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    messages.appendChild(wrapper);
+
+    scrollChat();
+
+}
+
+
+function removeTyping(){
+
+    const typing=
+        document.getElementById(
+            "typingMessage"
+        );
+
+
+    if(typing){
+
+        typing.remove();
+
+    }
+
+}
+
+
+function scrollChat(){
+
+    messages.scrollTop=
+        messages.scrollHeight;
+
+}
+
+
+/* =====================================================
+   CLEAR CHAT
+===================================================== */
+
+function clearChat(){
+
+    if(!conversation.length){
+
+        return;
+
+    }
+
+
+    const confirmed=
+        confirm(
+            "Clear this chat?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    conversation=[];
+
+
+    messages.innerHTML=`
+
+        <div class="welcome">
+
+            <div class="welcome-icon">
+                🤖
+            </div>
+
+            <h2>
+                Chat cleared 👋
+            </h2>
+
+            <p>
+                Ready for your next study question.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        document.body.classList.contains("dark")
+            ? "1"
+            : "0"
+    );
+
+}
+
+
+function applyDarkMode(){
+
+    if(
+        localStorage.getItem(
+            "studyIndiaDark"
+        )==="1"
+    ){
+
+        document.body.classList.add("dark");
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goBack(){
+
+    window.location.href=
+        "index.html";
+
+}
+
+
+function goHome(){
+
+    window.location.href=
+        "index.html";
+
+}
+
+
+function goClasses(){
+
+    window.location.href=
+        "lesson.html";
+
+}
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+applyDarkMode();
+
+input.focus();
+
+</script>
+
+</body>
+</html>

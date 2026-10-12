@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5b5cf0">
+<title>StudyIndia - Learn Smarter</title>
+
+<style>
+:root{
+  --primary:#5b5cf0;
+  --primary-dark:#4546d9;
+  --secondary:#00bfa6;
+  --bg:#f5f7ff;
+  --surface:#ffffff;
+  --text:#202442;
+  --muted:#747a98;
+  --border:#e8eafa;
+  --shadow:0 8px 30px rgba(57,65,140,.08);
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;transition:background .3s,color .3s;
+  padding-bottom:95px;
+}
+body.dark{
+  --bg:#111426;--surface:#1b2037;--text:#f3f4ff;
+  --muted:#a6acc9;--border:#303650;
+  --shadow:0 8px 30px rgba(0,0,0,.18);
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:3px solid #8c8dff;outline-offset:3px
+}
+.container{width:min(1100px,100%);margin:auto;padding:0 18px}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:19px 0;
+}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{
+  width:48px;height:48px;border-radius:16px;
+  display:grid;place-items:center;font-size:25px;
+  background:linear-gradient(135deg,#7778ff,#494be1);
+  color:white;box-shadow:0 7px 17px #5b5cf044;
+}
+.brand h1{font-size:21px;letter-spacing:-.7px}
+.brand p{font-size:12px;color:var(--muted);margin-top:2px}
+.top-actions{display:flex;gap:8px}
+.icon-btn{
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);width:43px;height:43px;border-radius:15px;
+  display:grid;place-items:center;font-size:19px;
+  transition:transform .2s,background .2s;
+}
+.icon-btn:hover{transform:translateY(-2px);background:var(--bg)}
+.hero{
+  position:relative;overflow:hidden;border-radius:28px;
+  padding:27px 24px;margin:6px 0 21px;color:white;
+  background:linear-gradient(120deg,#595bea,#7774ff 62%,#a27bff);
+  box-shadow:0 15px 35px #5758e52c;
+}
+.hero:before,.hero:after{
+  content:"";position:absolute;border-radius:50%;
+  background:#ffffff12;pointer-events:none;
+}
+.hero:before{width:190px;height:190px;right:-45px;top:-85px}
+.hero:after{width:130px;height:130px;right:95px;bottom:-95px}
+.hero-content{position:relative;z-index:1}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;opacity:.85}
+.hero h2{font-size:clamp(25px,5vw,34px);line-height:1.2;margin:10px 0}
+.hero p{font-size:14px;line-height:1.7;max-width:490px;color:#f1f0ff}
+.hero-btn{
+  margin-top:19px;border:0;border-radius:13px;padding:12px 17px;
+  background:white;color:#4d4fe1;font-weight:800;
+  box-shadow:0 5px 16px #2222;transition:transform .2s;
+}
+.hero-btn:hover{transform:translateY(-2px)}
+.hero-emoji{position:absolute;right:24px;bottom:18px;font-size:65px;opacity:.95;z-index:1}
+.search-wrap{position:relative;margin-bottom:22px}
+.search-wrap span{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:19px}
+.search{
+  width:100%;border:1px solid var(--border);border-radius:16px;
+  padding:15px 15px 15px 47px;background:var(--surface);
+  color:var(--text);outline:none;box-shadow:var(--shadow);
+}
+.search:focus{border-color:var(--primary)}
+.stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;margin-bottom:30px;
+}
+.stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:19px;padding:15px 10px;text-align:center;
+  box-shadow:var(--shadow);min-width:0;
+}
+.stat-icon{font-size:23px}
+.stat strong{display:block;font-size:22px;margin:7px 0 2px}
+.stat small{font-size:11px;color:var(--muted)}
+.section{margin:29px 0}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:15px;
+}
+.section-head h2{font-size:20px;letter-spacing:-.5px}
+.section-head p{font-size:12px;color:var(--muted);margin-top:4px}
+.section-link{font-size:12px;font-weight:800;color:var(--primary);white-space:nowrap}
+.feature-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;
+}
+.feature{
+  position:relative;overflow:hidden;text-align:left;
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-radius:21px;
+  padding:18px 15px;min-height:158px;
+  box-shadow:var(--shadow);transition:transform .22s,border-color .22s;
+}
+.feature:hover{transform:translateY(-4px);border-color:#b7b8ff}
+.feature .emoji{
+  width:49px;height:49px;display:grid;place-items:center;
+  font-size:26px;border-radius:16px;margin-bottom:13px;
+}
+.feature h3{font-size:15px;margin-bottom:6px}
+.feature p{font-size:12px;color:var(--muted);line-height:1.55}
+.feature .arrow{position:absolute;right:15px;top:20px;color:var(--muted)}
+.lavender{background:#eeedff}
+.mint{background:#dffaf3}
+.peach{background:#fff0e5}
+.blue{background:#e4f1ff}
+.pink{background:#ffe8f1}
+.yellow{background:#fff6d9}
+.dark .lavender{background:#343153}
+.dark .mint{background:#183c3b}
+.dark .peach{background:#45352d}
+.dark .blue{background:#263b56}
+.dark .pink{background:#442d3c}
+.dark .yellow{background:#443b24}
+.challenge{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;padding:19px;box-shadow:var(--shadow);
+}
+.challenge-top{display:flex;align-items:center;gap:14px}
+.challenge-icon{
+  flex-shrink:0;width:55px;height:55px;border-radius:17px;
+  display:grid;place-items:center;font-size:29px;background:#fff0d9;
+}
+.challenge h3{font-size:16px;margin-bottom:5px}
+.challenge p{font-size:12px;line-height:1.6;color:var(--muted)}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  border-radius:20px;background:#e8fff7;color:#07876f;
+  padding:6px 10px;font-size:11px;font-weight:800;margin-top:11px;
+}
+.primary-btn{
+  display:inline-flex;justify-content:center;align-items:center;gap:7px;
+  border:0;border-radius:13px;padding:12px 16px;margin-top:15px;
+  background:var(--primary);color:white;font-size:13px;font-weight:800;
+  transition:transform .2s,background .2s;
+}
+.primary-btn:hover{transform:translateY(-2px);background:var(--primary-dark)}
+.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.quick{
+  border:1px solid var(--border);border-radius:17px;padding:15px 5px;
+  background:var(--surface);color:var(--text);text-align:center;
+  transition:transform .2s;
+}
+.quick:hover{transform:translateY(-3px)}
+.quick span{display:block;font-size:25px;margin-bottom:8px}
+.quick strong{font-size:11px}
+.fun-panel{
+  position:relative;overflow:hidden;border-radius:25px;padding:19px;
+  background:linear-gradient(135deg,#fff2d8,#ffe6f0 56%,#e9e7ff);
+  color:#282545;border:1px solid #f3e0ec;
+}
+.dark .fun-panel{
+  background:linear-gradient(135deg,#3c332c,#402b3d 56%,#302d50);
+  color:#fff;
+}
+.fun-intro{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.fun-big-icon{
+  flex-shrink:0;width:57px;height:57px;border-radius:18px;
+  background:#ffffffad;display:grid;place-items:center;font-size:31px;
+}
+.fun-intro h3{font-size:18px;margin-bottom:4px}
+.fun-intro p{font-size:12px;line-height:1.6;opacity:.8}
+.fun-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fun-card{
+  border:1px solid #ffffffb0;border-radius:17px;padding:13px 10px;
+  background:#ffffffbd;color:#292645;text-align:left;min-width:0;
+  transition:transform .2s,box-shadow .2s;
+}
+.dark .fun-card{background:#ffffffed;color:#292645}
+.fun-card:hover{transform:translateY(-3px);box-shadow:0 7px 18px #51405d20}
+.fun-card .fun-emoji{font-size:27px;display:block;margin-bottom:9px}
+.fun-card strong{font-size:12px;display:block;margin-bottom:5px}
+.fun-card small{font-size:10px;line-height:1.5;display:block;color:#66617d}
+.fun-action{
+  width:100%;border:0;border-radius:12px;margin-top:14px;
+  background:#5b50c9;color:white;padding:12px;font-weight:800;font-size:12px;
+}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-around;align-items:center;
+  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+  background:var(--surface);border-top:1px solid var(--border);
+  box-shadow:0 -8px 25px #3331;
+}
+.nav-item{
+  min-width:53px;display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:transparent;border:0;color:var(--muted);font-size:10px;
+  font-weight:700;padding:4px 7px;border-radius:12px;
+}
+.nav-item span{font-size:21px}
+.nav-item.active{color:var(--primary);background:#f0efff}
+.dark .nav-item.active{background:#30304f}
+.modal-backdrop{
+  position:fixed;inset:0;z-index:50;display:none;
+  align-items:center;justify-content:center;padding:18px;
+  background:#1114269c;backdrop-filter:blur(5px);
+}
+.modal-backdrop.show{display:flex;animation:fadeIn .2s}
+.modal{
+  width:min(420px,100%);background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-radius:25px;padding:23px;
+  box-shadow:0 25px 80px #0003;animation:popIn .25s;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-head h2{font-size:20px}
+.close-btn{background:var(--bg);color:var(--text);border:0;border-radius:11px;width:36px;height:36px;font-size:20px}
+.modal label{font-size:12px;font-weight:800;display:block;margin:13px 0 7px}
+.modal input{
+  width:100%;padding:13px;border:1px solid var(--border);
+  background:var(--bg);color:var(--text);border-radius:12px;
+}
+.modal .primary-btn{width:100%}
+.toast{
+  position:fixed;left:50%;bottom:100px;z-index:80;
+  transform:translate(-50%,15px);opacity:0;pointer-events:none;
+  background:#202442;color:white;border-radius:13px;padding:12px 17px;
+  font-size:13px;box-shadow:0 8px 25px #0003;
+  transition:opacity .25s,transform .25s;max-width:calc(100% - 30px);
+  text-align:center;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.riddle-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:16px}
+.riddle-options button{
+  border:1px solid var(--border);border-radius:12px;padding:12px 8px;
+  background:var(--bg);color:var(--text);font-weight:700;font-size:13px;
+}
+.riddle-options button:hover{border-color:var(--primary)}
+.answer-msg{font-size:13px;font-weight:800;line-height:1.6;margin-top:13px;min-height:22px}
+.fact-text{font-size:15px;line-height:1.8;margin:15px 0}
+.mini-label{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.footer{text-align:center;color:var(--muted);font-size:11px;padding:15px 0 24px}
+.hide{display:none!important}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.hero-emoji{animation:float 3s ease-in-out infinite}
+@media(min-width:700px){
+  .container{padding:0 28px}
+  .feature-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .feature{min-height:180px}
+  .hero{padding:35px 34px}
+  .stats{gap:18px}
+  .stat{padding:19px}
+  .fun-panel{padding:25px}
+  .fun-card{padding:17px}
+  .fun-card strong{font-size:13px}
+  .fun-card small{font-size:11px}
+}
+@media(max-width:380px){
+  .container{padding:0 13px}
+  .hero{padding:22px 17px}
+  .hero-emoji{font-size:47px;right:12px}
+  .hero p{max-width:230px}
+  .stats{gap:7px}
+  .stat{padding:12px 5px}
+  .stat strong{font-size:19px}
+  .fun-cards{gap:7px}
+  .fun-card{padding:10px 7px}
+  .fun-card .fun-emoji{font-size:23px}
+  .fun-card strong{font-size:11px}
+  .quick-grid{gap:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="StudyIndia Home">
+      <div class="logo">📚</div>
+      <div>
+        <h1>StudyIndia</h1>
+        <p>Learn today, lead tomorrow</p>
+      </div>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Dark mode">🌙</button>
+      <button class="icon-btn" id="profileBtn" aria-label="Open profile" title="Profile">👤</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">✨ YOUR LEARNING JOURNEY</div>
+        <h2 id="greeting">Hello, Learner! 👋</h2>
+        <p>Learn something new every day. Explore lessons, test your knowledge and make learning fun.</p>
+        <button class="hero-btn" onclick="goTo('lesson.html')">Start Learning&nbsp; →</button>
+      </div>
+      <div class="hero-emoji" aria-hidden="true">🎓</div>
+    </section>
+
+    <div class="search-wrap">
+      <span>🔎</span>
+      <input class="search" id="searchInput" type="search"
+        placeholder="Search lessons, quizzes, games..."
+        aria-label="Search StudyIndia">
+    </div>
+
+    <section class="stats" aria-label="Your study stats">
+      <div class="stat">
+        <div class="stat-icon">🔥</div>
+        <strong id="streakValue">0</strong>
+        <small>Day Streak</small>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">🎯</div>
+        <strong id="goalValue">0/3</strong>
+        <small>Daily Goals</small>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">🏅</div>
+        <strong id="badgeValue">0</strong>
+        <small>Quiz Attempts</small>
+      </div>
+    </section>
+
+    <section class="section" id="learningSection">
+      <div class="section-head">
+        <div>
+          <h2>Start Learning 🚀</h2>
+          <p>Choose what you want to learn today</p>
+        </div>
+      </div>
+      <div class="feature-grid searchable">
+        <button class="feature search-card" data-search="lessons class subjects books study"
+          onclick="goTo('lesson.html')">
+          <span class="arrow">↗</span>
+          <div class="emoji lavender">📚</div>
+          <h3>Lessons</h3>
+          <p>Explore subjects and class-wise topics.</p>
+        </button>
+        <button class="feature search-card" data-search="mind exercise brain mental games memory"
+          onclick="goTo('mind.html')">
+          <span class="arrow">↗</span>
+          <div class="emoji mint">🧠</div>
+          <h3>Mind Exercise</h3>
+          <p>Train your memory, focus and logic.</p>
+        </button>
+        <button class="feature search-card" data-search="ai study helper assistant questions help"
+          onclick="goTo('ai.html')">
+          <span class="arrow">↗</span>
+          <div class="emoji peach">🤖</div>
+          <h3>AI Study Helper</h3>
+          <p>Get help with your study questions.</p>
+        </button>
+        <button class="feature search-card" data-search="quiz test exam practice questions"
+          onclick="goTo('quiz.html')">
+          <span class="arrow">↗</span>
+          <div class="emoji blue">✍️</div>
+          <h3>Quiz & Test</h3>
+          <p>Practice questions and check your knowledge.</p>
+        </button>
+      </div>
+    </section>
+
+    <section class="section" id="challengeSection">
+      <div class="section-head">
+        <div>
+          <h2>Daily Challenge ⚡</h2>
+          <p>A small step every day makes a big difference</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-top">
+          <div class="challenge-icon">🏆</div>
+          <div>
+            <h3>Today's Knowledge Challenge</h3>
+            <p>Take a quick quiz, challenge yourself and learn from every answer.</p>
+            <span class="pill">✨ Keep your brain active</span>
+          </div>
+        </div>
+        <button class="primary-btn" onclick="goTo('quiz.html')">Start Today's Quiz&nbsp; →</button>
+      </div>
+    </section>
+
+    <section class="section" id="quickSection">
+      <div class="section-head">
+        <div>
+          <h2>Quick Study 📖</h2>
+          <p>Jump straight into your favourite subject</p>
+        </div>
+      </div>
+      <div class="quick-grid">
+        <button class="quick search-card" data-search="math maths mathematics"
+          onclick="openSubject('Maths')"><span>🧮</span><strong>Maths</strong></button>
+        <button class="quick search-card" data-search="science physics chemistry biology"
+          onclick="openSubject('Science')"><span>🔬</span><strong>Science</strong></button>
+        <button class="quick search-card" data-search="sst social studies history geography"
+          onclick="openSubject('SST')"><span>🌍</span><strong>SST</strong></button>
+        <button class="quick search-card" data-search="english grammar vocabulary"
+          onclick="openSubject('English')"><span>🔤</span><strong>English</strong></button>
+      </div>
+    </section>
+
+    <!-- Fun Corner replaces Your Learning Progress -->
+    <section class="section" id="funCornerSection">
+      <div class="section-head">
+        <div>
+          <h2>🎉 Fun Corner</h2>
+          <p>Take a break and make your brain smile!</p>
+        </div>
+        <span class="section-link">Play & Learn</span>
+      </div>
+
+      <div class="fun-panel">
+        <div class="fun-intro">
+          <div class="fun-big-icon">🎈</div>
+          <div>
+            <h3>A little fun, a lot of learning!</h3>
+            <p>Try a riddle, discover a surprising fact or solve a quick brain challenge.</p>
+          </div>
+        </div>
+
+        <div class="fun-cards">
+          <button class="fun-card" onclick="openFun('riddle')">
+            <span class="fun-emoji">🤔</span>
+            <strong>Brain Riddle</strong>
+            <small>Can you solve today's puzzle?</small>
+          </button>
+          <button class="fun-card" onclick="openFun('fact')">
+            <span class="fun-emoji">🌟</span>
+            <strong>Fun Fact</strong>
+            <small>Discover something amazing.</small>
+          </button>
+          <button class="fun-card" onclick="openFun('challenge')">
+            <span class="fun-emoji">⚡</span>
+            <strong>Quick Challenge</strong>
+            <small>Test your thinking skills.</small>
+          </button>
+        </div>
+
+        <button class="fun-action" onclick="openFun('riddle')">Let's Have Some Fun! 🎮</button>
+      </div>
+    </section>
+
+    <div class="footer">Made with 🇮🇳 for curious minds · StudyIndia</div>
+  </main>
+</div>
+
+<nav class="bottom-nav" aria-label="Main navigation">
+  <button class="nav-item active" onclick="goTo('index.html')"><span>🏠</span>Home</button>
+  <button class="nav-item" onclick="goTo('lesson.html')"><span>📚</span>Lessons</button>
+  <button class="nav-item" onclick="goTo('mind.html')"><span>🧠</span>Mind Games</button>
+  <button class="nav-item" onclick="goTo('quiz.html')"><span>✍️</span>Quiz</button>
+  <button class="nav-item" onclick="goTo('progress.html')"><span>📊</span>Results</button>
+</nav>
+
+<!-- Profile Modal -->
+<div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="profileTitle">👤 Your Profile</h2>
+      <button class="close-btn" onclick="closeModal()" aria-label="Close">×</button>
+    </div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6">
+      Add your name to personalise your StudyIndia home page.
+    </p>
+    <form id="profileForm">
+      <label for="studentName">Your name</label>
+      <input id="studentName" maxlength="40" placeholder="Enter your name" autocomplete="name">
+      <button class="primary-btn" type="submit">Save Profile ✓</button>
+    </form>
+  </div>
+</div>
+
+<!-- Fun Corner Modal -->
+<div class="modal-backdrop" id="funModal" role="dialog" aria-modal="true" aria-labelledby="funTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="funTitle">🎉 Fun Corner</h2>
+      <button class="close-btn" onclick="closeFun()" aria-label="Close">×</button>
+    </div>
+    <div id="funContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const STORAGE = {
+  name: "studyindia_student_name_v3",
+  history: "studyindia_local_history_v3",
+  theme: "studyIndiaTheme",
+  streak: "studyIndiaStreak",
+  goals: "studyIndiaDailyGoals",
+  funScore: "studyIndiaFunScore"
+};
+
+const $ = (id) => document.getElementById(id);
+
+function safeGet(key, fallback = "") {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
+}
+
+function safeSet(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function goTo(page) {
+  window.location.href = page;
+}
+
+function showToast(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+}
+
+function loadProfile() {
+  const name = safeGet(STORAGE.name, "").trim();
+  $("greeting").textContent = name ? `Hello, ${name}! 👋` : "Hello, Learner! 👋";
+  $("studentName").value = name;
+}
+
+function openProfile() {
+  $("profileModal").classList.add("show");
+  $("studentName").focus();
+}
+
+function closeModal() {
+  $("profileModal").classList.remove("show");
+}
+
+$("profileBtn").addEventListener("click", openProfile);
+
+$("profileForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const name = $("studentName").value.trim();
+  safeSet(STORAGE.name, name);
+  loadProfile();
+  closeModal();
+  showToast(name ? `Welcome, ${name}! 🎉` : "Profile updated!");
+});
+
+function applyTheme(theme) {
+  document.body.classList.toggle("dark", theme === "dark");
+  $("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
+  $("themeBtn").title = theme === "dark" ? "Light mode" : "Dark mode";
+  $("themeBtn").setAttribute("aria-label", theme === "dark" ? "Enable light mode" : "Enable dark mode");
+  safeSet(STORAGE.theme, theme);
+}
+
+$("themeBtn").addEventListener("click", () => {
+  const next = document.body.classList.contains("dark") ? "light" : "dark";
+  applyTheme(next);
+});
+
+function loadStats() {
+  const streak = Math.max(0, Number(safeGet(STORAGE.streak, "0")) || 0);
+  $("streakValue").textContent = streak;
+
+  let goals = {};
+  try {
+    goals = JSON.parse(safeGet(STORAGE.goals, "{}")) || {};
+  } catch {
+    goals = {};
+  }
+  const today = new Date().toLocaleDateString("en-CA");
+  const todayGoals = goals[today] || [];
+  $("goalValue").textContent = `${todayGoals.length}/3`;
+
+  let history = [];
+  try {
+    history = JSON.parse(safeGet(STORAGE.history, "[]")) || [];
+    if (!Array.isArray(history)) history = [];
+  } catch {
+    history = [];
+  }
+  $("badgeValue").textContent = history.length;
+}
+
+function openSubject(subject) {
+  safeSet("studyIndiaSelectedSubject", subject);
+  goTo("lesson.html");
+}
+
+/* Search cards and sections */
+$("searchInput").addEventListener("input", () => {
+  const query = $("searchInput").value.trim().toLowerCase();
+  document.querySelectorAll(".search-card").forEach((card) => {
+    const text = `${card.innerText} ${card.dataset.search || ""}`.toLowerCase();
+    card.classList.toggle("hide", query.length > 0 && !text.includes(query));
+  });
+
+  const sections = [
+    ["learningSection", ".search-card"],
+    ["quickSection", ".search-card"]
+  ];
+
+  sections.forEach(([sectionId, selector]) => {
+    const section = $(sectionId);
+    const cards = [...section.querySelectorAll(selector)];
+    const visible = cards.some(card => !card.classList.contains("hide"));
+    section.classList.toggle("hide", query.length > 0 && !visible);
+  });
+
+  $("challengeSection").classList.toggle("hide",
+    query.length > 0 && !"daily challenge quiz test knowledge".includes(query));
+  $("funCornerSection").classList.toggle("hide",
+    query.length > 0 && !"fun corner riddle puzzle fact brain challenge game".includes(query));
+});
+
+/* Fun Corner mini activities */
+const riddles = [
+  {
+    question: "What has hands but cannot clap?",
+    options: ["A robot", "A clock", "A statue", "A doll"],
+    answer: 1,
+    explanation: "Correct! A clock has hands that show the time. ⏰"
+  },
+  {
+    question: "What gets wetter as it dries?",
+    options: ["A towel", "The sun", "A fan", "A mirror"],
+    answer: 0,
+    explanation: "That's right! A towel gets wet while drying things. 🧺"
+  },
+  {
+    question: "I have keys but no locks. What am I?",
+    options: ["A treasure box", "A keyboard", "A door", "A map"],
+    answer: 1,
+    explanation: "Correct! A keyboard has keys for typing. ⌨️"
+  },
+  {
+    question: "What has one eye but cannot see?",
+    options: ["A needle", "A camera", "A storm", "A potato"],
+    answer: 0,
+    explanation: "Well done! A needle has an eye for thread. 🪡"
+  }
+];
+
+const facts = [
+  {
+    title: "🐙 Eight Amazing Arms",
+    text: "An octopus has three hearts and blue blood. Two hearts pump blood to the gills, while one pumps it to the rest of the body."
+  },
+  {
+    title: "🌙 Moon's Slow Dance",
+    text: "The Moon takes about 27.3 days to orbit Earth once relative to distant stars."
+  },
+  {
+    title: "🦋 Taste With Their Feet",
+    text: "Butterflies have taste receptors on their feet, which help them identify suitable plants."
+  },
+  {
+    title: "🌈 A Rainbow's Secret",
+    text: "A rainbow forms when sunlight is refracted, reflected and dispersed inside water droplets."
+  },
+  {
+    title: "🐝 Tiny Wing Power",
+    text: "Honeybees communicate information about food sources through movements known as the waggle dance."
+  }
+];
+
+let currentRiddle = null;
+let challengeAnswer = null;
+
+function openFun(type) {
+  $("funModal").classList.add("show");
+  if (type === "riddle") showRiddle();
+  else if (type === "fact") showFact();
+  else showQuickChallenge();
+}
+
+function closeFun() {
+  $("funModal").classList.remove("show");
+}
+
+function showRiddle() {
+  currentRiddle = riddles[Math.floor(Math.random() * riddles.length)];
+  $("funTitle").textContent = "🤔 Brain Riddle";
+
+  const options = currentRiddle.options.map((option, index) =>
+    `<button type="button" data-answer="${index}">${escapeHTML(option)}</button>`
+  ).join("");
+
+  $("funContent").innerHTML = `
+    <span class="mini-label">Think before you answer</span>
+    <p class="fact-text">${escapeHTML(currentRiddle.question)}</p>
+    <div class="riddle-options">${options}</div>
+    <p class="answer-msg" id="answerMsg" aria-live="polite"></p>
+    <button class="primary-btn" id="anotherRiddle">Another Riddle ↻</button>
+  `;
+
+  $("funContent").querySelectorAll("[data-answer]").forEach(button => {
+    button.addEventListener("click", () => checkRiddle(Number(button.dataset.answer)));
+  });
+  $("anotherRiddle").addEventListener("click", showRiddle);
+}
+
+function checkRiddle(index) {
+  const buttons = $("funContent").querySelectorAll("[data-answer]");
+  buttons.forEach(button => button.disabled = true);
+
+  const message = $("answerMsg");
+  if (index === currentRiddle.answer) {
+    message.textContent = "🎉 " + currentRiddle.explanation;
+    message.style.color = "#0a987c";
+    addFunPoint();
+  } else {
+    message.textContent = `Not quite! The answer is "${currentRiddle.options[currentRiddle.answer]}". Try another!`;
+    message.style.color = "#e06b56";
+  }
+}
+
+function showFact() {
+  const fact = facts[Math.floor(Math.random() * facts.length)];
+  $("funTitle").textContent = "🌟 Fun Fact";
+  $("funContent").innerHTML = `
+    <span class="mini-label">Did you know?</span>
+    <h3 style="font-size:19px;margin-top:12px">${escapeHTML(fact.title)}</h3>
+    <p class="fact-text">${escapeHTML(fact.text)}</p>
+    <button class="primary-btn" id="anotherFact">Discover Another Fact ↻</button>
+  `;
+  $("anotherFact").addEventListener("click", showFact);
+}
+
+function showQuickChallenge() {
+  const a = Math.floor(Math.random() * 8) + 2;
+  const b = Math.floor(Math.random() * 8) + 2;
+  const operation = Math.random() < .5 ? "+" : "×";
+  const answer = operation === "+" ? a + b : a * b;
+  const options = new Set([answer]);
+
+  while (options.size < 4) {
+    const offset = Math.floor(Math.random() * 9) - 4;
+    if (offset !== 0 && answer + offset >= 0) options.add(answer + offset);
+  }
+
+  const choices = [...options].sort(() => Math.random() - .5);
+  challengeAnswer = answer;
+  $("funTitle").textContent = "⚡ Quick Challenge";
+  $("funContent").innerHTML = `
+    <span class="mini-label">Mental maths</span>
+    <p class="fact-text" style="font-size:25px;font-weight:900;text-align:center">
+      ${a} ${operation} ${b} = ?
+    </p>
+    <div class="riddle-options">
+      ${choices.map(n => `<button type="button" data-number="${n}">${n}</button>`).join("")}
+    </div>
+    <p class="answer-msg" id="answerMsg" aria-live="polite"></p>
+    <button class="primary-btn" id="nextChallenge">Next Challenge ↻</button>
+  `;
+
+  $("funContent").querySelectorAll("[data-number]").forEach(button => {
+    button.addEventListener("click", () => {
+      $("funContent").querySelectorAll("[data-number]").forEach(b => b.disabled = true);
+      const msg = $("answerMsg");
+      if (Number(button.dataset.number) === challengeAnswer) {
+        msg.textContent = "Brilliant! Your answer is correct. 🧠";
+        msg.style.color = "#0a987c";
+        addFunPoint();
+      } else {
+        msg.textContent = `Good try! The correct answer is ${challengeAnswer}.`;
+        msg.style.color = "#e06b56";
+      }
+    });
+  });
+
+  $("nextChallenge").addEventListener("click", showQuickChallenge);
+}
+
+function addFunPoint() {
+  const current = Math.max(0, Number(safeGet(STORAGE.funScore, "0")) || 0);
+  safeSet(STORAGE.funScore, String(current + 1));
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+/* Close modals by clicking outside or pressing Escape */
+["profileModal", "funModal"].forEach(id => {
+  $(id).addEventListener("click", event => {
+    if (event.target === $(id)) $(id).classList.remove("show");
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeModal();
+    closeFun();
+  }
+  if (event.key === "/" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+    event.preventDefault();
+    $("searchInput").focus();
+  }
+});
+
+function initialise() {
+  const savedTheme = safeGet(STORAGE.theme, "light");
+  applyTheme(savedTheme === "dark" ? "dark" : "light");
+  loadProfile();
+  loadStats();
+}
+
+initialise();
+</script>
+</body>
+</html>

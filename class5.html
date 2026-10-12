@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyIndia - Class 5</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#fff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --border:#334155;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef4ff,#f8f5ff);
+    color:var(--text);
+    transition:.3s;
+}
+
+body.dark{
+    background:linear-gradient(135deg,#0f172a,#111827);
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:90px;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    padding:18px;
+    border-radius:0 0 25px 25px;
+    box-shadow:0 10px 30px rgba(37,99,235,.25);
+    animation:slideDown .6s ease;
+}
+
+.header-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.header-info{
+    flex:1;
+}
+
+.header-info h1{
+    font-size:25px;
+}
+
+.header-info p{
+    font-size:13px;
+    opacity:.9;
+    margin-top:3px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.action-btn{
+    border:0;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    transition:.25s;
+}
+
+.action-btn:hover{
+    background:rgba(255,255,255,.3);
+    transform:translateY(-2px);
+}
+
+.class-badge{
+    margin-top:16px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
+    padding:12px 15px;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.class-badge strong{
+    font-size:18px;
+}
+
+/* MAIN */
+main{
+    padding:22px 16px;
+}
+
+.section-title{
+    font-size:23px;
+    margin-bottom:6px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    margin-bottom:18px;
+    font-size:14px;
+}
+
+/* SUBJECTS */
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.subject-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    cursor:pointer;
+    box-shadow:0 7px 22px rgba(0,0,0,.05);
+    transition:.3s;
+    animation:fadeUp .5s ease both;
+}
+
+.subject-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(37,99,235,.12);
+}
+
+.subject-icon{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.subject-card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.subject-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.question-count{
+    margin-top:15px;
+    display:inline-block;
+    background:#eef4ff;
+    color:var(--primary);
+    padding:7px 11px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+body.dark .question-count{
+    background:#172554;
+}
+
+/* TEACHER */
+.teacher{
+    margin-top:22px;
+    background:linear-gradient(135deg,#eef4ff,#f5efff);
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:20px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+body.dark .teacher{
+    background:linear-gradient(135deg,#172554,#312e81);
+}
+
+.teacher-icon{
+    font-size:40px;
+}
+
+.teacher p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* TEST */
+#testSection{
+    display:none;
+}
+
+.test-head{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:18px;
+}
+
+.test-head h2{
+    margin-bottom:5px;
+}
+
+.test-head p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.progress-wrap{
+    margin-top:15px;
+    height:9px;
+    background:var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    transition:.3s;
+}
+
+/* QUESTIONS */
+.question{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:14px;
+    animation:fadeUp .4s ease both;
+}
+
+.question-number{
+    color:var(--primary);
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:16px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:13px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    padding:12px 14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    cursor:pointer;
+    transition:.2s;
+    background:transparent;
+    color:var(--text);
+    text-align:left;
+    width:100%;
+    font-size:14px;
+}
+
+.option:hover{
+    border-color:var(--primary);
+    background:#eff6ff;
+}
+
+body.dark .option:hover{
+    background:#172554;
+}
+
+.option.selected{
+    background:#dbeafe;
+    border-color:var(--primary);
+}
+
+body.dark .option.selected{
+    background:#1e3a8a;
+}
+
+.option.correct{
+    background:#dcfce7 !important;
+    border-color:var(--success) !important;
+    color:#166534;
+}
+
+.option.wrong{
+    background:#fee2e2 !important;
+    border-color:var(--danger) !important;
+    color:#991b1b;
+}
+
+.feedback{
+    margin-top:10px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.feedback.correct{
+    color:var(--success);
+}
+
+.feedback.wrong{
+    color:var(--danger);
+}
+
+/* SUBMIT */
+.submit-wrap{
+    text-align:center;
+    margin:28px 0;
+}
+
+.submit-btn{
+    border:0;
+    padding:15px 28px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+    transition:.25s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* RESULT */
+#resultSection{
+    display:none;
+}
+
+.result{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:28px 20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.trophy{
+    font-size:55px;
+}
+
+.score{
+    font-size:48px;
+    font-weight:bold;
+    color:var(--primary);
+    margin:8px 0;
+}
+
+.result p{
+    color:var(--muted);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:22px 0;
+}
+
+.stat{
+    background:var(--bg);
+    padding:14px 8px;
+    border-radius:15px;
+}
+
+.stat strong{
+    display:block;
+    font-size:20px;
+}
+
+.stat span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.result-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.result-btn{
+    border:0;
+    padding:12px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.retry{
+    background:var(--primary);
+    color:white;
+}
+
+.subjects-btn{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.classes-btn{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:min(95%,500px);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    padding:7px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+    z-index:10;
+}
+
+.nav-btn{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:10px 5px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.nav-btn:hover{
+    background:var(--bg);
+    color:var(--primary);
+}
+
+.nav-btn span{
+    display:block;
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE */
+@media(max-width:650px){
+    .subject-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header-info h1{
+        font-size:21px;
+    }
+
+    .class-badge{
+        font-size:13px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .teacher{
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="header-top">
+
+        <div class="logo">📚</div>
+
+        <div class="header-info">
+            <h1>StudyIndia</h1>
+            <p>Learn • Practice • Grow</p>
+        </div>
+
+        <div class="actions">
+            <button class="action-btn" onclick="goToClasses()">←</button>
+            <button class="action-btn" onclick="toggleLanguage()" id="langBtn">हि</button>
+            <button class="action-btn" onclick="toggleDark()">🌙</button>
+        </div>
+
+    </div>
+
+    <div class="class-badge">
+        <strong>Class 5</strong>
+        <span>8 Subjects • 720 Questions</span>
+    </div>
+</header>
+
+
+<main>
+
+<section id="homeSection">
+
+    <h2 class="section-title">Choose Your Subject</h2>
+    <p class="section-subtitle">
+        Select a subject and start your 90-question practice test.
+    </p>
+
+    <div class="subject-grid" id="subjectGrid"></div>
+
+    <div class="teacher">
+        <div class="teacher-icon">👩‍🏫</div>
+
+        <p id="teacherText">
+            हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो, फिर उत्तर चुनो।
+            रोज थोड़ा अभ्यास करने से Class 5 में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟
+        </p>
+    </div>
+
+</section>
+
+
+<section id="testSection">
+
+    <div class="test-head">
+
+        <h2 id="testTitle">Class 5 Test</h2>
+
+        <p>
+            90 Questions • One Submit
+        </p>
+
+        <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="submit-wrap">
+        <button class="submit-btn" onclick="submitTest()">
+            🏆 Submit Test
+        </button>
+    </div>
+
+</section>
+
+
+<section id="resultSection">
+
+    <div class="result">
+
+        <div class="trophy">🏆</div>
+
+        <div class="score" id="scoreText">0 / 90</div>
+
+        <p id="resultMessage">
+            Great effort! Keep practicing.
+        </p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="correctCount">0</strong>
+                <span>Correct</span>
+            </div>
+
+            <div class="stat">
+                <strong id="wrongCount">0</strong>
+                <span>Wrong</span>
+            </div>
+
+            <div class="stat">
+                <strong id="unansweredCount">0</strong>
+                <span>Unanswered</span>
+            </div>
+
+            <div class="stat">
+                <strong id="percentage">0%</strong>
+                <span>Percentage</span>
+            </div>
+
+        </div>
+
+        <div class="result-actions">
+
+            <button class="result-btn retry" onclick="retryTest()">
+                🔄 Retry
+            </button>
+
+            <button class="result-btn subjects-btn" onclick="showHome()">
+                📚 Subjects
+            </button>
+
+            <button class="result-btn classes-btn" onclick="goToClasses()">
+                🏫 Classes
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<div class="bottom-nav">
+
+    <button class="nav-btn" onclick="showHome()">
+        <span>🏠</span>
+        Home
+    </button>
+
+    <button class="nav-btn" onclick="showHome()">
+        <span>📚</span>
+        Subjects
+    </button>
+
+    <button class="nav-btn" onclick="goToClasses()">
+        <span>🏫</span>
+        Classes
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   SUBJECT DATA
+========================= */
+
+const subjects = [
+
+    {
+        id:"Hindi",
+        name:"Hindi",
+        icon:"🇮🇳",
+        desc:"व्याकरण, शब्द ज्ञान, पर्यायवाची, विलोम और भाषा अभ्यास"
+    },
+
+    {
+        id:"English",
+        name:"English",
+        icon:"🔤",
+        desc:"Grammar, vocabulary, tenses, sentence formation and reading"
+    },
+
+    {
+        id:"Mathematics",
+        name:"Mathematics",
+        icon:"➕",
+        desc:"Numbers, fractions, decimals, geometry and calculations"
+    },
+
+    {
+        id:"EVS",
+        name:"EVS",
+        icon:"🌱",
+        desc:"Plants, animals, environment, health, Earth and science"
+    },
+
+    {
+        id:"Computer",
+        name:"Computer",
+        icon:"💻",
+        desc:"Computer basics, internet, files, hardware and digital safety"
+    },
+
+    {
+        id:"GK",
+        name:"General Knowledge",
+        icon:"🌎",
+        desc:"India, world, science, sports, geography and important facts"
+    },
+
+    {
+        id:"Art",
+        name:"Art",
+        icon:"🎨",
+        desc:"Colours, drawing, shapes, patterns and creative art"
+    },
+
+    {
+        id:"Moral",
+        name:"Moral Education",
+        icon:"❤️",
+        desc:"Good habits, honesty, kindness, responsibility and values"
+    }
+
+];
+
+let currentSubject = "";
+let currentQuestions = [];
+let userAnswers = [];
+
+let language =
+    localStorage.getItem("studyIndiaLanguage") || "hi";
+
+
+/* =========================
+   SHUFFLE
+========================= */
+
+function shuffle(array){
+
+    return [...array].sort(
+        () => Math.random() - 0.5
+    );
+
+}
+
+
+/* =========================
+   QUESTION MAKER
+========================= */
+
+function makeQuestion(
+    question,
+    answer,
+    wrongAnswers
+){
+
+    const options = shuffle([
+        answer,
+        ...wrongAnswers
+    ]).slice(0,4);
+
+    return {
+        question,
+        options,
+        answer
+    };
+
+}
+
+
+/* =========================
+   HINDI
+========================= */
+
+function hindiQuestions(){
+
+    const data = [
+
+        ["'सूर्य' का पर्यायवाची क्या है?","सूरज",["चाँद","तारा","बादल"]],
+        ["'जल' का पर्यायवाची क्या है?","पानी",["हवा","आग","मिट्टी"]],
+        ["'पृथ्वी' का पर्यायवाची क्या है?","धरती",["आकाश","समुद्र","सूर्य"]],
+        ["'आकाश' का पर्यायवाची क्या है?","नभ",["जल","पवन","वन"]],
+        ["'वायु' का पर्यायवाची क्या है?","हवा",["पानी","आग","धरती"]],
+
+        ["'दिन' का विलोम क्या है?","रात",["सुबह","दोपहर","शाम"]],
+        ["'सुख' का विलोम क्या है?","दुःख",["हँसी","प्रेम","आनंद"]],
+        ["'अच्छा' का विलोम क्या है?","बुरा",["सुंदर","मीठा","साफ"]],
+        ["'ऊँचा' का विलोम क्या है?","नीचा",["लंबा","बड़ा","मोटा"]],
+        ["'सत्य' का विलोम क्या है?","असत्य",["सही","ज्ञान","धर्म"]],
+
+        ["'राम स्कूल जाता है।' में संज्ञा कौन है?","राम",["जाता","है","स्कूल"]],
+        ["'लाल फूल सुंदर है।' में विशेषण कौन सा है?","लाल",["फूल","सुंदर","है"]],
+        ["'सीमा गाना गाती है।' में क्रिया क्या है?","गाती",["सीमा","गाना","है"]],
+        ["'वह बाजार गया।' में सर्वनाम कौन सा है?","वह",["बाजार","गया","में"]],
+        ["'बच्चे खेल रहे हैं।' में क्रिया कौन सी है?","खेल रहे हैं",["बच्चे","हैं","में"]],
+
+        ["'लड़का' का स्त्रीलिंग क्या है?","लड़की",["बच्चा","महिला","बहन"]],
+        ["'राजा' का स्त्रीलिंग क्या है?","रानी",["राजकुमारी","नारी","माता"]],
+        ["'पुत्र' का स्त्रीलिंग क्या है?","पुत्री",["बहन","बेटी","माँ"]],
+        ["'घोड़ा' का स्त्रीलिंग क्या है?","घोड़ी",["गाय","बकरी","मादा"]],
+        ["'शेर' का स्त्रीलिंग क्या है?","शेरनी",["बिल्ली","हिरनी","मादा"]],
+
+        ["'किताब' का बहुवचन क्या है?","किताबें",["किताबों","किताबी","किताब"]],
+        ["'लड़का' का बहुवचन क्या है?","लड़के",["लड़कियाँ","लड़कों","लड़का"]],
+        ["'बच्चा' का बहुवचन क्या है?","बच्चे",["बच्चियाँ","बच्चों","बच्चा"]],
+        ["'नदी' का बहुवचन क्या है?","नदियाँ",["नदियों","नदी","नदीयाँ"]],
+        ["'चिड़िया' का बहुवचन क्या है?","चिड़ियाँ",["चिड़ियों","चिड़िया","चिड़े"]],
+
+        ["जो शब्द किसी व्यक्ति, स्थान या वस्तु का नाम बताए, उसे क्या कहते हैं?","संज्ञा",["सर्वनाम","क्रिया","विशेषण"]],
+        ["जो शब्द संज्ञा के स्थान पर आता है, उसे क्या कहते हैं?","सर्वनाम",["क्रिया","विशेषण","संज्ञा"]],
+        ["काम का बोध कराने वाले शब्द को क्या कहते हैं?","क्रिया",["संज्ञा","सर्वनाम","विशेषण"]],
+        ["संज्ञा की विशेषता बताने वाले शब्द को क्या कहते हैं?","विशेषण",["क्रिया","सर्वनाम","वचन"]],
+
+        ["'कमल' में कितने अक्षर हैं?","2",["1","3","4"]],
+        ["'विद्यालय' का अर्थ क्या है?","पढ़ने का स्थान",["खेलने का स्थान","सोने का स्थान","खाने का स्थान"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach((item,index)=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? item[0]
+                    : round===1
+                    ? item[0]+" सही उत्तर चुनिए।"
+                    : "ध्यान से पढ़िए: "+item[0],
+                    item[1],
+                    item[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   ENGLISH
+========================= */
+
+function englishQuestions(){
+
+    const data = [
+
+        ["What is the plural of 'child'?","children",["childs","childes","childrens"]],
+        ["What is the plural of 'tooth'?","teeth",["tooths","toothes","tooth"]],
+        ["What is the plural of 'mouse'?","mice",["mouses","mousees","mices"]],
+        ["What is the plural of 'foot'?","feet",["foots","feets","foot"]],
+        ["What is the plural of 'man'?","men",["mans","mens","manes"]],
+
+        ["What is the past tense of 'go'?","went",["goed","goes","going"]],
+        ["What is the past tense of 'eat'?","ate",["eated","eats","eating"]],
+        ["What is the past tense of 'write'?","wrote",["writed","writes","writing"]],
+        ["What is the past tense of 'come'?","came",["comed","comes","coming"]],
+        ["What is the past tense of 'see'?","saw",["seed","sees","seeing"]],
+
+        ["What is the opposite of 'ancient'?","modern",["old","past","early"]],
+        ["What is the opposite of 'expand'?","contract",["increase","grow","extend"]],
+        ["What is the opposite of 'victory'?","defeat",["success","win","prize"]],
+        ["What is the opposite of 'accept'?","reject",["agree","receive","allow"]],
+        ["What is the opposite of 'include'?","exclude",["add","join","contain"]],
+
+        ["Which word is a noun?","garden",["quickly","beautiful","run"]],
+        ["Which word is a verb?","jump",["happy","school","green"]],
+        ["Which word is an adjective?","brave",["run","boy","slowly"]],
+        ["Which word is an adverb?","quickly",["quick","run","boy"]],
+        ["Which word is a pronoun?","they",["school","happy","write"]],
+
+        ["Choose the correct article: ___ apple","an",["a","the","no"]],
+        ["Choose the correct article: ___ university","a",["an","the","no"]],
+        ["Choose the correct article: ___ elephant","an",["a","the","no"]],
+        ["Choose the correct article: ___ book","a",["an","the","no"]],
+        ["Choose the correct article: ___ sun","the",["a","an","no"]],
+
+        ["Which sentence is correct?","She is reading a book.",["She reading book.","She are reading book.","She read a book yesterday."]],
+        ["Which sentence is correct?","They are playing football.",["They is playing football.","They playing football.","They am playing football."]],
+        ["Which sentence is correct?","He has a bicycle.",["He have a bicycle.","He having bicycle.","He are bicycle."]],
+        ["Which sentence is correct?","I went to school yesterday.",["I go school yesterday.","I gone school yesterday.","I going school yesterday."]],
+        ["Which sentence is correct?","We have finished our work.",["We has finished.","We finished has.","We having finished."]],
+
+        ["What is the comparative form of 'good'?","better",["gooder","best","more good"]],
+        ["What is the superlative form of 'good'?","best",["better","goodest","more good"]],
+        ["What is the comparative form of 'small'?","smaller",["smallest","more small","small"]],
+        ["What is the superlative form of 'tall'?","tallest",["taller","more tall","tall"]],
+
+        ["What is the meaning of 'honest'?","truthful",["angry","lazy","clever"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(item=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? item[0]
+                    : round===1
+                    ? item[0]+" Choose carefully."
+                    : "Read and answer: "+item[0],
+                    item[1],
+                    item[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   MATHEMATICS
+========================= */
+
+function mathQuestions(){
+
+    const result=[];
+
+    /* Addition */
+    for(let i=0;i<20;i++){
+
+        const a=120+i*17;
+        const b=35+i*9;
+        const ans=a+b;
+
+        result.push(
+            makeQuestion(
+                `${a} + ${b} = ?`,
+                String(ans),
+                [
+                    String(ans+10),
+                    String(ans-10),
+                    String(ans+5)
+                ]
+            )
+        );
+
+    }
+
+    /* Subtraction */
+    for(let i=0;i<15;i++){
+
+        const a=500+i*13;
+        const b=125+i*5;
+        const ans=a-b;
+
+        result.push(
+            makeQuestion(
+                `${a} - ${b} = ?`,
+                String(ans),
+                [
+                    String(ans+10),
+                    String(ans-10),
+                    String(ans+20)
+                ]
+            )
+        );
+
+    }
+
+    /* Multiplication */
+    for(let i=0;i<15;i++){
+
+        const a=11+i;
+        const b=4+(i%7);
+        const ans=a*b;
+
+        result.push(
+            makeQuestion(
+                `${a} × ${b} = ?`,
+                String(ans),
+                [
+                    String(ans+5),
+                    String(ans-5),
+                    String(ans+10)
+                ]
+            )
+        );
+
+    }
+
+    /* Division */
+    for(let i=0;i<10;i++){
+
+        const divisor=2+(i%8);
+        const answer=6+i;
+        const dividend=divisor*answer;
+
+        result.push(
+            makeQuestion(
+                `${dividend} ÷ ${divisor} = ?`,
+                String(answer),
+                [
+                    String(answer+1),
+                    String(answer-1),
+                    String(answer+2)
+                ]
+            )
+        );
+
+    }
+
+    /* Fractions */
+    const fractions=[
+
+        ["Which fraction is equal to 1/2?","2/4",["1/3","3/4","2/3"]],
+        ["Which fraction is equal to 1/3?","2/6",["2/5","3/5","1/6"]],
+        ["Which fraction is greater?","3/4",["1/4","1/2","1/8"]],
+        ["Which fraction is smaller?","1/5",["4/5","3/5","2/5"]],
+        ["What is 1/4 + 1/4?","1/2",["1/4","3/4","1"]],
+        ["What is 1/5 + 2/5?","3/5",["2/5","4/5","1/5"]],
+        ["What is 3/4 - 1/4?","1/2",["1/4","3/4","1"]],
+        ["What is the numerator of 5/8?","5",["8","13","3"]],
+        ["What is the denominator of 7/9?","9",["7","16","2"]],
+        ["Which fraction represents one whole?","4/4",["1/4","2/4","3/4"]]
+
+    ];
+
+    fractions.forEach(x=>{
+        result.push(makeQuestion(x[0],x[1],x[2]));
+    });
+
+    /* Decimals */
+    const decimals=[
+
+        ["0.5 is equal to which fraction?","1/2",["1/5","5/10","1/4"]],
+        ["0.25 is equal to which fraction?","1/4",["1/2","3/4","2/5"]],
+        ["Which is greater?","0.8",["0.3","0.5","0.6"]],
+        ["Which is smaller?","0.2",["0.7","0.5","0.9"]],
+        ["1.5 + 0.5 = ?","2",["1","2.5","3"]],
+        ["2.5 + 1.5 = ?","4",["3","5","4.5"]],
+        ["5.5 - 2.5 = ?","3",["2","4","3.5"]],
+        ["10.0 - 3.5 = ?","6.5",["6","7.5","5.5"]],
+        ["0.75 is equal to which fraction?","3/4",["1/4","1/2","2/3"]],
+        ["0.1 means which fraction?","1/10",["1/2","1/5","1/100"]]
+
+    ];
+
+    decimals.forEach(x=>{
+        result.push(makeQuestion(x[0],x[1],x[2]));
+    });
+
+    /* Geometry */
+    const geometry=[
+
+        ["How many sides does a pentagon have?","5",["4","6","7"]],
+        ["How many sides does a hexagon have?","6",["5","7","8"]],
+        ["How many sides does a triangle have?","3",["4","5","6"]],
+        ["How many degrees are in a right angle?","90°",["45°","180°","360°"]],
+        ["How many degrees are in a straight angle?","180°",["90°","270°","360°"]],
+        ["How many faces does a cube have?","6",["4","8","12"]],
+        ["How many edges does a cube have?","12",["6","8","10"]],
+        ["Which shape has no sides?","circle",["square","triangle","rectangle"]],
+        ["A rectangle has how many sides?","4",["3","5","6"]],
+        ["A square has how many equal sides?","4",["2","3","5"]]
+
+    ];
+
+    geometry.forEach(x=>{
+        result.push(makeQuestion(x[0],x[1],x[2]));
+    });
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   EVS
+========================= */
+
+function evsQuestions(){
+
+    const data=[
+
+        ["Which gas do plants take in for photosynthesis?","Carbon dioxide",["Oxygen","Nitrogen","Hydrogen"]],
+        ["Which gas do humans need for breathing?","Oxygen",["Carbon dioxide","Hydrogen","Helium"]],
+        ["Which part of a plant absorbs water?","Roots",["Flower","Fruit","Leaf"]],
+        ["Which part makes food in most plants?","Leaf",["Root","Stem","Flower"]],
+        ["Which organ pumps blood?","Heart",["Lung","Brain","Kidney"]],
+
+        ["Which organ helps us breathe?","Lungs",["Heart","Stomach","Brain"]],
+        ["Which organ helps us think?","Brain",["Heart","Liver","Lungs"]],
+        ["Which organ digests food?","Stomach",["Heart","Brain","Lungs"]],
+        ["Which nutrient gives us energy?","Carbohydrates",["Water","Minerals","Vitamins"]],
+        ["Which nutrient helps build muscles?","Protein",["Sugar","Water","Salt"]],
+
+        ["Which animal is called the ship of the desert?","Camel",["Horse","Elephant","Yak"]],
+        ["Which animal gives us wool?","Sheep",["Cow","Dog","Hen"]],
+        ["Which bird cannot fly?","Ostrich",["Eagle","Parrot","Pigeon"]],
+        ["Which animal lives both on land and in water?","Frog",["Lion","Cow","Horse"]],
+        ["Which animal is a herbivore?","Deer",["Lion","Tiger","Wolf"]],
+
+        ["What causes day and night?","Earth's rotation",["Earth's revolution","Moon's rotation","Sun's movement"]],
+        ["How long does Earth take to rotate once?","About 24 hours",["12 hours","7 days","365 days"]],
+        ["How long does Earth take to revolve around the Sun?","About 365 days",["24 hours","30 days","7 days"]],
+        ["Which planet is known as the Red Planet?","Mars",["Venus","Jupiter","Mercury"]],
+        ["Which is the largest planet?","Jupiter",["Earth","Mars","Venus"]],
+
+        ["What is pollution?","Harmful contamination of environment",["Clean air","Rainwater","Plant growth"]],
+        ["Which pollution is caused by loud sounds?","Noise pollution",["Air pollution","Water pollution","Soil pollution"]],
+        ["Which pollution affects rivers and lakes?","Water pollution",["Noise pollution","Air pollution","Light pollution"]],
+        ["Planting trees helps reduce which pollution?","Air pollution",["Noise only","Water only","Light only"]],
+        ["Which is a renewable source of energy?","Solar energy",["Coal","Petroleum","Natural gas"]],
+
+        ["Which is a non-renewable resource?","Coal",["Sunlight","Wind","Water"]],
+        ["Why should we save water?","Fresh water is limited",["Water is useless","It makes air dirty","It stops rainfall"]],
+        ["Which practice helps conserve electricity?","Switching off unused lights",["Keeping lights on","Opening the fridge often","Wasting power"]],
+        ["Which material can be recycled?","Paper",["Smoke","Dust","Food waste only"]],
+        ["Which bin is generally used for wet waste?","Green bin",["Blue bin","Red bin","Blackboard"]],
+
+        ["Which disease can spread through contaminated water?","Cholera",["Fracture","Myopia","Sprain"]],
+        ["Why should we wash hands before eating?","To remove germs",["To make hands cold","To increase hunger","To change skin colour"]],
+        ["Which food is rich in calcium?","Milk",["Sugar","Oil","Soft drink"]],
+        ["Which vitamin is commonly obtained from sunlight?","Vitamin D",["Vitamin C","Vitamin B12","Vitamin K"]],
+
+        ["Which layer protects Earth from much harmful UV radiation?","Ozone layer",["Cloud layer","Dust layer","Smoke layer"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(x=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? x[0]
+                    : round===1
+                    ? x[0]+" सही उत्तर चुनिए।"
+                    : "Science & EVS: "+x[0],
+                    x[1],
+                    x[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   COMPUTER
+========================= */
+
+function computerQuestions(){
+
+    const data=[
+
+        ["What is the brain of a computer?","CPU",["Monitor","Keyboard","Mouse"]],
+        ["Which device is used to type text?","Keyboard",["Monitor","Speaker","Printer"]],
+        ["Which device displays information?","Monitor",["Mouse","Keyboard","CPU"]],
+        ["Which device is used to point and click?","Mouse",["Printer","Speaker","Scanner"]],
+        ["Which device prints documents on paper?","Printer",["Monitor","Mouse","CPU"]],
+
+        ["What does CPU stand for?","Central Processing Unit",["Computer Personal Unit","Central Program Utility","Control Processing User"]],
+        ["What is an operating system?","Software that manages a computer",["A keyboard","A cable","A printer"]],
+        ["Which is an operating system?","Windows",["Google","YouTube","Keyboard"]],
+        ["Which device stores data permanently?","Hard drive",["Monitor","Mouse","Speaker"]],
+        ["Which device is commonly used to store portable files?","USB drive",["Monitor","Keyboard","Webcam"]],
+
+        ["What is a file?","A collection of stored information",["A computer screen","A cable","A keyboard"]],
+        ["What is a folder used for?","Organizing files",["Printing paper","Playing sound","Typing only"]],
+        ["What does Ctrl+C usually do?","Copy",["Paste","Cut","Undo"]],
+        ["What does Ctrl+V usually do?","Paste",["Copy","Save","Print"]],
+        ["What does Ctrl+S usually do?","Save",["Search","Copy","Delete"]],
+
+        ["What is the Internet?","A global network of computers",["A single computer","A printer","A keyboard"]],
+        ["What is a web browser used for?","Visiting websites",["Cooking food","Printing clothes","Charging a phone"]],
+        ["Which is a web browser?","Chrome",["Windows","Excel","Keyboard"]],
+        ["What is email used for?","Sending electronic messages",["Drawing only","Playing offline games","Cleaning files"]],
+        ["What should a strong password contain?","A mix of letters, numbers and symbols",["Only your name","Only 123456","Only your birthday"]],
+
+        ["What is a computer virus?","A harmful program",["A hardware part","A monitor","A keyboard"]],
+        ["What software helps protect against malware?","Antivirus",["Calculator","Paint","Notepad"]],
+        ["Should you share your password with strangers?","No",["Yes","Always","Only online"]],
+        ["What should you do with a suspicious link?","Avoid clicking it",["Click immediately","Share it","Download everything"]],
+
+        ["Which program is used for drawing?","Paint",["Calculator","Browser","Clock"]],
+        ["Which program is commonly used for documents?","Word processor",["Music player","Camera","Antivirus"]],
+        ["Which device records video?","Webcam",["Printer","Keyboard","Speaker"]],
+        ["Which device produces sound?","Speaker",["Scanner","Mouse","Monitor"]],
+        ["Which device scans paper documents?","Scanner",["Speaker","Mouse","Keyboard"]],
+
+        ["What is a website address called?","URL",["CPU","RAM","USB"]],
+        ["What does Wi-Fi allow?","Wireless network connection",["Printing without paper","Charging batteries","Making calls only"]],
+        ["What is cloud storage?","Online storage for data",["A physical cupboard","A keyboard","A printer"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(x=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? x[0]
+                    : round===1
+                    ? "Computer Question: "+x[0]
+                    : "Think carefully: "+x[0],
+                    x[1],
+                    x[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   GK
+========================= */
+
+function gkQuestions(){
+
+    const data=[
+
+        ["What is the capital of India?","New Delhi",["Mumbai","Kolkata","Chennai"]],
+        ["What is the national animal of India?","Bengal Tiger",["Lion","Elephant","Leopard"]],
+        ["What is the national bird of India?","Peacock",["Parrot","Eagle","Sparrow"]],
+        ["What is the national flower of India?","Lotus",["Rose","Sunflower","Jasmine"]],
+        ["What is the national fruit of India?","Mango",["Apple","Banana","Orange"]],
+
+        ["Which is the largest ocean?","Pacific Ocean",["Atlantic Ocean","Indian Ocean","Arctic Ocean"]],
+        ["Which is the highest mountain in the world?","Mount Everest",["K2","Kangchenjunga","Nanda Devi"]],
+        ["Which is the largest continent?","Asia",["Africa","Europe","Australia"]],
+        ["Which is the smallest continent?","Australia",["Europe","Asia","Africa"]],
+        ["Which is the largest hot desert?","Sahara Desert",["Thar Desert","Gobi Desert","Kalahari Desert"]],
+
+        ["How many days are there in a leap year?","366",["365","364","360"]],
+        ["How many months are there in a year?","12",["10","11","13"]],
+        ["How many hours are there in a day?","24",["12","48","36"]],
+        ["How many minutes are there in an hour?","60",["30","90","100"]],
+        ["How many seconds are there in a minute?","60",["30","100","120"]],
+
+        ["Which planet is closest to the Sun?","Mercury",["Venus","Earth","Mars"]],
+        ["Which planet is known for its rings?","Saturn",["Mars","Earth","Mercury"]],
+        ["Which planet is called the Blue Planet?","Earth",["Neptune","Mars","Venus"]],
+        ["What is Earth's natural satellite?","Moon",["Sun","Mars","Venus"]],
+
+        ["Who wrote the Indian national anthem?","Rabindranath Tagore",["Mahatma Gandhi","Jawaharlal Nehru","Subhas Chandra Bose"]],
+        ["Who is known as the Father of the Nation in India?","Mahatma Gandhi",["Bhagat Singh","Sardar Patel","Tagore"]],
+        ["When is Independence Day celebrated in India?","15 August",["26 January","2 October","14 November"]],
+        ["When is Republic Day celebrated?","26 January",["15 August","5 September","14 April"]],
+        ["When is Children's Day celebrated in India?","14 November",["15 August","26 January","2 October"]],
+
+        ["How many players are there in a cricket team?","11",["9","10","12"]],
+        ["Which sport uses a shuttlecock?","Badminton",["Football","Cricket","Hockey"]],
+        ["Which sport uses a bat and ball?","Cricket",["Swimming","Boxing","Wrestling"]],
+        ["How many rings are in the Olympic symbol?","5",["4","6","7"]],
+
+        ["Which is the fastest land animal?","Cheetah",["Tiger","Horse","Deer"]],
+        ["Which is the largest land animal?","Elephant",["Giraffe","Rhino","Hippo"]],
+        ["Which bird is known for its ability to mimic sounds?","Parrot",["Ostrich","Penguin","Eagle"]],
+
+        ["Which metal is liquid at room temperature?","Mercury",["Iron","Gold","Copper"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(x=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? x[0]
+                    : round===1
+                    ? "General Knowledge: "+x[0]
+                    : "Can you answer? "+x[0],
+                    x[1],
+                    x[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   ART
+========================= */
+
+function artQuestions(){
+
+    const data=[
+
+        ["Which are the primary colours?","Red, Yellow, Blue",["Green, Orange, Purple","Black, White, Grey","Pink, Brown, Gold"]],
+        ["Which colour is made by mixing red and yellow?","Orange",["Green","Purple","Brown"]],
+        ["Which colour is made by mixing blue and yellow?","Green",["Orange","Purple","Pink"]],
+        ["Which colour is made by mixing red and blue?","Purple",["Green","Orange","Yellow"]],
+        ["Which colour is often called a warm colour?","Red",["Blue","Green","Purple"]],
+
+        ["Which colour is often called a cool colour?","Blue",["Red","Orange","Yellow"]],
+        ["What is a pencil mainly used for?","Drawing",["Cutting","Gluing","Painting walls"]],
+        ["What is an eraser used for?","Removing pencil marks",["Adding colour","Cutting paper","Mixing paint"]],
+        ["What is a paintbrush used for?","Applying paint",["Writing code","Cutting paper","Measuring"]],
+        ["What is a ruler used for in drawing?","Drawing straight lines",["Mixing colours","Painting","Erasing"]],
+
+        ["What is a landscape drawing?","A drawing of scenery",["Only a face","Only a fruit","Only letters"]],
+        ["What is a portrait?","A picture of a person",["A building plan","A map","A flower pattern"]],
+        ["What is still life?","A drawing of arranged objects",["A moving animal","A dance","A landscape"]],
+        ["What is shading used for?","Showing light and dark",["Cutting paper","Writing words","Making glue"]],
+        ["What does texture show in art?","How a surface looks or feels",["Only size","Only colour","Only sound"]],
+
+        ["What is symmetry?","Matching parts on opposite sides",["Random shapes","Only circles","Only colours"]],
+        ["What is a pattern?","A repeated design",["A mistake","A blank page","A single dot"]],
+        ["What is collage?","Art made by combining materials",["Only pencil writing","Only singing","Only clay"]],
+        ["What is origami?","Paper folding art",["Stone painting","Wood carving","Digital typing"]],
+        ["What is a sketch?","A simple drawing",["A song","A sculpture only","A photograph only"]],
+
+        ["Which tool is useful for cutting paper?","Scissors",["Brush","Eraser","Ruler"]],
+        ["Which material can be used for a paper collage?","Colored paper",["Water only","Smoke","Sound"]],
+        ["What can crayons be used for?","Colouring",["Measuring","Cutting","Typing"]],
+        ["What can watercolours be mixed with?","Water",["Sand","Oil only","Glue"]],
+        ["Which shape is round?","Circle",["Square","Triangle","Rectangle"]],
+
+        ["How many sides does a triangle have?","3",["4","5","6"]],
+        ["How many sides does a square have?","4",["3","5","6"]],
+        ["How many sides does a hexagon have?","6",["5","7","8"]],
+        ["What is a horizon in landscape art?","The line where sky and land seem to meet",["A pencil","A colour","A brush"]],
+        ["What is foreground?","The part closest to the viewer",["The farthest part","The sky only","The paper edge"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(x=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? x[0]
+                    : round===1
+                    ? "Art Question: "+x[0]
+                    : "Creative thinking: "+x[0],
+                    x[1],
+                    x[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   MORAL EDUCATION
+========================= */
+
+function moralQuestions(){
+
+    const data=[
+
+        ["What should we do when we make a mistake?","Accept it and learn from it",["Blame others","Hide it always","Repeat it"]],
+        ["Why is honesty important?","It builds trust",["It creates fear","It causes lies","It wastes time"]],
+        ["What should you do if someone is hurt?","Help them",["Laugh","Ignore them","Push them"]],
+        ["How should we treat elderly people?","With respect",["Rudely","Carelessly","Angrily"]],
+        ["What should we do with public property?","Take care of it",["Damage it","Break it","Waste it"]],
+
+        ["What is kindness?","Helping and caring for others",["Hurting others","Ignoring people","Being selfish"]],
+        ["What is responsibility?","Doing your duties properly",["Avoiding work","Blaming others","Breaking rules"]],
+        ["What is courage?","Doing the right thing despite fear",["Being rude","Running away always","Hurting others"]],
+        ["What is patience?","Waiting calmly",["Getting angry quickly","Shouting","Fighting"]],
+        ["What is respect?","Treating others with dignity",["Insulting them","Ignoring them","Cheating them"]],
+
+        ["Should we waste food?","No",["Yes","Always","Sometimes for fun"]],
+        ["Should we help keep our surroundings clean?","Yes",["No","Never","Only at school"]],
+        ["Why should we plant trees?","To protect the environment",["To waste water","To increase pollution","To block roads"]],
+        ["What should we do with a lost wallet?","Try to return it",["Keep the money","Throw it away","Hide it"]],
+        ["What should we do before crossing a road?","Look both ways",["Run quickly","Close our eyes","Use the phone"]],
+
+        ["Why should we follow rules?","For safety and order",["To create problems","To waste time","To hurt people"]],
+        ["What should we do when someone is speaking?","Listen carefully",["Interrupt","Shout","Walk away"]],
+        ["How should we behave with classmates?","Cooperate and respect them",["Fight","Insult","Exclude everyone"]],
+        ["What does teamwork mean?","Working together",["Working against others","Avoiding work","Blaming teammates"]],
+        ["What is fairness?","Treating people justly",["Cheating","Favouring unfairly","Lying"]],
+
+        ["What should we do if we borrow something?","Return it carefully",["Keep it forever","Damage it","Hide it"]],
+        ["What should we do if we promise something?","Try to keep the promise",["Forget it intentionally","Break it immediately","Lie about it"]],
+        ["Why should we say thank you?","To show gratitude",["To insult someone","To waste words","To create anger"]],
+        ["Why should we say sorry?","To acknowledge our mistake",["To win arguments","To blame others","To avoid responsibility"]],
+        ["What is gratitude?","Being thankful",["Being jealous","Being angry","Being careless"]],
+
+        ["What should we do when we disagree?","Discuss calmly",["Fight","Shout","Insult"]],
+        ["How can we show empathy?","Try to understand others' feelings",["Laugh at them","Ignore them","Mock them"]],
+        ["Should we judge someone only by appearance?","No",["Yes","Always","Only sometimes"]],
+        ["What should we do when a friend succeeds?","Congratulate them",["Become jealous","Insult them","Ignore them"]],
+        ["What makes a good friend?","Trust and kindness",["Lies","Jealousy","Selfishness"]],
+
+        ["Why should we be punctual?","It shows responsibility",["It wastes time","It creates disorder","It avoids duties"]]
+
+    ];
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(x=>{
+
+            result.push(
+                makeQuestion(
+                    round===0
+                    ? x[0]
+                    : round===1
+                    ? "Moral Question: "+x[0]
+                    : "Think about this: "+x[0],
+                    x[1],
+                    x[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+}
+
+
+/* =========================
+   QUESTION ROUTER
+========================= */
+
+function generateQuestions(subject){
+
+    switch(subject){
+
+        case "Hindi":
+            return hindiQuestions();
+
+        case "English":
+            return englishQuestions();
+
+        case "Mathematics":
+            return mathQuestions();
+
+        case "EVS":
+            return evsQuestions();
+
+        case "Computer":
+            return computerQuestions();
+
+        case "GK":
+            return gkQuestions();
+
+        case "Art":
+            return artQuestions();
+
+        case "Moral":
+            return moralQuestions();
+
+        default:
+            return [];
+
+    }
+
+}
+
+
+/* =========================
+   SUBJECT RENDER
+========================= */
+
+function renderSubjects(){
+
+    const grid =
+        document.getElementById("subjectGrid");
+
+    grid.innerHTML="";
+
+    subjects.forEach((subject,index)=>{
+
+        const card=document.createElement("div");
+
+        card.className="subject-card";
+
+        card.style.animationDelay =
+            `${index*0.06}s`;
+
+        card.innerHTML=`
+
+            <div class="subject-icon">
+                ${subject.icon}
+            </div>
+
+            <h3>${subject.name}</h3>
+
+            <p>${subject.desc}</p>
+
+            <span class="question-count">
+                📝 90 Questions
+            </span>
+
+        `;
+
+        card.onclick=()=>{
+            openSubject(subject.id);
+        };
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   OPEN SUBJECT
+========================= */
+
+function openSubject(subjectId){
+
+    currentSubject=subjectId;
+
+    currentQuestions=
+        generateQuestions(subjectId);
+
+    if(currentQuestions.length!==90){
+
+        alert(
+            "Question generation error. Please try again."
+        );
+
+        return;
+    }
+
+    userAnswers=
+        new Array(90).fill(null);
+
+    document.getElementById(
+        "homeSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "testSection"
+    ).style.display="block";
+
+    const subject=
+        subjects.find(s=>s.id===subjectId);
+
+    document.getElementById(
+        "testTitle"
+    ).textContent=
+        `Class 5 • ${subject.name}`;
+
+    renderQuestions();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   RENDER QUESTIONS
+========================= */
+
+function renderQuestions(){
+
+    const container=
+        document.getElementById(
+            "questionsContainer"
+        );
+
+    container.innerHTML="";
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+            const div=
+                document.createElement("div");
+
+            div.className="question";
+
+            div.id=`question-${index}`;
+
+            div.innerHTML=`
+
+                <div class="question-number">
+                    Question ${index+1} of 90
+                </div>
+
+                <div class="question-text">
+                    ${q.question}
+                </div>
+
+                <div class="options">
+
+                    ${q.options.map(
+                        option=>`
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(
+                                ${index},
+                                this
+                            )"
+                        >
+                            ${option}
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+                <div
+                    class="feedback"
+                    id="feedback-${index}"
+                ></div>
+
+            `;
+
+            container.appendChild(div);
+
+        }
+    );
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   SELECT ANSWER
+========================= */
+
+function selectAnswer(index,button){
+
+    if(
+        document
+        .getElementById("submitBtn")
+    ){
+        return;
+    }
+
+    const question =
+        document.getElementById(
+            `question-${index}`
+        );
+
+    const options =
+        question.querySelectorAll(".option");
+
+    options.forEach(
+        btn=>btn.classList.remove("selected")
+    );
+
+    button.classList.add("selected");
+
+    userAnswers[index]=
+        button.textContent.trim();
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+    const answered =
+        userAnswers.filter(
+            answer=>answer!==null
+        ).length;
+
+    const percent =
+        (answered/90)*100;
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+        percent+"%";
+
+}
+
+
+/* =========================
+   SUBMIT TEST
+========================= */
+
+function submitTest(){
+
+    let correct=0;
+    let wrong=0;
+    let unanswered=0;
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+            const question =
+                document.getElementById(
+                    `question-${index}`
+                );
+
+            const options =
+                question.querySelectorAll(".option");
+
+            const selected =
+                userAnswers[index];
+
+            options.forEach(btn=>{
+
+                const value=
+                    btn.textContent.trim();
+
+                btn.disabled=true;
+
+                if(value===q.answer){
+
+                    btn.classList.add("correct");
+
+                }
+
+                if(
+                    selected===value &&
+                    selected!==q.answer
+                ){
+
+                    btn.classList.add("wrong");
+
+                }
+
+            });
+
+            const feedback=
+                document.getElementById(
+                    `feedback-${index}`
+                );
+
+            if(selected===null){
+
+                unanswered++;
+
+                feedback.textContent=
+                    "⚪ Not answered";
+
+                feedback.className=
+                    "feedback";
+
+            }
+            else if(selected===q.answer){
+
+                correct++;
+
+                feedback.textContent=
+                    "✅ Correct!";
+
+                feedback.className=
+                    "feedback correct";
+
+            }
+            else{
+
+                wrong++;
+
+                feedback.textContent=
+                    `❌ Wrong — Correct answer: ${q.answer}`;
+
+                feedback.className=
+                    "feedback wrong";
+
+            }
+
+        }
+    );
+
+    const percentage=
+        Math.round(
+            (correct/90)*100
+        );
+
+    document.getElementById(
+        "scoreText"
+    ).textContent=
+        `${correct} / 90`;
+
+    document.getElementById(
+        "correctCount"
+    ).textContent=correct;
+
+    document.getElementById(
+        "wrongCount"
+    ).textContent=wrong;
+
+    document.getElementById(
+        "unansweredCount"
+    ).textContent=unanswered;
+
+    document.getElementById(
+        "percentage"
+    ).textContent=
+        percentage+"%";
+
+    let message="Keep practicing! 💪";
+
+    if(percentage>=90)
+        message="Excellent! Outstanding performance! 🏆";
+
+    else if(percentage>=75)
+        message="Great job! Keep it up! 🌟";
+
+    else if(percentage>=50)
+        message="Good effort! Practice a little more. 👍";
+
+    else
+        message="Don't give up! Practice makes you better. 💪";
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent=message;
+
+    localStorage.setItem(
+        `studyIndiaClass5_${currentSubject}`,
+        JSON.stringify({
+            score:correct,
+            total:90,
+            percentage,
+            date:new Date().toISOString()
+        })
+    );
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="block";
+
+    document.getElementById(
+        "resultSection"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   RETRY
+========================= */
+
+function retryTest(){
+
+    openSubject(currentSubject);
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function showHome(){
+
+    document.getElementById(
+        "testSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "homeSection"
+    ).style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   CLASSES
+========================= */
+
+function goToClasses(){
+
+    window.location.href="lesson.html";
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        document.body.classList.contains("dark")
+    );
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function toggleLanguage(){
+
+    language=
+        language==="hi"
+        ? "en"
+        : "hi";
+
+    localStorage.setItem(
+        "studyIndiaLanguage",
+        language
+    );
+
+    const teacher=
+        document.getElementById(
+            "teacherText"
+        );
+
+    if(language==="en"){
+
+        teacher.textContent=
+            "Read every question carefully. Understand the question first and then choose the answer. A little practice every day will make your Class 5 preparation much stronger! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="EN";
+
+    }
+    else{
+
+        teacher.textContent=
+            "हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो, फिर उत्तर चुनो। रोज थोड़ा अभ्यास करने से Class 5 में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="हि";
+
+    }
+
+}
+
+
+/* =========================
+   INITIAL STATE
+========================= */
+
+if(
+    localStorage.getItem("studyIndiaDark")
+    ==="true"
+){
+
+    document.body.classList.add("dark");
+
+}
+
+toggleLanguage();
+
+renderSubjects();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyIndia - Class 4</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#fff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef4ff,#f8f5ff);
+    color:var(--text);
+    transition:.3s;
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --border:#334155;
+    background:linear-gradient(135deg,#0f172a,#172554);
+}
+
+button{
+    font-family:inherit;
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:90px;
+}
+
+/* HEADER */
+.header{
+    margin:14px;
+    padding:18px;
+    border-radius:24px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 12px 30px rgba(37,99,235,.22);
+    animation:slideDown .55s ease;
+}
+
+.logo{
+    width:54px;
+    height:54px;
+    border-radius:17px;
+    background:rgba(255,255,255,.18);
+    display:grid;
+    place-items:center;
+    font-size:28px;
+    flex-shrink:0;
+}
+
+.brand{
+    flex:1;
+}
+
+.brand h1{
+    font-size:23px;
+    margin-bottom:3px;
+}
+
+.brand p{
+    font-size:12px;
+    opacity:.88;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.14);
+    color:white;
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    cursor:pointer;
+    font-size:17px;
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px) scale(1.04);
+    background:rgba(255,255,255,.24);
+}
+
+.class-badge{
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.2);
+    padding:8px 12px;
+    border-radius:13px;
+    text-align:center;
+    min-width:92px;
+}
+
+.class-badge strong{
+    display:block;
+    font-size:14px;
+}
+
+.class-badge span{
+    font-size:10px;
+    opacity:.9;
+}
+
+/* SECTIONS */
+.section{
+    margin:18px 14px;
+    animation:fadeUp .55s ease;
+}
+
+.section-title{
+    margin-bottom:14px;
+}
+
+.section-title h2{
+    font-size:21px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* SUBJECTS */
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.subject-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 7px 20px rgba(15,23,42,.05);
+}
+
+.subject-card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb22,#7c3aed22);
+    right:-40px;
+    top:-40px;
+}
+
+.subject-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 28px rgba(37,99,235,.13);
+    border-color:#9db9ff;
+}
+
+.subject-icon{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    background:#eef4ff;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+body.dark .subject-icon{
+    background:#263653;
+}
+
+.subject-card h3{
+    font-size:16px;
+    margin-bottom:6px;
+}
+
+.subject-card p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+    min-height:38px;
+}
+
+.subject-count{
+    margin-top:12px;
+    display:inline-block;
+    padding:7px 10px;
+    border-radius:10px;
+    background:#eef4ff;
+    color:#2563eb;
+    font-size:11px;
+    font-weight:bold;
+}
+
+body.dark .subject-count{
+    background:#263653;
+}
+
+/* TEACHER */
+.teacher{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.teacher-icon{
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#dbeafe,#ede9fe);
+    display:grid;
+    place-items:center;
+    font-size:31px;
+    flex-shrink:0;
+}
+
+body.dark .teacher-icon{
+    background:#263653;
+}
+
+.teacher h3{
+    margin-bottom:5px;
+}
+
+.teacher p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.55;
+}
+
+/* TEST */
+#testSection{
+    display:none;
+}
+
+.test-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    overflow:hidden;
+}
+
+.test-head{
+    padding:18px;
+    background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+    border-bottom:1px solid var(--border);
+}
+
+body.dark .test-head{
+    background:linear-gradient(135deg,#172554,#312e81);
+}
+
+.test-head h2{
+    font-size:21px;
+}
+
+.test-head p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.progress-wrap{
+    margin-top:14px;
+    height:9px;
+    border-radius:20px;
+    background:#dbe4f5;
+    overflow:hidden;
+}
+
+body.dark .progress-wrap{
+    background:#334155;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.questions{
+    padding:18px;
+}
+
+.question{
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:17px;
+    margin-bottom:13px;
+    transition:.25s;
+    animation:fadeUp .35s ease;
+}
+
+.question:hover{
+    border-color:#a9bff7;
+}
+
+.question-number{
+    color:#2563eb;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.question-text{
+    font-size:15px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:13px;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+}
+
+.option{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:11px 12px;
+    border-radius:12px;
+    cursor:pointer;
+    text-align:left;
+    font-size:13px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#7c3aed;
+    transform:translateY(-1px);
+}
+
+.option.selected{
+    border-color:#2563eb;
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+body.dark .option.selected{
+    background:#1e3a8a;
+    color:#dbeafe;
+}
+
+.option.correct{
+    border-color:var(--success);
+    background:#dcfce7;
+    color:#166534;
+}
+
+.option.wrong{
+    border-color:var(--danger);
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+body.dark .option.correct{
+    background:#14532d;
+    color:#dcfce7;
+}
+
+body.dark .option.wrong{
+    background:#7f1d1d;
+    color:#fee2e2;
+}
+
+.feedback{
+    display:none;
+    margin-top:10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.submit-wrap{
+    padding:18px;
+    border-top:1px solid var(--border);
+    background:var(--card);
+}
+
+.submit-btn{
+    width:100%;
+    border:0;
+    border-radius:15px;
+    padding:15px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(37,99,235,.22);
+    transition:.25s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* RESULT */
+#resultSection{
+    display:none;
+}
+
+.result{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:25px 18px;
+    text-align:center;
+}
+
+.result-trophy{
+    font-size:48px;
+    animation:bounce 1.2s infinite;
+}
+
+.result h2{
+    margin-top:7px;
+}
+
+.score{
+    font-size:54px;
+    font-weight:900;
+    margin:10px 0;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.stat{
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:13px 8px;
+}
+
+.stat strong{
+    display:block;
+    font-size:20px;
+}
+
+.stat span{
+    font-size:10px;
+    color:var(--muted);
+}
+
+.result-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.result-btn{
+    border:0;
+    padding:12px 17px;
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#eef4ff;
+    color:#2563eb;
+    transition:.2s;
+}
+
+body.dark .result-btn{
+    background:#263653;
+    color:#dbeafe;
+}
+
+.result-btn.primary{
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+}
+
+.result-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:12px;
+    width:min(650px,calc(100% - 24px));
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(16px);
+    border:1px solid #dbe3ef;
+    border-radius:20px;
+    padding:9px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+    box-shadow:0 14px 35px rgba(15,23,42,.15);
+    z-index:100;
+}
+
+body.dark .bottom-nav{
+    background:rgba(30,41,59,.92);
+    border-color:#334155;
+}
+
+.nav-btn{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    border-radius:14px;
+    padding:9px;
+    cursor:pointer;
+    font-size:11px;
+    transition:.2s;
+}
+
+.nav-btn span{
+    display:block;
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+.nav-btn:hover{
+    background:#eef4ff;
+    color:#2563eb;
+}
+
+body.dark .nav-btn:hover{
+    background:#263653;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-7px)}
+}
+
+/* MOBILE */
+@media(max-width:850px){
+    .subject-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .header{
+        margin:9px;
+        padding:13px;
+        border-radius:19px;
+        gap:9px;
+    }
+
+    .logo{
+        width:45px;
+        height:45px;
+        font-size:23px;
+    }
+
+    .brand h1{
+        font-size:18px;
+    }
+
+    .brand p{
+        font-size:10px;
+    }
+
+    .class-badge{
+        display:none;
+    }
+
+    .header-actions{
+        gap:5px;
+    }
+
+    .icon-btn{
+        width:35px;
+        height:35px;
+        border-radius:11px;
+    }
+
+    .section{
+        margin:14px 9px;
+    }
+
+    .subject-grid{
+        gap:9px;
+    }
+
+    .subject-card{
+        padding:14px;
+        border-radius:17px;
+    }
+
+    .subject-card p{
+        font-size:11px;
+    }
+
+    .teacher{
+        padding:14px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .questions{
+        padding:10px;
+    }
+
+    .question{
+        padding:13px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="logo">📚</div>
+
+    <div class="brand">
+        <h1>StudyIndia</h1>
+        <p>Learn • Practice • Grow</p>
+    </div>
+
+    <div class="header-actions">
+
+        <button class="icon-btn"
+                onclick="goToClasses()"
+                title="Back">
+            ←
+        </button>
+
+        <button class="icon-btn"
+                onclick="toggleLanguage()"
+                id="langBtn">
+            हि
+        </button>
+
+        <button class="icon-btn"
+                onclick="toggleDark()"
+                id="darkBtn">
+            🌙
+        </button>
+
+    </div>
+
+    <div class="class-badge">
+        <strong>Class 4</strong>
+        <span>8 Subjects • 720 Questions</span>
+    </div>
+
+</header>
+
+
+<section class="section" id="subjectSection">
+
+    <div class="section-title">
+        <h2>📖 Class 4 Subjects</h2>
+        <p>Choose a subject and start your 90-question practice test.</p>
+    </div>
+
+    <div class="subject-grid" id="subjectGrid"></div>
+
+</section>
+
+
+<section class="section" id="teacherSection">
+
+    <div class="teacher">
+
+        <div class="teacher-icon">👩‍🏫</div>
+
+        <div>
+
+            <h3>Teacher's Tip</h3>
+
+            <p id="teacherText">
+                हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो,
+                फिर उत्तर चुनो। रोज थोड़ा अभ्यास करने से Class 4
+                में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="testSection">
+
+    <div class="test-box">
+
+        <div class="test-head">
+
+            <h2 id="testTitle">Class 4 Test</h2>
+
+            <p>90 Questions • One Submit</p>
+
+            <div class="progress-wrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+        </div>
+
+        <div class="questions" id="questions"></div>
+
+        <div class="submit-wrap">
+
+            <button class="submit-btn"
+                    onclick="submitTest()">
+                🏆 Submit Test
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="resultSection">
+
+    <div class="result">
+
+        <div class="result-trophy">🏆</div>
+
+        <h2>Test Completed!</h2>
+
+        <div class="score">
+            <span id="scoreValue">0</span>/90
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="correctValue">0</strong>
+                <span>Correct</span>
+            </div>
+
+            <div class="stat">
+                <strong id="wrongValue">0</strong>
+                <span>Wrong</span>
+            </div>
+
+            <div class="stat">
+                <strong id="unansweredValue">0</strong>
+                <span>Unanswered</span>
+            </div>
+
+            <div class="stat">
+                <strong id="percentValue">0%</strong>
+                <span>Percentage</span>
+            </div>
+
+        </div>
+
+        <div class="result-actions">
+
+            <button class="result-btn primary"
+                    onclick="retryTest()">
+                🔄 Retry
+            </button>
+
+            <button class="result-btn"
+                    onclick="showHome()">
+                📚 Subjects
+            </button>
+
+            <button class="result-btn"
+                    onclick="goToClasses()">
+                🏫 Classes
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+    <button class="nav-btn"
+            onclick="showHome()">
+        <span>🏠</span>
+        Home
+    </button>
+
+    <button class="nav-btn"
+            onclick="showHome()">
+        <span>📚</span>
+        Subjects
+    </button>
+
+    <button class="nav-btn"
+            onclick="goToClasses()">
+        <span>🏫</span>
+        Classes
+    </button>
+
+</nav>
+
+
+<script>
+
+/* =========================
+   SUBJECTS
+========================= */
+
+const subjects=[
+
+    {
+        id:"hindi",
+        name:"Hindi",
+        icon:"🇮🇳",
+        desc:"व्याकरण, शब्द ज्ञान और भाषा अभ्यास"
+    },
+
+    {
+        id:"english",
+        name:"English",
+        icon:"🔤",
+        desc:"Grammar, vocabulary and sentence practice"
+    },
+
+    {
+        id:"math",
+        name:"Mathematics",
+        icon:"➕",
+        desc:"Numbers, fractions, multiplication and geometry"
+    },
+
+    {
+        id:"evs",
+        name:"EVS",
+        icon:"🌱",
+        desc:"Plants, animals, environment and science"
+    },
+
+    {
+        id:"computer",
+        name:"Computer",
+        icon:"💻",
+        desc:"Computer basics and digital knowledge"
+    },
+
+    {
+        id:"gk",
+        name:"General Knowledge",
+        icon:"🌎",
+        desc:"India, world, science and everyday GK"
+    },
+
+    {
+        id:"art",
+        name:"Art",
+        icon:"🎨",
+        desc:"Colours, drawing, shapes and creativity"
+    },
+
+    {
+        id:"moral",
+        name:"Moral Education",
+        icon:"❤️",
+        desc:"Good habits, values and responsible behaviour"
+    }
+
+];
+
+
+/* =========================
+   QUESTION BUILDER
+========================= */
+
+function makeQuestion(question,correct,w1,w2,w3){
+
+    const options=[
+        correct,
+        w1,
+        w2,
+        w3
+    ].sort(()=>Math.random()-0.5);
+
+    return{
+        question:question,
+        options:options,
+        answer:options.indexOf(correct)
+    };
+}
+
+
+/* =========================
+   HINDI - CLASS 4
+========================= */
+
+function hindiQuestions(){
+
+    const data=[
+
+        ["'विद्यालय' का पर्यायवाची क्या है?","स्कूल"],
+        ["'सूर्य' का पर्यायवाची क्या है?","रवि"],
+        ["'चंद्रमा' का पर्यायवाची क्या है?","शशि"],
+        ["'जल' का पर्यायवाची क्या है?","नीर"],
+        ["'पवन' का अर्थ क्या है?","हवा"],
+        ["'प्रसन्न' का विलोम क्या है?","दुखी"],
+        ["'अंधकार' का विलोम क्या है?","प्रकाश"],
+        ["'लाभ' का विलोम क्या है?","हानि"],
+        ["'आरंभ' का विलोम क्या है?","अंत"],
+        ["'सफल' का विलोम क्या है?","असफल"],
+        ["'राम बाजार गया।' में संज्ञा कौन-सी है?","राम"],
+        ["'वह बहुत तेज दौड़ता है।' में क्रिया कौन-सी है?","दौड़ता है"],
+        ["'सुंदर फूल' में विशेषण कौन-सा है?","सुंदर"],
+        ["'मैं रोज पढ़ता हूँ।' में सर्वनाम कौन-सा है?","मैं"],
+        ["'सीमा ने खाना खाया।' में कर्ता कौन है?","सीमा"],
+        ["'बच्चे मैदान में खेलते हैं।' में क्रिया क्या है?","खेलते हैं"],
+        ["'लाल गुलाब' में विशेषण क्या है?","लाल"],
+        ["'वे स्कूल जा रहे हैं।' में सर्वनाम क्या है?","वे"],
+        ["'लड़का' का स्त्रीलिंग क्या है?","लड़की"],
+        ["'राजा' का स्त्रीलिंग क्या है?","रानी"],
+        ["'पुत्र' का स्त्रीलिंग क्या है?","पुत्री"],
+        ["'घोड़ा' का स्त्रीलिंग क्या है?","घोड़ी"],
+        ["'लड़का' का बहुवचन क्या है?","लड़के"],
+        ["'किताब' का बहुवचन क्या है?","किताबें"],
+        ["'बच्चा' का बहुवचन क्या है?","बच्चे"],
+        ["'फूल' का बहुवचन क्या है?","फूल"],
+        ["'आँख' का बहुवचन क्या है?","आँखें"],
+        ["'मीठा' का विलोम क्या है?","कड़वा"],
+        ["'कठिन' का विलोम क्या है?","सरल"],
+        ["'निकट' का विलोम क्या है?","दूर"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "घर","पेड़","नदी"
+        ));
+
+        q.push(makeQuestion(
+            x[0]+" सही उत्तर चुनिए।",
+            x[1],
+            "आम","कुर्सी","गेंद"
+        ));
+
+        q.push(makeQuestion(
+            x[0]+" का सही उत्तर क्या है?",
+            x[1],
+            "पुस्तक","सड़क","पक्षी"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   ENGLISH - CLASS 4
+========================= */
+
+function englishQuestions(){
+
+    const data=[
+
+        ["What is the plural of 'leaf'?","leaves"],
+        ["What is the plural of 'knife'?","knives"],
+        ["What is the plural of 'woman'?","women"],
+        ["What is the plural of 'foot'?","feet"],
+        ["What is the plural of 'tooth'?","teeth"],
+        ["What is the past tense of 'go'?","went"],
+        ["What is the past tense of 'write'?","wrote"],
+        ["What is the past tense of 'take'?","took"],
+        ["What is the past tense of 'bring'?","brought"],
+        ["What is the past tense of 'buy'?","bought"],
+        ["What is the opposite of 'ancient'?","modern"],
+        ["What is the opposite of 'brave'?","cowardly"],
+        ["What is the opposite of 'polite'?","rude"],
+        ["What is the opposite of 'empty'?","full"],
+        ["What is the opposite of 'victory'?","defeat"],
+        ["Which word is a noun?","garden"],
+        ["Which word is a verb?","jump"],
+        ["Which word is an adjective?","clever"],
+        ["Which word is a pronoun?","they"],
+        ["Which word is an adverb?","quickly"],
+        ["Choose the correct article: ___ honest boy","an"],
+        ["Choose the correct article: ___ university","a"],
+        ["Choose the correct article: ___ orange","an"],
+        ["Choose the correct article: ___ moon","the"],
+        ["Which sentence is correct?","She goes to school."],
+        ["Which sentence is correct?","They are playing."],
+        ["Which sentence is correct?","He has a book."],
+        ["Which sentence is correct?","I am happy."],
+        ["What is the comparative form of 'tall'?","taller"],
+        ["What is the superlative form of 'small'?","smallest"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "table","river","school"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "apple","chair","window"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "book","house","garden"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   MATHEMATICS - CLASS 4
+========================= */
+
+function mathQuestions(){
+
+    const q=[];
+
+    /* Addition */
+    for(let i=1;i<=20;i++){
+
+        const a=120+i*13;
+        const b=45+i*7;
+        const ans=a+b;
+
+        q.push(makeQuestion(
+            `What is ${a} + ${b}?`,
+            String(ans),
+            String(ans+10),
+            String(ans-10),
+            String(ans+20)
+        ));
+
+    }
+
+    /* Subtraction */
+    for(let i=1;i<=15;i++){
+
+        const a=500+i*12;
+        const b=100+i*5;
+        const ans=a-b;
+
+        q.push(makeQuestion(
+            `What is ${a} - ${b}?`,
+            String(ans),
+            String(ans+10),
+            String(ans-10),
+            String(ans+20)
+        ));
+
+    }
+
+    /* Multiplication */
+    for(let i=1;i<=15;i++){
+
+        const a=i+3;
+        const b=(i%9)+2;
+        const ans=a*b;
+
+        q.push(makeQuestion(
+            `What is ${a} × ${b}?`,
+            String(ans),
+            String(ans+3),
+            String(ans-3),
+            String(ans+6)
+        ));
+
+    }
+
+    /* Division */
+    for(let i=1;i<=10;i++){
+
+        const divisor=(i%6)+2;
+        const answer=i+3;
+        const dividend=divisor*answer;
+
+        q.push(makeQuestion(
+            `What is ${dividend} ÷ ${divisor}?`,
+            String(answer),
+            String(answer+2),
+            String(answer-1),
+            String(answer+3)
+        ));
+
+    }
+
+    /* Fractions */
+    const fractions=[
+
+        ["Which fraction represents one half?","1/2"],
+        ["Which fraction represents one quarter?","1/4"],
+        ["Which fraction is greater than 1/2?","3/4"],
+        ["How many quarters make one whole?","4"],
+        ["How many halves make one whole?","2"],
+        ["Which fraction is smaller?","1/4"],
+        ["What is 2/4 equal to?","1/2"],
+        ["What is 3/4 called?","Three quarters"],
+        ["What is 1/3 called?","One third"],
+        ["What is 2/3 called?","Two thirds"]
+
+    ];
+
+    fractions.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "1/5","3/5","4/5"
+        ));
+
+    });
+
+    /* Geometry */
+    const geometry=[
+
+        ["How many sides does a triangle have?","3"],
+        ["How many sides does a square have?","4"],
+        ["How many sides does a pentagon have?","5"],
+        ["How many sides does a hexagon have?","6"],
+        ["How many right angles does a square have?","4"],
+        ["How many sides does a rectangle have?","4"],
+        ["How many corners does a triangle have?","3"],
+        ["A circle has how many corners?","0"],
+        ["What is the perimeter of a square with side 5 cm?","20 cm"],
+        ["What is half of 100?","50"]
+
+    ];
+
+    geometry.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "10","15","25"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   EVS - CLASS 4
+========================= */
+
+function evsQuestions(){
+
+    const data=[
+
+        ["Which part of a plant absorbs water from soil?","roots"],
+        ["Which part of a plant prepares food?","leaves"],
+        ["Which gas do plants take in?","carbon dioxide"],
+        ["Which gas do plants release during photosynthesis?","oxygen"],
+        ["What is the process by which plants make food?","photosynthesis"],
+        ["Which organ pumps blood through the body?","heart"],
+        ["Which organ helps us breathe?","lungs"],
+        ["Which organ controls the body?","brain"],
+        ["Which organ helps digest food?","stomach"],
+        ["Which sense organ helps us hear?","ears"],
+        ["Which vitamin is obtained from sunlight?","Vitamin D"],
+        ["Which nutrient helps body growth?","protein"],
+        ["Which nutrient gives us energy?","carbohydrates"],
+        ["Why should we drink clean water?","To stay healthy"],
+        ["Why should we wash hands before eating?","To remove germs"],
+        ["Which animal is a herbivore?","cow"],
+        ["Which animal is a carnivore?","lion"],
+        ["Which animal eats both plants and animals?","bear"],
+        ["Which animal has a pouch?","kangaroo"],
+        ["Which animal is adapted to desert life?","camel"],
+        ["What is the natural home of an animal called?","habitat"],
+        ["What do bees collect from flowers?","nectar"],
+        ["What do plants need for photosynthesis?","sunlight"],
+        ["Which layer protects Earth from harmful UV rays?","ozone layer"],
+        ["What causes day and night?","Earth's rotation"],
+        ["What causes seasons?","Earth's revolution and tilt"],
+        ["What is rainwater harvesting?","Collecting rainwater"],
+        ["Why should trees be planted?","They help the environment"],
+        ["What is pollution?","Harmful contamination of environment"],
+        ["Which source gives us solar energy?","Sun"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "stone","chair","book"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "road","house","table"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "pencil","school","ball"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   COMPUTER - CLASS 4
+========================= */
+
+function computerQuestions(){
+
+    const data=[
+
+        ["What is the brain of a computer called?","CPU"],
+        ["What does CPU stand for?","Central Processing Unit"],
+        ["Which device is used for typing?","Keyboard"],
+        ["Which device is used for pointing?","Mouse"],
+        ["Which device displays information?","Monitor"],
+        ["Which device prints documents?","Printer"],
+        ["Which device scans documents?","Scanner"],
+        ["Which device records sound?","Microphone"],
+        ["Which device produces sound?","Speaker"],
+        ["What is used to store digital files?","Storage device"],
+        ["What is an operating system?","Software that manages a computer"],
+        ["Give an example of an operating system.","Windows"],
+        ["What is a file?","Stored information"],
+        ["What is a folder?","A place to organize files"],
+        ["What is the internet?","A global network"],
+        ["What is a web browser used for?","Opening websites"],
+        ["What is email used for?","Sending electronic messages"],
+        ["What is a password?","A secret security code"],
+        ["Should you share your password with strangers?","No"],
+        ["What is a computer virus?","A harmful program"],
+        ["What protects a computer from viruses?","Antivirus"],
+        ["What is Paint used for?","Drawing"],
+        ["What is a word processor used for?","Writing documents"],
+        ["What is a presentation program used for?","Creating slides"],
+        ["What does Ctrl+C usually do?","Copy"],
+        ["What does Ctrl+V usually do?","Paste"],
+        ["What does Ctrl+S usually do?","Save"],
+        ["What does Ctrl+Z usually do?","Undo"],
+        ["What does the Enter key do?","Starts a new line"],
+        ["What does the Spacebar do?","Creates a space"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Monitor","Printer","Mouse"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Keyboard","Speaker","Scanner"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Camera","Folder","Screen"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   GK - CLASS 4
+========================= */
+
+function gkQuestions(){
+
+    const data=[
+
+        ["What is the capital of India?","New Delhi"],
+        ["What is the national animal of India?","Bengal Tiger"],
+        ["What is the national bird of India?","Peacock"],
+        ["What is the national flower of India?","Lotus"],
+        ["What is the national tree of India?","Banyan"],
+        ["What is the national aquatic animal of India?","Ganges river dolphin"],
+        ["How many states are there in India?","28"],
+        ["How many Union Territories are there in India?","8"],
+        ["Which is the largest Indian state by area?","Rajasthan"],
+        ["Which is the smallest Indian state by area?","Goa"],
+        ["Which is the longest river in India?","Ganga"],
+        ["Which is the highest mountain peak in India?","Kangchenjunga"],
+        ["Which is the largest ocean?","Pacific Ocean"],
+        ["Which is the smallest continent?","Australia"],
+        ["How many continents are there?","7"],
+        ["How many oceans are there?","5"],
+        ["Which planet is called the Red Planet?","Mars"],
+        ["Which is the largest planet?","Jupiter"],
+        ["Which planet is closest to the Sun?","Mercury"],
+        ["Which is the hottest planet?","Venus"],
+        ["What is Earth's natural satellite?","Moon"],
+        ["How many days are there in a leap year?","366"],
+        ["How many months have 31 days?","7"],
+        ["Who wrote the Indian national anthem?","Rabindranath Tagore"],
+        ["Who is known as the Father of the Nation in India?","Mahatma Gandhi"],
+        ["When is India's Independence Day?","15 August"],
+        ["When is India's Republic Day?","26 January"],
+        ["When is Children's Day celebrated in India?","14 November"],
+        ["When is Teachers' Day celebrated in India?","5 September"],
+        ["Which sport uses a bat and ball and has wickets?","Cricket"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Mumbai","Kolkata","Chennai"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Lion","Elephant","Tiger"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Monday","Friday","Sunday"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   ART - CLASS 4
+========================= */
+
+function artQuestions(){
+
+    const data=[
+
+        ["Which two colours make green?","Blue and yellow"],
+        ["Which two colours make orange?","Red and yellow"],
+        ["Which two colours make purple?","Red and blue"],
+        ["Which colour is made by adding white to red?","Pink"],
+        ["Which colour is made by adding black to white?","Grey"],
+        ["What is a primary colour?","Red"],
+        ["Which is a primary colour?","Blue"],
+        ["Which is a primary colour?","Yellow"],
+        ["Which tool is used for painting?","Brush"],
+        ["Which tool is used for sketching?","Pencil"],
+        ["Which tool is used to erase pencil marks?","Eraser"],
+        ["Which tool helps draw straight lines?","Ruler"],
+        ["What is a colour palette used for?","Mixing colours"],
+        ["What is a landscape?","A picture of scenery"],
+        ["What is a portrait?","A picture of a person"],
+        ["What is a still life drawing?","Drawing of objects"],
+        ["What is symmetry?","Balanced matching halves"],
+        ["How many sides does a triangle have?","3"],
+        ["How many sides does a square have?","4"],
+        ["How many sides does a hexagon have?","6"],
+        ["What is a sketch?","A simple drawing"],
+        ["What is shading?","Showing light and dark areas"],
+        ["What is texture?","How a surface looks or feels"],
+        ["What is a pattern?","A repeated design"],
+        ["Which colours are warm colours?","Red and orange"],
+        ["Which colours are cool colours?","Blue and green"],
+        ["What is origami?","Paper folding art"],
+        ["What is collage?","Art made by joining materials"],
+        ["What is creativity?","Making new ideas"],
+        ["Why should brushes be cleaned after painting?","To keep them usable"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Black","White","Green"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Circle","Square","Triangle"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Pencil","Book","Table"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   MORAL EDUCATION
+========================= */
+
+function moralQuestions(){
+
+    const data=[
+
+        ["What should we do when we make a mistake?","Say sorry"],
+        ["What should we say when someone helps us?","Thank you"],
+        ["Should we always tell the truth?","Yes"],
+        ["Should we cheat in an exam?","No"],
+        ["Should we respect our parents?","Yes"],
+        ["Should we respect our teachers?","Yes"],
+        ["Should we help elderly people?","Yes"],
+        ["Should we waste food?","No"],
+        ["Should we save water?","Yes"],
+        ["Should we waste electricity?","No"],
+        ["Should we keep our classroom clean?","Yes"],
+        ["Should we throw garbage on the road?","No"],
+        ["What is honesty?","Telling the truth"],
+        ["What is kindness?","Helping others"],
+        ["What is responsibility?","Doing our duty"],
+        ["What is courage?","Facing difficulty bravely"],
+        ["What is patience?","Waiting calmly"],
+        ["What is respect?","Treating others politely"],
+        ["Should we bully others?","No"],
+        ["Should we include lonely classmates in games?","Yes"],
+        ["Should we keep promises?","Yes"],
+        ["Should we forgive genuine mistakes?","Yes"],
+        ["Should we take care of animals?","Yes"],
+        ["Should we plant trees?","Yes"],
+        ["Should we protect nature?","Yes"],
+        ["Should we speak politely?","Yes"],
+        ["Should we listen when others speak?","Yes"],
+        ["Should we be jealous of others?","No"],
+        ["Should we be grateful for what we have?","Yes"],
+        ["What makes a good student?","Discipline"]
+
+    ];
+
+    const q=[];
+
+    data.forEach(x=>{
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Anger","Laziness","Rudeness"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "No","Maybe","Never"
+        ));
+
+        q.push(makeQuestion(
+            x[0],x[1],
+            "Running","Sleeping","Playing"
+        ));
+
+    });
+
+    return q.slice(0,90);
+}
+
+
+/* =========================
+   GENERATOR
+========================= */
+
+function generateQuestions(subject){
+
+    switch(subject){
+
+        case "hindi":
+            return hindiQuestions();
+
+        case "english":
+            return englishQuestions();
+
+        case "math":
+            return mathQuestions();
+
+        case "evs":
+            return evsQuestions();
+
+        case "computer":
+            return computerQuestions();
+
+        case "gk":
+            return gkQuestions();
+
+        case "art":
+            return artQuestions();
+
+        case "moral":
+            return moralQuestions();
+
+        default:
+            return [];
+
+    }
+
+}
+
+
+/* =========================
+   STATE
+========================= */
+
+let currentSubject=null;
+let currentQuestions=[];
+let selectedAnswers=[];
+let submitted=false;
+
+let currentLanguage=
+    localStorage.getItem("studyIndiaLanguage") || "hi";
+
+
+/* =========================
+   RENDER SUBJECTS
+========================= */
+
+function renderSubjects(){
+
+    const grid=
+        document.getElementById("subjectGrid");
+
+    grid.innerHTML="";
+
+    subjects.forEach(subject=>{
+
+        const card=document.createElement("div");
+
+        card.className="subject-card";
+
+        card.innerHTML=`
+
+            <div class="subject-icon">
+                ${subject.icon}
+            </div>
+
+            <h3>${subject.name}</h3>
+
+            <p>${subject.desc}</p>
+
+            <span class="subject-count">
+                📝 90 Questions
+            </span>
+
+        `;
+
+        card.onclick=()=>{
+            openSubject(subject.id);
+        };
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   OPEN SUBJECT
+========================= */
+
+function openSubject(subjectId){
+
+    currentSubject=subjectId;
+
+    currentQuestions=
+        generateQuestions(subjectId);
+
+    if(currentQuestions.length!==90){
+
+        alert(
+            "Question generation error. Please try again."
+        );
+
+        return;
+    }
+
+    selectedAnswers=
+        new Array(90).fill(null);
+
+    submitted=false;
+
+    const subject=
+        subjects.find(
+            s=>s.id===subjectId
+        );
+
+    document.getElementById("subjectSection")
+        .style.display="none";
+
+    document.getElementById("teacherSection")
+        .style.display="none";
+
+    document.getElementById("resultSection")
+        .style.display="none";
+
+    document.getElementById("testSection")
+        .style.display="block";
+
+    document.getElementById("testTitle")
+        .textContent=
+        `Class 4 • ${subject.name}`;
+
+    renderQuestions();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+function renderQuestions(){
+
+    const container=
+        document.getElementById("questions");
+
+    container.innerHTML="";
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+        const question=
+            document.createElement("div");
+
+        question.className="question";
+
+        question.innerHTML=`
+
+            <div class="question-number">
+                Question ${index+1} of 90
+            </div>
+
+            <div class="question-text">
+                ${q.question}
+            </div>
+
+            <div class="options">
+
+                ${q.options.map(
+                    (option,optIndex)=>`
+
+                    <button
+                        class="option"
+                        data-index="${optIndex}"
+                        onclick="selectAnswer(
+                            ${index},
+                            ${optIndex}
+                        )">
+
+                        ${String.fromCharCode(65+optIndex)}.
+                        ${option}
+
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+            <div
+                class="feedback"
+                id="feedback-${index}">
+            </div>
+
+        `;
+
+        container.appendChild(question);
+
+    });
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   SELECT ANSWER
+========================= */
+
+function selectAnswer(
+    questionIndex,
+    optionIndex
+){
+
+    if(submitted) return;
+
+    selectedAnswers[
+        questionIndex
+    ]=optionIndex;
+
+    const question=
+        document.querySelectorAll(
+            ".question"
+        )[questionIndex];
+
+    question.querySelectorAll(
+        ".option"
+    ).forEach((btn,index)=>{
+
+        btn.classList.toggle(
+            "selected",
+            index===optionIndex
+        );
+
+    });
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+    const answered=
+        selectedAnswers.filter(
+            a=>a!==null
+        ).length;
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+        ((answered/90)*100)+"%";
+
+}
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+function submitTest(){
+
+    if(submitted) return;
+
+    submitted=true;
+
+    let correct=0;
+    let wrong=0;
+    let unanswered=0;
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+        const question=
+            document.querySelectorAll(
+                ".question"
+            )[index];
+
+        const options=
+            question.querySelectorAll(
+                ".option"
+            );
+
+        const selected=
+            selectedAnswers[index];
+
+        options.forEach(
+            (btn,optIndex)=>{
+
+            btn.disabled=true;
+
+            if(optIndex===q.answer){
+                btn.classList.add("correct");
+            }
+
+            if(
+                selected!==null &&
+                optIndex===selected &&
+                selected!==q.answer
+            ){
+                btn.classList.add("wrong");
+            }
+
+        });
+
+        const feedback=
+            document.getElementById(
+                `feedback-${index}`
+            );
+
+        feedback.style.display="block";
+
+        if(selected===null){
+
+            unanswered++;
+
+            feedback.textContent=
+                "⚪ Not answered";
+
+            feedback.style.color=
+                "var(--muted)";
+
+        }
+        else if(selected===q.answer){
+
+            correct++;
+
+            feedback.textContent=
+                "✅ Correct!";
+
+            feedback.style.color=
+                "var(--success)";
+
+        }
+        else{
+
+            wrong++;
+
+            feedback.textContent=
+                "❌ Wrong answer";
+
+            feedback.style.color=
+                "var(--danger)";
+
+        }
+
+    });
+
+    const percentage=
+        Math.round(
+            (correct/90)*100
+        );
+
+    document.getElementById(
+        "scoreValue"
+    ).textContent=correct;
+
+    document.getElementById(
+        "correctValue"
+    ).textContent=correct;
+
+    document.getElementById(
+        "wrongValue"
+    ).textContent=wrong;
+
+    document.getElementById(
+        "unansweredValue"
+    ).textContent=unanswered;
+
+    document.getElementById(
+        "percentValue"
+    ).textContent=
+        percentage+"%";
+
+    document.getElementById(
+        "testSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="block";
+
+    localStorage.setItem(
+        "studyIndiaClass4_"+currentSubject,
+        JSON.stringify({
+            score:correct,
+            wrong:wrong,
+            unanswered:unanswered,
+            percentage:percentage,
+            total:90,
+            date:new Date().toISOString()
+        })
+    );
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   RETRY
+========================= */
+
+function retryTest(){
+
+    if(!currentSubject) return;
+
+    currentQuestions=
+        generateQuestions(
+            currentSubject
+        );
+
+    selectedAnswers=
+        new Array(90).fill(null);
+
+    submitted=false;
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "testSection"
+    ).style.display="block";
+
+    renderQuestions();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function showHome(){
+
+    currentSubject=null;
+    currentQuestions=[];
+    selectedAnswers=[];
+    submitted=false;
+
+    document.getElementById(
+        "testSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "subjectSection"
+    ).style.display="block";
+
+    document.getElementById(
+        "teacherSection"
+    ).style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   CLASSES
+========================= */
+
+function goToClasses(){
+
+    window.location.href="lesson.html";
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+    const enabled=
+        document.body.classList.contains(
+            "dark"
+        );
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        enabled ? "1" : "0"
+    );
+
+    document.getElementById(
+        "darkBtn"
+    ).textContent=
+        enabled ? "☀️" : "🌙";
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function toggleLanguage(){
+
+    currentLanguage=
+        currentLanguage==="hi"
+        ? "en"
+        : "hi";
+
+    localStorage.setItem(
+        "studyIndiaLanguage",
+        currentLanguage
+    );
+
+    const teacher=
+        document.getElementById(
+            "teacherText"
+        );
+
+    if(currentLanguage==="en"){
+
+        teacher.textContent=
+        "Read every question carefully. Understand the question first and then choose your answer. Regular practice will make your Class 4 preparation stronger! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="EN";
+
+    }
+    else{
+
+        teacher.textContent=
+        "हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो, फिर उत्तर चुनो। रोज थोड़ा अभ्यास करने से Class 4 में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="हि";
+
+    }
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+if(
+    localStorage.getItem(
+        "studyIndiaDark"
+    )==="1"
+){
+
+    document.body.classList.add(
+        "dark"
+    );
+
+    document.getElementById(
+        "darkBtn"
+    ).textContent="☀️";
+
+}
+
+if(currentLanguage==="en"){
+
+    document.getElementById(
+        "teacherText"
+    ).textContent=
+    "Read every question carefully. Understand the question first and then choose your answer. Regular practice will make your Class 4 preparation stronger! 🌟";
+
+    document.getElementById(
+        "langBtn"
+    ).textContent="EN";
+
+}
+
+renderSubjects();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyIndia Daily Quiz</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#4f46e5;
+  --secondary:#7c3aed;
+  --bg:#f4f6ff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --green:#16a34a;
+  --red:#dc2626;
+}
+body{
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#eef2ff,#f8faff,#ede9fe);
+  color:var(--text);
+  min-height:100vh;
+  padding:18px;
+}
+.container{max-width:760px;margin:auto}
+header{text-align:center;padding:20px 8px}
+.logo{
+  width:65px;height:65px;border-radius:22px;
+  display:grid;place-items:center;margin:0 auto 12px;
+  color:white;font-size:30px;font-weight:bold;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  box-shadow:0 10px 25px #4f46e144;
+}
+h1{font-size:28px;margin-bottom:8px}
+.subtitle{color:var(--muted);font-size:14px}
+.card{
+  background:#fff;border:1px solid #e5e7eb;
+  border-radius:22px;padding:23px;margin-bottom:18px;
+  box-shadow:0 12px 35px #312e8110;
+  animation:fadeIn .35s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hidden{display:none!important}
+label{display:block;font-size:14px;font-weight:bold;margin-bottom:8px}
+input{
+  width:100%;padding:14px;border:1px solid #cbd5e1;
+  border-radius:12px;font-size:16px;outline:none;
+  margin-bottom:14px;
+}
+input:focus{border-color:var(--primary);box-shadow:0 0 0 3px #4f46e51c}
+button{
+  border:0;border-radius:12px;padding:14px 18px;
+  font-size:15px;font-weight:bold;cursor:pointer;
+  transition:transform .2s,opacity .2s;
+}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{
+  color:white;width:100%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+}
+.secondary{background:#eef2ff;color:var(--primary)}
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;margin:18px 0;
+}
+.stat{
+  text-align:center;padding:14px 6px;background:#f8fafc;
+  border:1px solid #e2e8f0;border-radius:14px;
+}
+.stat strong{display:block;font-size:22px;color:var(--primary)}
+.stat span{font-size:12px;color:var(--muted)}
+.note{
+  background:#fffbeb;border:1px solid #fde68a;
+  padding:12px;border-radius:12px;font-size:13px;
+  line-height:1.6;margin:15px 0;color:#92400e;
+}
+.topline{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;margin-bottom:18px;
+}
+.pill{
+  background:#eef2ff;color:var(--primary);
+  border-radius:50px;padding:8px 12px;font-size:13px;font-weight:bold;
+}
+.timer{background:#fff1f2;color:#be123c}
+.progress{
+  height:8px;background:#e2e8f0;border-radius:20px;
+  overflow:hidden;margin:12px 0 22px;
+}
+.progress-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#4f46e5,#a78bfa);
+  transition:width .25s;
+}
+.subject{color:var(--primary);font-size:13px;font-weight:bold;margin-bottom:10px}
+.question{font-size:21px;line-height:1.5;margin-bottom:20px}
+.option{
+  width:100%;text-align:left;background:#fff;
+  border:1px solid #dbe2ee;margin-bottom:10px;
+  display:flex;align-items:center;gap:12px;
+  color:var(--text);font-weight:normal;
+}
+.option .letter{
+  min-width:30px;height:30px;border-radius:9px;
+  display:grid;place-items:center;background:#f1f5f9;font-weight:bold;
+}
+.option.selected{border:2px solid var(--primary);background:#eef2ff}
+.option.correct{border:2px solid var(--green);background:#f0fdf4}
+.option.wrong{border:2px solid var(--red);background:#fef2f2}
+.actions{display:flex;gap:10px;margin-top:18px}
+.actions button{flex:1}
+.feedback{padding:13px;border-radius:12px;margin-top:14px;line-height:1.5}
+.good{background:#f0fdf4;color:#166534}
+.bad{background:#fef2f2;color:#991b1b}
+.section-title{font-size:19px;margin-bottom:14px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:12px 9px;border-bottom:1px solid #e2e8f0}
+th{background:#f8fafc;color:#475569}
+.empty{color:var(--muted);text-align:center;padding:18px}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 25px}
+.result-score{font-size:48px;font-weight:bold;color:var(--primary);text-align:center;margin:10px}
+.result-caption{text-align:center;color:var(--muted);margin-bottom:18px}
+@media(max-width:480px){
+  body{padding:12px}
+  .card{padding:17px;border-radius:18px}
+  h1{font-size:24px}
+  .question{font-size:19px}
+  .stats{gap:7px}
+  .stat strong{font-size:19px}
+  .stat span{font-size:11px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <div class="logo">S</div>
+    <h1>StudyIndia Quiz</h1>
+    <p class="subtitle">हर दिन सीखो • हर दिन आगे बढ़ो</p>
+  </header>
+
+  <section id="home" class="card">
+    <h2>🎯 Daily Challenge</h2>
+    <p class="subtitle" style="margin-top:8px">रोज़ 10 नए सवालों का अभ्यास करो।</p>
+
+    <div class="stats">
+      <div class="stat"><strong>10</strong><span>सवाल</span></div>
+      <div class="stat"><strong>10 min</strong><span>समय</span></div>
+      <div class="stat"><strong>100</strong><span>अधिकतम अंक</span></div>
+    </div>
+
+    <label for="studentName">अपना नाम लिखें</label>
+    <input id="studentName" maxlength="35" placeholder="जैसे: Rahul">
+
+    <div class="note">
+      ⚠️ एक दिन में केवल एक attempt मिलेगा। Quiz शुरू करने के बाद पेज बंद हो जाए, तो आज का quiz दोबारा खोलकर जारी कर सकते हो।
+    </div>
+
+    <button id="startBtn" class="primary">🚀 Start Daily Quiz</button>
+    <p id="homeMessage" class="subtitle" style="margin-top:13px"></p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="topline">
+      <span id="questionCount" class="pill">Question 1/10</span>
+      <span id="timer" class="pill timer">10:00</span>
+    </div>
+    <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+    <div id="subject" class="subject"></div>
+    <h2 id="questionText" class="question"></h2>
+    <div id="options"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <div class="actions">
+      <button id="nextBtn" class="primary" disabled>Next Question →</button>
+    </div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <h2 style="text-align:center">🏆 Quiz Result</h2>
+    <div id="resultScore" class="result-score">0/100</div>
+    <p id="resultMessage" class="result-caption"></p>
+    <div class="stats">
+      <div class="stat"><strong id="correctCount">0</strong><span>सही जवाब</span></div>
+      <div class="stat"><strong id="wrongCount">0</strong><span>गलत/छूटे</span></div>
+      <div class="stat"><strong id="accuracy">0%</strong><span>Accuracy</span></div>
+    </div>
+    <button id="homeBtn" class="primary">View Score History</button>
+  </section>
+
+  <section id="historyCard" class="card">
+    <h2 class="section-title">📊 Score History</h2>
+    <div id="historyContent" class="empty">अभी कोई score नहीं है।</div>
+  </section>
+
+  <section id="rankingCard" class="card">
+    <h2 class="section-title">🥇 This Mobile's Ranking</h2>
+    <p class="subtitle" style="margin-bottom:12px">यह ranking इसी browser में सेव हुए scores की है।</p>
+    <div id="rankingContent" class="empty">अभी कोई ranking नहीं है।</div>
+  </section>
+
+  <div class="footer">StudyIndia • Learn something new every day</div>
+</div>
+
+<script>
+"use strict";
+
+const KEYS = {
+  name: "studyindia_student_name_v3",
+  attempts: "studyindia_daily_attempts_v3",
+  session: "studyindia_daily_session_v3",
+  history: "studyindia_local_history_v3"
+};
+
+const $ = id => document.getElementById(id);
+
+function readStore(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function writeStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (e) {
+    alert("Browser storage उपलब्ध नहीं है। कृपया browser settings जाँचें।");
+    return false;
+  }
+}
+
+function todayKey() {
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth() + 1).padStart(2, "0") + "-" +
+    String(d.getDate()).padStart(2, "0");
+}
+
+function dateLabel(key) {
+  const parts = key.split("-").map(Number);
+  return new Date(parts[0], parts[1] - 1, parts[2])
+    .toLocaleDateString("hi-IN");
+}
+
+/* Reproducible random generator: refresh पर आज के सवाल नहीं बदलेंगे. */
+function seededRandom(seed) {
+  let value = seed >>> 0;
+  return function() {
+    value = (value * 1664525 + 1013904223) >>> 0;
+    return value / 4294967296;
+  };
+}
+
+function hashText(text) {
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function shuffle(array, random) {
+  const result = array.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+/* हर सवाल में सही उत्तर text के रूप में रखा गया है। */
+const questionBank = [
+  {id:"g1",subject:"सामान्य ज्ञान",q:"भारत की राजधानी क्या है?",options:["नई दिल्ली","मुंबई","जयपुर","लखनऊ"],answer:"नई दिल्ली",hint:"भारत की राजधानी नई दिल्ली है।"},
+  {id:"g2",subject:"विज्ञान",q:"पौधे अपना भोजन मुख्यतः किस प्रक्रिया से बनाते हैं?",options:["प्रकाश संश्लेषण","वाष्पीकरण","पाचन","संघनन"],answer:"प्रकाश संश्लेषण",hint:"इस प्रक्रिया में सूर्य का प्रकाश उपयोग होता है।"},
+  {id:"g3",subject:"विज्ञान",q:"पानी का रासायनिक सूत्र क्या है?",options:["H₂O","CO₂","O₂","NaCl"],answer:"H₂O",hint:"पानी में हाइड्रोजन और ऑक्सीजन होते हैं।"},
+  {id:"g4",subject:"गणित",q:"त्रिभुज के तीनों कोणों का योग कितना होता है?",options:["180°","90°","270°","360°"],answer:"180°",hint:"किसी भी त्रिभुज के आंतरिक कोणों का योग 180° है।"},
+  {id:"g5",subject:"सामान्य ज्ञान",q:"भारत का राष्ट्रीय पशु कौन है?",options:["बाघ","शेर","हाथी","मोर"],answer:"बाघ",hint:"भारत का राष्ट्रीय पशु रॉयल बंगाल टाइगर है।"},
+  {id:"g6",subject:"विज्ञान",q:"सौरमंडल का सबसे बड़ा ग्रह कौन-सा है?",options:["बृहस्पति","पृथ्वी","मंगल","बुध"],answer:"बृहस्पति",hint:"यह गैसों से बना विशाल ग्रह है।"},
+  {id:"g7",subject:"सामान्य ज्ञान",q:"भारत का स्वतंत्रता दिवस कब मनाया जाता है?",options:["15 अगस्त","26 जनवरी","2 अक्टूबर","14 नवंबर"],answer:"15 अगस्त",hint:"भारत 1947 में स्वतंत्र हुआ था।"},
+  {id:"g8",subject:"विज्ञान",q:"सामान्य वायुदाब पर पानी लगभग कितने °C पर उबलता है?",options:["100°C","50°C","0°C","150°C"],answer:"100°C",hint:"समुद्र तल पर पानी का क्वथनांक 100°C होता है।"},
+  {id:"g9",subject:"सामान्य ज्ञान",q:"भारत का राष्ट्रीय पक्षी कौन है?",options:["मोर","तोता","कबूतर","हंस"],answer:"मोर",hint:"मोर अपने रंगीन पंखों के लिए प्रसिद्ध है।"},
+  {id:"g10",subject:"विज्ञान",q:"मनुष्य साँस लेने के लिए मुख्यतः कौन-सी गैस उपयोग करता है?",options:["ऑक्सीजन","नाइट्रोजन","कार्बन डाइऑक्साइड","हीलियम"],answer:"ऑक्सीजन",hint:"यह गैस शरीर में ऊर्जा बनाने की प्रक्रिया में मदद करती है।"},
+  {id:"g11",subject:"गणित",q:"एक दर्जन में कितनी वस्तुएँ होती हैं?",options:["12","10","6","24"],answer:"12",hint:"एक दर्जन का अर्थ बारह होता है।"},
+  {id:"g12",subject:"सामान्य ज्ञान",q:"सौरमंडल में पृथ्वी सूर्य से कौन-सा ग्रह है?",options:["तीसरा","पहला","दूसरा","चौथा"],answer:"तीसरा",hint:"बुध और शुक्र के बाद पृथ्वी आती है।"},
+  {id:"g13",subject:"विज्ञान",q:"मानव शरीर में रक्त पंप करने वाला अंग कौन-सा है?",options:["हृदय","फेफड़ा","यकृत","गुर्दा"],answer:"हृदय",hint:"यह लगातार धड़कता रहता है।"},
+  {id:"g14",subject:"सामान्य ज्ञान",q:"भारत का राष्ट्रीय गान किसने लिखा?",options:["रवीन्द्रनाथ टैगोर","महात्मा गांधी","प्रेमचंद","सरोजिनी नायडू"],answer:"रवीन्द्रनाथ टैगोर",hint:"उन्होंने 'जन गण मन' की रचना की।"},
+  {id:"g15",subject:"विज्ञान",q:"पृथ्वी के प्राकृतिक उपग्रह का नाम क्या है?",options:["चंद्रमा","सूर्य","मंगल","शुक्र"],answer:"चंद्रमा",hint:"यह रात में आकाश में दिखाई देता है।"},
+  {id:"g16",subject:"गणित",q:"किसी संख्या को शून्य से गुणा करने पर क्या मिलता है?",options:["0","वही संख्या","1","10"],answer:"0",hint:"शून्य से गुणा करने का परिणाम हमेशा शून्य है।"},
+  {id:"g17",subject:"सामान्य ज्ञान",q:"भारत का गणतंत्र दिवस कब मनाया जाता है?",options:["26 जनवरी","15 अगस्त","5 सितंबर","2 अक्टूबर"],answer:"26 जनवरी",hint:"भारत का संविधान 1950 में इसी दिन लागू हुआ।"},
+  {id:"g18",subject:"विज्ञान",q:"सूर्य किस दिशा से उगता दिखाई देता है?",options:["पूर्व","पश्चिम","उत्तर","दक्षिण"],answer:"पूर्व",hint:"सूर्योदय पूर्व दिशा में दिखाई देता है।"},
+  {id:"g19",subject:"गणित",q:"एक सप्ताह में कितने दिन होते हैं?",options:["7","5","10","12"],answer:"7",hint:"सोमवार से रविवार तक सात दिन होते हैं।"},
+  {id:"g20",subject:"विज्ञान",q:"सामान्य तापमान पर तरल अवस्था में रहने वाली धातु कौन-सी है?",options:["पारा","लोहा","तांबा","एल्युमिनियम"],answer:"पारा",hint:"इसे अंग्रेज़ी में Mercury कहते हैं।"}
+];
+
+/* गणित के बहुत से अभ्यास प्रश्न बनाना */
+function addMathQuestion(id, subject, text, answer, wrongs, hint) {
+  const unique = [...new Set([String(answer), ...wrongs.map(String)])];
+  questionBank.push({
+    id, subject, q:text, options:unique, answer:String(answer), hint
+  });
+}
+
+for (let a = 2; a <= 30; a++) {
+  for (let b = 2; b <= 15; b++) {
+    addMathQuestion(
+      "mul-" + a + "-" + b, "गणित",
+      a + " × " + b + " = ?",
+      a * b,
+      [a*b+1, a*b-1, a+b+2],
+      "गुणा करने के लिए " + a + " को " + b + " बार जोड़ सकते हो।"
+    );
+  }
+}
+
+for (let a = 15; a <= 90; a += 3) {
+  for (let b = 2; b <= Math.min(a - 1, 25); b += 2) {
+    addMathQuestion(
+      "sub-" + a + "-" + b, "गणित",
+      a + " − " + b + " = ?",
+      a - b,
+      [a-b+1, a-b-1, a+b],
+      "बड़ी संख्या में से छोटी संख्या घटाएँ।"
+    );
+  }
+}
+
+for (let a = 2; a <= 30; a++) {
+  for (let b = 2; b <= 12; b++) {
+    const product = a * b;
+    addMathQuestion(
+      "div-" + a + "-" + b, "गणित",
+      product + " ÷ " + b + " = ?",
+      a,
+      [a+1, Math.max(1,a-1), b],
+      "भाग देने के लिए जाँचें कि किस संख्या को " + b + " से गुणा करने पर " + product + " मिलता है।"
+    );
+  }
+}
+
+function makeDailyQuestions(day) {
+  const dailySeed = hashText("StudyIndia-" + day);
+  const random = seededRandom(dailySeed);
+  const selected = shuffle(questionBank, random).slice(0, 10);
+
+  return selected.map((item, index) => {
+    const optionSeed = seededRandom(hashText(day + "-" + item.id));
+    return {
+      ...item,
+      options: shuffle(item.options, optionSeed),
+      number: index + 1
+    };
+  });
+}
+
+let session = null;
+let timerInterval = null;
+let checkedAnswer = false;
+
+function showSection(sectionId) {
+  ["home", "quiz", "result"].forEach(id => {
+    $(id).classList.toggle("hidden", id !== sectionId);
+  });
+}
+
+function getHistory() {
+  return readStore(KEYS.history, []);
+}
+
+function saveHistory(entry) {
+  const history = getHistory();
+  history.unshift(entry);
+  writeStore(KEYS.history, history.slice(0, 100));
+}
+
+function loadProfile() {
+  $("studentName").value = localStorage.getItem(KEYS.name) || "";
+}
+
+function renderQuestion() {
+  if (!session) return;
+
+  const item = session.questions[session.index];
+  checkedAnswer = false;
+  $("feedback").classList.add("hidden");
+  $("feedback").textContent = "";
+  $("questionCount").textContent =
+    "Question " + (session.index + 1) + "/10";
+  $("progressBar").style.width = (session.index / 10 * 100) + "%";
+  $("subject").textContent = item.subject;
+  $("questionText").textContent = item.q;
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent =
+    session.index === 9 ? "Finish Quiz ✓" : "Next Question →";
+
+  const options = $("options");
+  options.innerHTML = "";
+
+  item.options.forEach((option, i) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.type = "button";
+
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = String.fromCharCode(65 + i);
+
+    const label = document.createElement("span");
+    label.textContent = option;
+
+    button.append(letter, label);
+    button.addEventListener("click", () => chooseAnswer(option, button));
+    options.appendChild(button);
+  });
+
+  updateTimerDisplay();
+}
+
+function chooseAnswer(option, button) {
+  if (!session || checkedAnswer) return;
+
+  checkedAnswer = true;
+  const item = session.questions[session.index];
+  const isCorrect = option === item.answer;
+
+  session.answers[session.index] = {
+    selected: option,
+    correct: isCorrect
+  };
+
+  [...$("options").children].forEach(el => {
+    el.disabled = true;
+    const text = el.lastElementChild.textContent;
+    if (text === item.answer) el.classList.add("correct");
+    if (el === button && !isCorrect) el.classList.add("wrong");
+  });
+
+  const feedback = $("feedback");
+  feedback.className = "feedback " + (isCorrect ? "good" : "bad");
+  feedback.textContent = isCorrect
+    ? "✅ सही जवाब! " + item.hint
+    : "❌ सही जवाब: " + item.answer + ". " + item.hint;
+
+  $("nextBtn").disabled = false;
+  writeStore(KEYS.session, session);
+}
+
+function updateTimerDisplay() {
+  const remaining = Math.max(0, session ? session.remaining : 0);
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+  $("timer").textContent =
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0");
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  session.lastTick = Date.now();
+  timerInterval = setInterval(() => {
+    if (!session) return;
+    const now = Date.now();
+    const elapsed = Math.floor((now - session.lastTick) / 1000);
+    if (elapsed > 0) {
+      session.remaining = Math.max(0, session.remaining - elapsed);
+      session.lastTick = now;
+      updateTimerDisplay();
+      writeStore(KEYS.session, session);
+    }
+    if (session.remaining <= 0) finishQuiz(true);
+  }, 500);
+}
+
+function startQuiz() {
+  const day = todayKey();
+  const name = $("studentName").value.trim() || "Student";
+  const attempts = readStore(KEYS.attempts, {});
+
+  localStorage.setItem(KEYS.name, name);
+
+  const existing = readStore(KEYS.session, null);
+  if (attempts[day]) {
+    if (existing && existing.day === day && !existing.finished) {
+      session = existing;
+      showSection("quiz");
+      renderQuestion();
+      startTimer();
+      return;
+    }
+    $("homeMessage").textContent =
+      "आज का attempt पूरा हो चुका है। अगला quiz कल उपलब्ध होगा।";
+    $("startBtn").disabled = true;
+    return;
+  }
+
+  session = {
+    day,
+    name,
+    questions: makeDailyQuestions(day),
+    index: 0,
+    answers: {},
+    remaining: 600,
+    finished: false,
+    lastTick: Date.now()
+  };
+
+  attempts[day] = true;
+  if (!writeStore(KEYS.attempts, attempts)) return;
+  if (!writeStore(KEYS.session, session)) return;
+
+  showSection("quiz");
+  renderQuestion();
+  startTimer();
+}
+
+function finishQuiz(timeUp) {
+  if (!session || session.finished) return;
+
+  clearInterval(timerInterval);
+  session.finished = true;
+
+  const answers = session.answers || {};
+  let correct = 0;
+
+  session.questions.forEach((item, i) => {
+    if (answers[i] && answers[i].correct) correct++;
+  });
+
+  const total = session.questions.length;
+  const score = correct * 10;
+  const answered = Object.keys(answers).length;
+  const wrong = total - correct;
+
+  saveHistory({
+    day: session.day,
+    name: session.name,
+    score,
+    correct,
+    wrong,
+    total,
+    dateTime: new Date().toISOString()
+  });
+
+  writeStore(KEYS.session, session);
+
+  $("resultScore").textContent = score + "/100";
+  $("resultMessage").textContent = timeUp
+    ? "समय पूरा हो गया। तुम्हारा result सेव कर दिया गया है।"
+    : (score >= 80 ? "बहुत बढ़िया! शानदार प्रदर्शन 🎉"
+       : score >= 50 ? "अच्छी कोशिश! अभ्यास जारी रखो 💪"
+       : "अभ्यास करते रहो, तुम बेहतर कर सकते हो! 🌟");
+  $("correctCount").textContent = correct;
+  $("wrongCount").textContent = wrong;
+  $("accuracy").textContent = Math.round(correct / total * 100) + "%";
+
+  showSection("result");
+  renderHistory();
+  renderRanking();
+}
+
+function renderHistory() {
+  const history = getHistory();
+  const container = $("historyContent");
+
+  if (!history.length) {
+    container.className = "empty";
+    container.textContent = "अभी कोई score नहीं है।";
+    return;
+  }
+
+  container.className = "table-wrap";
+  const table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>तारीख</th><th>नाम</th><th>स्कोर</th></tr></thead>";
+  const tbody = document.createElement("tbody");
+
+  history.slice(0, 15).forEach(row => {
+    const tr = document.createElement("tr");
+    [dateLabel(row.day), row.name, row.score + "/100"].forEach(value => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  container.replaceChildren(table);
+}
+
+function renderRanking() {
+  const history = getHistory();
+  const container = $("rankingContent");
+
+  if (!history.length) {
+    container.className = "empty";
+    container.textContent = "पहला quiz पूरा करो और ranking देखो।";
+    return;
+  }
+
+  const ranking = history.slice().sort((a, b) =>
+    b.score - a.score || a.day.localeCompare(b.day)
+  );
+
+  container.className = "table-wrap";
+  const table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>Rank</th><th>नाम</th><th>स्कोर</th><th>तारीख</th></tr></thead>";
+  const tbody = document.createElement("tbody");
+
+  ranking.slice(0, 10).forEach((row, i) => {
+    const tr = document.createElement("tr");
+    const values = [
+      i === 0 ? "🥇 1" : i === 1 ? "🥈 2" : i === 2 ? "🥉 3" : String(i + 1),
+      row.name,
+      row.score + "/100",
+      dateLabel(row.day)
+    ];
+    values.forEach(value => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  container.replaceChildren(table);
+}
+
+$("startBtn").addEventListener("click", startQuiz);
+
+$("nextBtn").addEventListener("click", () => {
+  if (!session) return;
+
+  if (session.index >= 9) {
+    finishQuiz(false);
+    return;
+  }
+
+  session.index++;
+  writeStore(KEYS.session, session);
+  renderQuestion();
+});
+
+$("homeBtn").addEventListener("click", () => {
+  showSection("home");
+  renderHistory();
+  renderRanking();
+});
+
+function initialize() {
+  loadProfile();
+  renderHistory();
+  renderRanking();
+
+  const day = todayKey();
+  const attempts = readStore(KEYS.attempts, {});
+  const saved = readStore(KEYS.session, null);
+
+  if (attempts[day] && saved && saved.day === day && !saved.finished) {
+    session = saved;
+    showSection("quiz");
+    renderQuestion();
+    startTimer();
+    $("homeMessage").textContent = "आज का quiz जारी है।";
+  } else if (attempts[day]) {
+    $("startBtn").disabled = true;
+    $("homeMessage").textContent =
+      "आज का attempt इस्तेमाल हो चुका है। कल फिर आना!";
+  }
+}
+
+initialize();
+</script>
+</body>
+</html>

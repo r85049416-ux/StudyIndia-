@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyIndia - Classes</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+:root{
+    --bg:#f4f7ff;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#687386;
+    --primary:#4f46e5;
+    --primary2:#7c3aed;
+    --border:#e5e7eb;
+    --shadow:0 12px 35px rgba(30,41,59,.10);
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top left,#dbeafe 0,transparent 35%),
+        radial-gradient(circle at bottom right,#ede9fe 0,transparent 35%),
+        var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    padding:16px 20px;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(229,231,235,.8);
+}
+
+.header-inner{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:800;
+    color:var(--primary);
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+    );
+    box-shadow:0 8px 20px rgba(79,70,229,.28);
+}
+
+.back-btn{
+    border:0;
+    background:#eef2ff;
+    color:var(--primary);
+    padding:10px 15px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.back-btn:hover{
+    transform:translateY(-2px);
+    background:#e0e7ff;
+}
+
+/* HERO */
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:45px 20px 25px;
+    text-align:center;
+    animation:fadeDown .7s ease;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    border-radius:50px;
+    background:#eef2ff;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(30px,6vw,48px);
+    line-height:1.1;
+    margin-bottom:12px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.6;
+}
+
+/* CLASS GRID */
+.container{
+    width:min(1100px,calc(100% - 30px));
+    margin:auto;
+    padding:15px 0 45px;
+}
+
+.class-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.class-card{
+    position:relative;
+    overflow:hidden;
+    min-height:190px;
+    padding:24px 20px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    background:rgba(255,255,255,.88);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+    animation:cardIn .65s ease both;
+}
+
+/* CARD ANIMATION */
+.class-card:nth-child(2){
+    animation-delay:.05s;
+}
+
+.class-card:nth-child(3){
+    animation-delay:.1s;
+}
+
+.class-card:nth-child(4){
+    animation-delay:.15s;
+}
+
+.class-card:nth-child(5){
+    animation-delay:.2s;
+}
+
+.class-card:nth-child(6){
+    animation-delay:.25s;
+}
+
+.class-card:nth-child(7){
+    animation-delay:.3s;
+}
+
+.class-card:nth-child(8){
+    animation-delay:.35s;
+}
+
+.class-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        rgba(79,70,229,.10),
+        rgba(124,58,237,.05)
+    );
+    top:-45px;
+    right:-35px;
+    transition:.35s ease;
+}
+
+.class-card:hover{
+    transform:translateY(-8px);
+    border-color:#c7d2fe;
+    box-shadow:0 20px 45px rgba(30,41,59,.16);
+}
+
+.class-card:hover::before{
+    transform:scale(1.35);
+}
+
+.class-icon{
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    font-size:28px;
+    background:linear-gradient(
+        135deg,
+        #eef2ff,
+        #f5f3ff
+    );
+    margin-bottom:17px;
+    transition:.3s ease;
+}
+
+.class-card:hover .class-icon{
+    transform:rotate(-5deg) scale(1.08);
+}
+
+.class-number{
+    font-size:25px;
+    font-weight:850;
+    margin-bottom:7px;
+}
+
+.class-description{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.start{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:#eef2ff;
+    color:var(--primary);
+    font-size:20px;
+    font-weight:bold;
+    transition:.3s ease;
+}
+
+.class-card:hover .start{
+    background:var(--primary);
+    color:white;
+    transform:translateX(3px);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding:10px 20px 30px;
+}
+
+/* DARK MODE */
+body.dark{
+    --bg:#0b1020;
+    --card:#11182b;
+    --text:#f8fafc;
+    --muted:#9ca8bd;
+    --border:#202a40;
+    --shadow:0 15px 40px rgba(0,0,0,.28);
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #172554 0,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #2e1065 0,
+            transparent 35%
+        ),
+        var(--bg);
+}
+
+body.dark .header{
+    background:rgba(11,16,32,.82);
+    border-color:#202a40;
+}
+
+body.dark .back-btn{
+    background:#18213a;
+    color:#a5b4fc;
+}
+
+body.dark .hero-badge{
+    background:#18213a;
+    color:#a5b4fc;
+}
+
+body.dark .class-card{
+    background:rgba(17,24,43,.9);
+}
+
+body.dark .class-icon{
+    background:#18213a;
+}
+
+body.dark .start{
+    background:#18213a;
+    color:#a5b4fc;
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* TABLET */
+@media(max-width:850px){
+
+    .class-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+/* MOBILE */
+@media(max-width:620px){
+
+    .header{
+        padding:13px 15px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .logo-icon{
+        width:38px;
+        height:38px;
+    }
+
+    .hero{
+        padding:35px 15px 22px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .container{
+        width:min(100% - 24px,1100px);
+    }
+
+    .class-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .class-card{
+        min-height:175px;
+        padding:19px 16px;
+        border-radius:20px;
+    }
+
+    .class-icon{
+        width:50px;
+        height:50px;
+        font-size:24px;
+        border-radius:15px;
+    }
+
+    .class-number{
+        font-size:21px;
+    }
+
+    .class-description{
+        font-size:12px;
+    }
+
+    .start{
+        width:34px;
+        height:34px;
+        bottom:15px;
+        right:15px;
+    }
+}
+
+@media(max-width:360px){
+
+    .class-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .class-card{
+        min-height:165px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                📚
+            </div>
+
+            <span>
+                StudyIndia
+            </span>
+
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-badge">
+        🎓 Choose Your Class
+    </div>
+
+    <h1>
+        Start Your
+        <span>Learning Journey</span>
+    </h1>
+
+    <p>
+        Apni class select karo aur apne subjects ke
+        90-question practice tests shuru karo.
+    </p>
+
+</section>
+
+
+<main class="container">
+
+    <div class="class-grid">
+
+        <!-- CLASS 1 -->
+        <div
+            class="class-card"
+            onclick="openClass(1)"
+        >
+
+            <div class="class-icon">
+                🎒
+            </div>
+
+            <div class="class-number">
+                Class 1
+            </div>
+
+            <div class="class-description">
+                Basic learning & foundation
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 2 -->
+        <div
+            class="class-card"
+            onclick="openClass(2)"
+        >
+
+            <div class="class-icon">
+                📖
+            </div>
+
+            <div class="class-number">
+                Class 2
+            </div>
+
+            <div class="class-description">
+                Build strong fundamentals
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 3 -->
+        <div
+            class="class-card"
+            onclick="openClass(3)"
+        >
+
+            <div class="class-icon">
+                ✏️
+            </div>
+
+            <div class="class-number">
+                Class 3
+            </div>
+
+            <div class="class-description">
+                Learn, practice & improve
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 4 -->
+        <div
+            class="class-card"
+            onclick="openClass(4)"
+        >
+
+            <div class="class-icon">
+                🧠
+            </div>
+
+            <div class="class-number">
+                Class 4
+            </div>
+
+            <div class="class-description">
+                Strengthen your knowledge
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 5 -->
+        <div
+            class="class-card"
+            onclick="openClass(5)"
+        >
+
+            <div class="class-icon">
+                🚀
+            </div>
+
+            <div class="class-number">
+                Class 5
+            </div>
+
+            <div class="class-description">
+                Prepare for advanced learning
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 6 -->
+        <div
+            class="class-card"
+            onclick="openClass(6)"
+        >
+
+            <div class="class-icon">
+                🔬
+            </div>
+
+            <div class="class-number">
+                Class 6
+            </div>
+
+            <div class="class-description">
+                Explore concepts deeply
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 7 -->
+        <div
+            class="class-card"
+            onclick="openClass(7)"
+        >
+
+            <div class="class-icon">
+                📐
+            </div>
+
+            <div class="class-number">
+                Class 7
+            </div>
+
+            <div class="class-description">
+                Practice with confidence
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+
+        <!-- CLASS 8 -->
+        <div
+            class="class-card"
+            onclick="openClass(8)"
+        >
+
+            <div class="class-icon">
+                🏆
+            </div>
+
+            <div class="class-number">
+                Class 8
+            </div>
+
+            <div class="class-description">
+                Master important concepts
+            </div>
+
+            <div class="start">
+                →
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<div class="footer">
+
+    © 2026 StudyIndia •
+    Learn • Practice • Improve
+
+</div>
+
+
+<script>
+
+/* ================================
+   OPEN CLASS
+================================ */
+
+function openClass(classNumber){
+
+    window.location.href =
+        `class${classNumber}.html`;
+
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+function goBack(){
+
+    if(document.referrer){
+
+        history.back();
+
+    }else{
+
+        window.location.href =
+            "index.html";
+
+    }
+
+}
+
+
+/* ================================
+   DARK MODE
+================================ */
+
+function applyDarkMode(){
+
+    const darkMode =
+        localStorage.getItem(
+            "studyIndiaDark"
+        );
+
+    if(
+        darkMode === "true" ||
+        darkMode === "1"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+}
+
+
+/* ================================
+   INITIALIZE
+================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    applyDarkMode
+);
+
+</script>
+
+</body>
+</html>

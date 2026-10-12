@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyIndia - Class 1</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#fff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+}
+
+body{
+    min-height:100vh;
+    color:var(--text);
+    background:linear-gradient(135deg,#eef4ff,#faf7ff);
+}
+
+body.dark{
+    --bg:#0b1220;
+    --card:#111a2d;
+    --text:#f1f5ff;
+    --muted:#aab5ca;
+    --border:#26344e;
+    background:linear-gradient(135deg,#080d18,#111827);
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:90px;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    margin:15px;
+    padding:20px;
+    border-radius:25px;
+    color:#fff;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 18px 40px rgba(37,99,235,.25);
+    animation:slideDown .6s ease;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:52px;
+    height:52px;
+    display:grid;
+    place-items:center;
+    border-radius:17px;
+    background:rgba(255,255,255,.18);
+    font-size:28px;
+}
+
+.logo h1{
+    font-size:24px;
+}
+
+.logo p{
+    margin-top:3px;
+    font-size:13px;
+    opacity:.85;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:43px;
+    height:43px;
+    border:0;
+    border-radius:14px;
+    color:#fff;
+    background:rgba(255,255,255,.17);
+    font-size:18px;
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    background:rgba(255,255,255,.25);
+}
+
+.class-badge{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    padding:12px 15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.13);
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+    margin:18px 15px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.section-title h2{
+    font-size:20px;
+}
+
+.section-title span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= SUBJECTS ================= */
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.subject{
+    padding:20px;
+    border-radius:21px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 10px 28px rgba(37,99,235,.08);
+    cursor:pointer;
+    transition:.3s;
+    animation:fadeUp .5s ease both;
+}
+
+.subject:hover{
+    transform:translateY(-7px);
+    border-color:var(--primary);
+    box-shadow:0 18px 38px rgba(37,99,235,.16);
+}
+
+.subject:active{
+    transform:scale(.98);
+}
+
+.subject-icon{
+    width:52px;
+    height:52px;
+    display:grid;
+    place-items:center;
+    margin-bottom:12px;
+    border-radius:16px;
+    background:#edf2ff;
+    font-size:29px;
+}
+
+.dark .subject-icon{
+    background:#1b2d50;
+}
+
+.subject h3{
+    font-size:16px;
+}
+
+.subject p{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* ================= TEACHER ================= */
+
+.teacher{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+    border-radius:22px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 10px 28px rgba(0,0,0,.05);
+}
+
+.teacher-avatar{
+    width:60px;
+    height:60px;
+    display:grid;
+    place-items:center;
+    border-radius:19px;
+    background:linear-gradient(135deg,#dbeafe,#ede9fe);
+    font-size:31px;
+}
+
+.teacher-text h3{
+    margin-bottom:5px;
+}
+
+.teacher-text p{
+    color:var(--muted);
+    line-height:1.5;
+    font-size:13px;
+}
+
+/* ================= TEST ================= */
+
+.hidden{
+    display:none!important;
+}
+
+.test-head{
+    padding:22px;
+    border-radius:23px;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 16px 35px rgba(37,99,235,.2);
+}
+
+.test-head h2{
+    font-size:21px;
+}
+
+.test-head p{
+    margin-top:6px;
+    opacity:.86;
+    font-size:13px;
+}
+
+.question{
+    margin-top:14px;
+    padding:18px;
+    border-radius:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 6px 20px rgba(0,0,0,.04);
+    animation:fadeUp .35s ease;
+}
+
+.question-title{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    line-height:1.5;
+    font-weight:bold;
+}
+
+.q-number{
+    flex:0 0 34px;
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    color:var(--primary);
+    background:#eaf0ff;
+}
+
+.dark .q-number{
+    background:#1c3156;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-top:14px;
+}
+
+.option{
+    padding:13px;
+    text-align:left;
+    color:var(--text);
+    background:transparent;
+    border:1px solid var(--border);
+    border-radius:13px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:var(--primary);
+    background:rgba(37,99,235,.06);
+    transform:translateY(-1px);
+}
+
+.option.selected{
+    color:#1746a2;
+    background:#eaf0ff;
+    border-color:var(--primary);
+    font-weight:bold;
+}
+
+.dark .option.selected{
+    color:#dbeafe;
+    background:#19366d;
+}
+
+.option.correct-answer{
+    color:#166534;
+    background:#dcfce7;
+    border-color:#22c55e;
+}
+
+.option.wrong-answer{
+    color:#991b1b;
+    background:#fee2e2;
+    border-color:#ef4444;
+}
+
+.dark .option.correct-answer{
+    color:#bbf7d0;
+    background:#123b26;
+}
+
+.dark .option.wrong-answer{
+    color:#fecaca;
+    background:#451a1a;
+}
+
+.feedback{
+    display:none;
+    margin-top:12px;
+    padding:11px;
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.feedback.correct{
+    display:block;
+    color:var(--success);
+    background:rgba(22,163,74,.1);
+}
+
+.feedback.wrong{
+    display:block;
+    color:var(--danger);
+    background:rgba(220,38,38,.1);
+}
+
+/* ================= BUTTON ================= */
+
+.submit-wrap{
+    margin:25px 0;
+    text-align:center;
+}
+
+.submit-btn,
+.retry-btn,
+.back-btn{
+    padding:15px 25px;
+    border:0;
+    border-radius:15px;
+    color:#fff;
+    font-weight:bold;
+    font-size:15px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 10px 25px rgba(37,99,235,.22);
+    transition:.25s;
+}
+
+.submit-btn:hover,
+.retry-btn:hover,
+.back-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= RESULT ================= */
+
+.result{
+    display:none;
+    margin:20px 0;
+    padding:25px;
+    text-align:center;
+    border-radius:24px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 12px 35px rgba(37,99,235,.1);
+}
+
+.score{
+    margin:5px 0;
+    color:var(--primary);
+    font-size:48px;
+    font-weight:900;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.stat{
+    padding:14px;
+    border-radius:15px;
+    background:var(--bg);
+}
+
+.stat strong{
+    display:block;
+    font-size:22px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.result-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+/* ================= PROGRESS ================= */
+
+.test-progress{
+    height:7px;
+    margin-top:15px;
+    overflow:hidden;
+    border-radius:20px;
+    background:rgba(255,255,255,.2);
+}
+
+.test-progress-bar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+    background:#fff;
+    transition:.3s;
+}
+
+/* ================= BOTTOM ================= */
+
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:min(600px,calc(100% - 25px));
+    display:flex;
+    justify-content:space-around;
+    padding:9px;
+    border-radius:22px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(18px);
+    border:1px solid #dce3f0;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    z-index:100;
+}
+
+.dark .bottom-nav{
+    background:rgba(17,26,45,.94);
+    border-color:#293852;
+}
+
+.nav-btn{
+    padding:8px 14px;
+    border:0;
+    border-radius:14px;
+    color:var(--muted);
+    background:none;
+    font-size:12px;
+}
+
+.nav-btn.active{
+    color:var(--primary);
+    background:#eaf0ff;
+    font-weight:bold;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(.8);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:800px){
+
+    .subject-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:520px){
+
+    .header{
+        margin:10px;
+        padding:16px;
+    }
+
+    .section{
+        margin:14px 10px;
+    }
+
+    .subject{
+        padding:14px;
+    }
+
+    .subject-icon{
+        width:45px;
+        height:45px;
+        font-size:25px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .teacher{
+        align-items:flex-start;
+    }
+
+    .logo h1{
+        font-size:20px;
+    }
+
+    .logo-icon{
+        width:45px;
+        height:45px;
+    }
+
+    .icon-btn{
+        width:39px;
+        height:39px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-top">
+
+        <div class="logo">
+
+            <div class="logo-icon">📚</div>
+
+            <div>
+                <h1>StudyIndia</h1>
+                <p>Learn • Practice • Grow</p>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <!-- BACK TO CLASSES -->
+            <button
+                class="icon-btn"
+                onclick="goToClasses()"
+                title="Back to Classes">
+                ←
+            </button>
+
+            <!-- LANGUAGE -->
+            <button
+                class="icon-btn"
+                onclick="toggleLanguage()"
+                id="langBtn">
+                हि
+            </button>
+
+            <!-- DARK MODE -->
+            <button
+                class="icon-btn"
+                onclick="toggleDark()"
+                id="darkBtn">
+                🌙
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="class-badge">
+
+        <strong>Class 1</strong>
+
+        <span>8 Subjects • 720 Questions</span>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section class="section" id="homeSection">
+
+    <div class="section-title">
+
+        <h2>📚 Class 1 Subjects</h2>
+
+        <span>Choose Subject</span>
+
+    </div>
+
+    <div class="subject-grid" id="subjects"></div>
+
+    <div class="section">
+
+        <div class="teacher">
+
+            <div class="teacher-avatar">
+                👩‍🏫
+            </div>
+
+            <div class="teacher-text">
+
+                <h3 id="teacherTitle">
+                    Your Study Teacher
+                </h3>
+
+                <p id="teacherText">
+                    अपनी class का subject चुनो और सीधे
+                    90 questions का test शुरू करो।
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TEST ================= -->
+
+<section class="section hidden" id="testSection">
+
+    <div class="test-head">
+
+        <h2 id="testTitle">
+            Class 1 Test
+        </h2>
+
+        <p id="testSubtitle">
+            90 Questions • One Submit
+        </p>
+
+        <div class="test-progress">
+            <div
+                class="test-progress-bar"
+                id="testProgressBar">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="questions"></div>
+
+    <div class="submit-wrap">
+
+        <button
+            class="submit-btn"
+            onclick="submitTest()">
+
+            🏆 Submit Test
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= RESULT ================= -->
+
+    <div class="result" id="result">
+
+        <div>🎉 Your Score</div>
+
+        <div class="score" id="score">
+            0 / 90
+        </div>
+
+        <p id="resultMessage"></p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="correct">0</strong>
+                <span>Correct</span>
+            </div>
+
+            <div class="stat">
+                <strong id="wrong">0</strong>
+                <span>Wrong</span>
+            </div>
+
+            <div class="stat">
+                <strong id="unanswered">0</strong>
+                <span>Unanswered</span>
+            </div>
+
+            <div class="stat">
+                <strong id="percentage">0%</strong>
+                <span>Percentage</span>
+            </div>
+
+        </div>
+
+        <div class="result-actions">
+
+            <button
+                class="retry-btn"
+                onclick="retryTest()">
+                🔄 Retry Test
+            </button>
+
+            <button
+                class="back-btn"
+                onclick="showHome()">
+                📚 Subjects
+            </button>
+
+            <button
+                class="back-btn"
+                onclick="goToClasses()">
+                ← Classes
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-btn active"
+        onclick="showHome()">
+        🏠<br>Home
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="showHome()">
+        📚<br>Subjects
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="goToClasses()">
+        🎓<br>Classes
+    </button>
+
+</nav>
+
+
+<script>
+
+/* =====================================================
+   SUBJECT DATA
+===================================================== */
+
+const subjects = [
+
+    {
+        id:"hindi",
+        name:"Hindi",
+        icon:"🇮🇳",
+        description:"हिंदी पढ़ना और समझना"
+    },
+
+    {
+        id:"english",
+        name:"English",
+        icon:"🔤",
+        description:"English basics"
+    },
+
+    {
+        id:"math",
+        name:"Mathematics",
+        icon:"➕",
+        description:"Numbers & Maths"
+    },
+
+    {
+        id:"evs",
+        name:"EVS",
+        icon:"🌱",
+        description:"Our world & nature"
+    },
+
+    {
+        id:"computer",
+        name:"Computer",
+        icon:"💻",
+        description:"Computer basics"
+    },
+
+    {
+        id:"gk",
+        name:"General Knowledge",
+        icon:"🌎",
+        description:"Fun GK facts"
+    },
+
+    {
+        id:"art",
+        name:"Art",
+        icon:"🎨",
+        description:"Creative learning"
+    },
+
+    {
+        id:"moral",
+        name:"Moral Education",
+        icon:"❤️",
+        description:"Good habits & values"
+    }
+
+];
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentSubject=null;
+
+let currentQuestions=[];
+
+let selectedAnswers=[];
+
+let submitted=false;
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const arr=[...array];
+
+    for(
+        let i=arr.length-1;
+        i>0;
+        i--
+    ){
+
+        const j=
+            Math.floor(
+                Math.random()*(i+1)
+            );
+
+        [
+            arr[i],
+            arr[j]
+        ]=[
+            arr[j],
+            arr[i]
+        ];
+
+    }
+
+    return arr;
+}
+
+
+/* =====================================================
+   QUESTION CREATOR
+===================================================== */
+
+function makeQuestion(
+    question,
+    options,
+    correct,
+    explanation
+){
+
+    const data=options.map(
+        (text,index)=>({
+
+            text:text,
+
+            correct:index===correct
+
+        })
+    );
+
+    const shuffled=shuffle(data);
+
+    return {
+
+        question:question,
+
+        options:
+            shuffled.map(
+                x=>x.text
+            ),
+
+        answer:
+            shuffled.findIndex(
+                x=>x.correct
+            ),
+
+        explanation:explanation
+
+    };
+
+}
+
+
+/* =====================================================
+   HINDI — 90 UNIQUE
+===================================================== */
+
+function hindiQuestions(){
+
+    const nouns=[
+        ["आम","फल"],
+        ["सेब","फल"],
+        ["केला","फल"],
+        ["गाय","जानवर"],
+        ["कुत्ता","जानवर"],
+        ["बिल्ली","जानवर"],
+        ["घोड़ा","जानवर"],
+        ["शेर","जानवर"],
+        ["हाथी","जानवर"],
+        ["मोर","पक्षी"],
+        ["तोता","पक्षी"],
+        ["कबूतर","पक्षी"],
+        ["कमल","फूल"],
+        ["गुलाब","फूल"],
+        ["सूरज","आकाशीय वस्तु"],
+        ["चाँद","आकाशीय वस्तु"],
+        ["तारा","आकाशीय वस्तु"],
+        ["पानी","पेय"],
+        ["दूध","पेय"],
+        ["किताब","वस्तु"],
+        ["पेंसिल","वस्तु"],
+        ["कुर्सी","वस्तु"],
+        ["मेज","वस्तु"],
+        ["बैग","वस्तु"],
+        ["जूता","वस्तु"],
+        ["स्कूल","स्थान"],
+        ["घर","स्थान"],
+        ["बगीचा","स्थान"],
+        ["अस्पताल","स्थान"],
+        ["बाजार","स्थान"]
+    ];
+
+    const result=[];
+
+    nouns.forEach(
+        ([word,type],index)=>{
+
+            const wrong1=
+                type==="फल"
+                ?"जानवर"
+                :"फल";
+
+            const wrong2=
+                type==="पक्षी"
+                ?"वस्तु"
+                :"पक्षी";
+
+            result.push(
+                makeQuestion(
+                    `"${word}" क्या है?`,
+                    [
+                        type,
+                        wrong1,
+                        wrong2,
+                        "क्रिया"
+                    ],
+                    0,
+                    `"${word}" एक ${type} है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `"${word}" किसका उदाहरण है?`,
+                    [
+                        type,
+                        "संख्या",
+                        "क्रिया",
+                        "रंग"
+                    ],
+                    0,
+                    `"${word}" ${type} का उदाहरण है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `"${word}" शब्द किससे जुड़ा है?`,
+                    [
+                        type,
+                        "गिनती",
+                        "समय",
+                        "क्रिया"
+                    ],
+                    0,
+                    `"${word}" ${type} से जुड़ा शब्द है।`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   ENGLISH — 90 UNIQUE
+===================================================== */
+
+function englishQuestions(){
+
+    const words=[
+        ["Apple","fruit"],
+        ["Mango","fruit"],
+        ["Banana","fruit"],
+        ["Orange","fruit"],
+        ["Dog","animal"],
+        ["Cat","animal"],
+        ["Cow","animal"],
+        ["Horse","animal"],
+        ["Lion","animal"],
+        ["Tiger","animal"],
+        ["Elephant","animal"],
+        ["Rabbit","animal"],
+        ["Parrot","bird"],
+        ["Peacock","bird"],
+        ["Pigeon","bird"],
+        ["Rose","flower"],
+        ["Lotus","flower"],
+        ["Sun","object"],
+        ["Moon","object"],
+        ["Star","object"],
+        ["Book","thing"],
+        ["Pen","thing"],
+        ["Pencil","thing"],
+        ["Bag","thing"],
+        ["Ball","thing"],
+        ["Chair","thing"],
+        ["Table","thing"],
+        ["School","place"],
+        ["Home","place"],
+        ["Park","place"]
+    ];
+
+    const result=[];
+
+    words.forEach(
+        ([word,type])=>{
+
+            result.push(
+                makeQuestion(
+                    `What is "${word}"?`,
+                    [
+                        type,
+                        "number",
+                        "colour",
+                        "action"
+                    ],
+                    0,
+                    `"${word}" is a ${type}.`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `Choose the correct category for "${word}".`,
+                    [
+                        type,
+                        "number",
+                        "place",
+                        "action"
+                    ],
+                    0,
+                    `The correct category is ${type}.`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `Which answer is correct about "${word}"?`,
+                    [
+                        type,
+                        "number",
+                        "action",
+                        "colour"
+                    ],
+                    0,
+                    `"${word}" is a ${type}.`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   MATH — 90 UNIQUE
+===================================================== */
+
+function mathQuestions(){
+
+    const result=[];
+
+    /* 30 Addition */
+
+    for(let i=1;i<=30;i++){
+
+        const a=i;
+        const b=(i%9)+1;
+        const answer=a+b;
+
+        result.push(
+            makeQuestion(
+                `${a} + ${b} = ?`,
+                [
+                    String(answer),
+                    String(answer+1),
+                    String(answer-1),
+                    String(answer+2)
+                ],
+                0,
+                `${a} और ${b} को जोड़ने पर ${answer} मिलता है।`
+            )
+        );
+
+    }
+
+
+    /* 20 Subtraction */
+
+    for(let i=1;i<=20;i++){
+
+        const a=i+15;
+        const b=(i%9)+1;
+        const answer=a-b;
+
+        result.push(
+            makeQuestion(
+                `${a} - ${b} = ?`,
+                [
+                    String(answer),
+                    String(answer+1),
+                    String(answer-1),
+                    String(a+b)
+                ],
+                0,
+                `${a} में से ${b} घटाने पर ${answer} मिलता है।`
+            )
+        );
+
+    }
+
+
+    /* 15 Number before */
+
+    for(let i=1;i<=15;i++){
+
+        const n=i+10;
+
+        result.push(
+            makeQuestion(
+                `${n} से पहले कौन-सी संख्या आती है?`,
+                [
+                    String(n-1),
+                    String(n+1),
+                    String(n-2),
+                    String(n+2)
+                ],
+                0,
+                `${n} से पहले ${n-1} आता है।`
+            )
+        );
+
+    }
+
+
+    /* 15 Number after */
+
+    for(let i=1;i<=15;i++){
+
+        const n=i+20;
+
+        result.push(
+            makeQuestion(
+                `${n} के बाद कौन-सी संख्या आती है?`,
+                [
+                    String(n+1),
+                    String(n+2),
+                    String(n-1),
+                    String(n+10)
+                ],
+                0,
+                `${n} के बाद ${n+1} आता है।`
+            )
+        );
+
+    }
+
+
+    /* 10 Shapes */
+
+    const shapes=[
+        ["triangle",3],
+        ["square",4],
+        ["rectangle",4],
+        ["pentagon",5],
+        ["hexagon",6],
+        ["triangle",3],
+        ["square",4],
+        ["rectangle",4],
+        ["pentagon",5],
+        ["hexagon",6]
+    ];
+
+    shapes.forEach(
+        ([shape,sides])=>{
+
+            result.push(
+                makeQuestion(
+                    `A ${shape} has how many sides?`,
+                    [
+                        String(sides),
+                        "2",
+                        "6",
+                        "8"
+                    ],
+                    0,
+                    `A ${shape} has ${sides} sides.`
+                )
+            );
+
+        }
+    );
+
+    return result;
+}
+
+
+/* =====================================================
+   EVS — 90 UNIQUE
+===================================================== */
+
+function evsQuestions(){
+
+    const data=[
+        ["आँख","देखना","कान"],
+        ["कान","सुनना","आँख"],
+        ["नाक","सूँघना","कान"],
+        ["जीभ","स्वाद लेना","आँख"],
+        ["दाँत","चबाना","कान"],
+        ["हाथ","पकड़ना","पैर"],
+        ["पैर","चलना","हाथ"],
+        ["हृदय","रक्त पंप करना","कान"],
+        ["फेफड़े","साँस लेना","आँख"],
+        ["पेट","भोजन पचाना","हाथ"],
+        ["सूरज","प्रकाश","चाँद"],
+        ["बादल","बारिश","सूरज"],
+        ["पेड़","ऑक्सीजन","पत्थर"],
+        ["जड़","पौधे को पकड़ना","फूल"],
+        ["पत्तियाँ","भोजन बनाना","जड़"],
+        ["फूल","बीज बनाना","पत्थर"],
+        ["मछली","पानी","आसमान"],
+        ["पक्षी","उड़ना","तैरना"],
+        ["गाय","घास खाना","मछली"],
+        ["शेर","मांस खाना","घास"],
+        ["स्कूल","पढ़ाई","सोना"],
+        ["अस्पताल","इलाज","खेल"],
+        ["बाजार","खरीदारी","पढ़ाई"],
+        ["रसोई","खाना बनाना","सोना"],
+        ["शयनकक्ष","सोना","खाना बनाना"],
+        ["बाथरूम","नहाना","खरीदारी"],
+        ["कूड़ेदान","कचरा","पानी"],
+        ["साबुन","हाथ साफ करना","लिखना"],
+        ["पानी","पीना","लिखना"],
+        ["छाता","बारिश से बचना","खाना"]
+    ];
+
+    const result=[];
+
+    data.forEach(
+        ([thing,use,wrong])=>{
+
+            result.push(
+                makeQuestion(
+                    `${thing} का मुख्य काम क्या है?`,
+                    [
+                        use,
+                        wrong,
+                        "खेलना",
+                        "सोना"
+                    ],
+                    0,
+                    `${thing} का उपयोग ${use} के लिए होता है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `${thing} किससे संबंधित है?`,
+                    [
+                        use,
+                        "खिलौना",
+                        "कपड़ा",
+                        "वाहन"
+                    ],
+                    0,
+                    `${thing} ${use} से संबंधित है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `सही उत्तर चुनो: ${thing}`,
+                    [
+                        use,
+                        "केवल खेल",
+                        "केवल खाना",
+                        "केवल सोना"
+                    ],
+                    0,
+                    `सही उत्तर ${use} है।`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   COMPUTER — 90 UNIQUE
+===================================================== */
+
+function computerQuestions(){
+
+    const data=[
+        ["Keyboard","typing","input device"],
+        ["Mouse","clicking","input device"],
+        ["Monitor","showing information","output device"],
+        ["Printer","printing","output device"],
+        ["Speaker","sound","output device"],
+        ["Microphone","recording sound","input device"],
+        ["Camera","taking pictures","input device"],
+        ["Scanner","scanning","input device"],
+        ["CPU","processing","computer brain"],
+        ["Computer","processing information","electronic machine"],
+        ["Paint","drawing","program"],
+        ["Browser","opening websites","software"],
+        ["Internet","finding information","network"],
+        ["Password","security","secret"],
+        ["Folder","organising files","storage"],
+        ["File","storing information","document"],
+        ["Desktop","main screen","screen"],
+        ["Icon","opening programs","symbol"],
+        ["Laptop","portable computing","computer"],
+        ["Tablet","touch operation","device"],
+        ["USB","data transfer","device"],
+        ["Keyboard","entering letters","input device"],
+        ["Mouse","moving pointer","input device"],
+        ["Monitor","displaying images","output device"],
+        ["Speaker","playing audio","output device"],
+        ["Printer","paper output","output device"],
+        ["CPU","running instructions","processor"],
+        ["Internet","communication","network"],
+        ["Password","protecting account","security"],
+        ["Computer","learning","machine"]
+    ];
+
+    const result=[];
+
+    data.forEach(
+        ([item,use,type])=>{
+
+            result.push(
+                makeQuestion(
+                    `${item} का उपयोग किस लिए किया जाता है?`,
+                    [
+                        use,
+                        "खाना बनाने",
+                        "सोने",
+                        "दौड़ने"
+                    ],
+                    0,
+                    `${item} का उपयोग ${use} के लिए किया जाता है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `${item} किससे संबंधित है?`,
+                    [
+                        type,
+                        "खेल",
+                        "खाना",
+                        "कपड़े"
+                    ],
+                    0,
+                    `${item} ${type} से संबंधित है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `Which one is related to ${item}?`,
+                    [
+                        use,
+                        "sleeping",
+                        "cooking",
+                        "running"
+                    ],
+                    0,
+                    `${item} is related to ${use}.`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   GK — 90 UNIQUE
+===================================================== */
+
+function gkQuestions(){
+
+    const data=[
+        ["भारत","नई दिल्ली","राजधानी"],
+        ["भारत","बाघ","राष्ट्रीय पशु"],
+        ["भारत","मोर","राष्ट्रीय पक्षी"],
+        ["भारत","कमल","राष्ट्रीय फूल"],
+        ["भारत","आम","राष्ट्रीय फल"],
+        ["भारत","रुपया","मुद्रा"],
+        ["पृथ्वी","चंद्रमा","प्राकृतिक उपग्रह"],
+        ["पृथ्वी","सूर्य","प्रकाश का स्रोत"],
+        ["सप्ताह","7","दिन"],
+        ["वर्ष","12","महीने"],
+        ["इंद्रधनुष","7","रंग"],
+        ["सूर्य","पूर्व","उगने की दिशा"],
+        ["सूर्य","पश्चिम","डूबने की दिशा"],
+        ["मछली","पानी","रहने का स्थान"],
+        ["ऊँट","रेगिस्तान","रहने का स्थान"],
+        ["शेर","जंगल","रहने का स्थान"],
+        ["पक्षी","आसमान","उड़ने का स्थान"],
+        ["गाय","दूध","देती है"],
+        ["मुर्गी","अंडे","देती है"],
+        ["मधुमक्खी","शहद","बनाती है"],
+        ["रेशम का कीड़ा","रेशम","बनाता है"],
+        ["पेड़","ऑक्सीजन","देते हैं"],
+        ["पौधा","पानी","चाहता है"],
+        ["चाँद","रात","दिखता है"],
+        ["सूर्य","दिन","दिखता है"],
+        ["स्कूल","शिक्षा","स्थान"],
+        ["अस्पताल","इलाज","स्थान"],
+        ["पुस्तकालय","किताबें","स्थान"],
+        ["डाकघर","डाक","स्थान"],
+        ["पार्क","खेल","स्थान"]
+    ];
+
+    const result=[];
+
+    data.forEach(
+        ([subject,answer,type])=>{
+
+            result.push(
+                makeQuestion(
+                    `${subject} से संबंधित सही उत्तर क्या है?`,
+                    [
+                        answer,
+                        "कुर्सी",
+                        "पेंसिल",
+                        "जूता"
+                    ],
+                    0,
+                    `सही उत्तर ${answer} है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `${subject} का संबंध किससे है?`,
+                    [
+                        type,
+                        "खेल",
+                        "कपड़े",
+                        "खाना"
+                    ],
+                    0,
+                    `${subject} का संबंध ${type} से है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `सही तथ्य चुनो: ${subject}`,
+                    [
+                        answer,
+                        "कार",
+                        "किताब",
+                        "मेज"
+                    ],
+                    0,
+                    `सही उत्तर ${answer} है।`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   ART — 90 UNIQUE
+===================================================== */
+
+function artQuestions(){
+
+    const data=[
+        ["लाल","primary colour"],
+        ["नीला","primary colour"],
+        ["पीला","primary colour"],
+        ["हरा","secondary colour"],
+        ["नारंगी","secondary colour"],
+        ["बैंगनी","secondary colour"],
+        ["पेंसिल","drawing"],
+        ["क्रेयॉन","colouring"],
+        ["ब्रश","painting"],
+        ["पेंट","colouring"],
+        ["कागज","drawing surface"],
+        ["कैंची","cutting"],
+        ["गोंद","sticking"],
+        ["स्केल","straight line"],
+        ["रबर","removing marks"],
+        ["वृत्त","shape"],
+        ["वर्ग","shape"],
+        ["त्रिभुज","shape"],
+        ["आयत","shape"],
+        ["तारा","shape"],
+        ["लाल","warm colour"],
+        ["नारंगी","warm colour"],
+        ["पीला","warm colour"],
+        ["नीला","cool colour"],
+        ["हरा","cool colour"],
+        ["बैंगनी","cool colour"],
+        ["पेंसिल","sketching"],
+        ["ब्रश","painting"],
+        ["क्रेयॉन","colouring"],
+        ["कागज","art material"]
+    ];
+
+    const result=[];
+
+    data.forEach(
+        ([item,type])=>{
+
+            result.push(
+                makeQuestion(
+                    `${item} का उपयोग किसमें होता है?`,
+                    [
+                        type,
+                        "खाने",
+                        "दौड़ने",
+                        "सोने"
+                    ],
+                    0,
+                    `${item} का उपयोग ${type} में होता है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `${item} किससे संबंधित है?`,
+                    [
+                        type,
+                        "खेल",
+                        "जानवर",
+                        "फल"
+                    ],
+                    0,
+                    `${item} ${type} से संबंधित है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `सही उत्तर चुनो: ${item}`,
+                    [
+                        type,
+                        "स्थान",
+                        "संख्या",
+                        "जानवर"
+                    ],
+                    0,
+                    `सही उत्तर ${type} है।`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   MORAL EDUCATION — 90 UNIQUE
+===================================================== */
+
+function moralQuestions(){
+
+    const data=[
+        ["सच बोलना","ईमानदारी"],
+        ["बड़ों का सम्मान करना","सम्मान"],
+        ["दोस्त की मदद करना","दयालुता"],
+        ["चीजें बाँटना","साझा करना"],
+        ["समय पर स्कूल जाना","समय की पाबंदी"],
+        ["कचरा dustbin में डालना","स्वच्छता"],
+        ["गलती पर माफी माँगना","जिम्मेदारी"],
+        ["कमजोर की मदद करना","दयालुता"],
+        ["लाइन में खड़ा होना","अनुशासन"],
+        ["दूसरों की बात सुनना","सम्मान"],
+        ["माता-पिता की मदद करना","कर्तव्य"],
+        ["शिक्षक की बात सुनना","अनुशासन"],
+        ["जानवरों से प्यार करना","करुणा"],
+        ["पानी बचाना","जिम्मेदारी"],
+        ["बिजली बचाना","जिम्मेदारी"],
+        ["पेड़ लगाना","पर्यावरण प्रेम"],
+        ["किसी को परेशान न करना","अच्छा व्यवहार"],
+        ["अपनी चीजें संभालना","जिम्मेदारी"],
+        ["वादा निभाना","विश्वास"],
+        ["दूसरों को धन्यवाद देना","कृतज्ञता"],
+        ["हार के बाद फिर कोशिश करना","धैर्य"],
+        ["गुस्से में शांत रहना","संयम"],
+        ["बिना पूछे चीज न लेना","ईमानदारी"],
+        ["किसी का मजाक न उड़ाना","सम्मान"],
+        ["जरूरतमंद की मदद करना","दयालुता"],
+        ["साफ हाथ रखना","स्वच्छता"],
+        ["समय पर काम करना","अनुशासन"],
+        ["अपनी गलती स्वीकार करना","ईमानदारी"],
+        ["सभी के साथ अच्छा व्यवहार","समानता"],
+        ["दूसरों की भावनाओं का ध्यान रखना","संवेदनशीलता"]
+    ];
+
+    const result=[];
+
+    data.forEach(
+        ([action,value])=>{
+
+            result.push(
+                makeQuestion(
+                    `"${action}" किस अच्छे गुण को दिखाता है?`,
+                    [
+                        value,
+                        "गुस्सा",
+                        "आलस",
+                        "झूठ"
+                    ],
+                    0,
+                    `"${action}" ${value} का उदाहरण है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `हमें "${action}" क्यों करना चाहिए?`,
+                    [
+                        "अच्छा व्यवहार सीखने के लिए",
+                        "लड़ाई करने के लिए",
+                        "समय खराब करने के लिए",
+                        "किसी को दुख देने के लिए"
+                    ],
+                    0,
+                    `${action} एक अच्छी आदत है।`
+                )
+            );
+
+            result.push(
+                makeQuestion(
+                    `Which value is connected with "${action}"?`,
+                    [
+                        value,
+                        "anger",
+                        "laziness",
+                        "fighting"
+                    ],
+                    0,
+                    `This action shows ${value}.`
+                )
+            );
+
+        }
+    );
+
+    return result.slice(0,90);
+}
+
+
+/* =====================================================
+   SUBJECT RENDER
+===================================================== */
+
+function renderSubjects(){
+
+    document.getElementById("subjects").innerHTML=
+
+        subjects.map(
+            (subject,index)=>`
+
+            <div
+                class="subject"
+                onclick="openSubject('${subject.id}')"
+                style="animation-delay:${index*.06}s">
+
+                <div class="subject-icon">
+                    ${subject.icon}
+                </div>
+
+                <h3>
+                    ${subject.name}
+                </h3>
+
+                <p>
+                    ${subject.description}
+                </p>
+
+                <p>
+                    📝 90 Questions
+                </p>
+
+            </div>
+
+        `
+        ).join("");
+
+}
+
+
+/* =====================================================
+   OPEN SUBJECT
+===================================================== */
+
+function openSubject(subjectId){
+
+    currentSubject=subjectId;
+
+    const subject=
+        subjects.find(
+            s=>s.id===subjectId
+        );
+
+
+    if(subjectId==="hindi"){
+        currentQuestions=hindiQuestions();
+    }
+
+    else if(subjectId==="english"){
+        currentQuestions=englishQuestions();
+    }
+
+    else if(subjectId==="math"){
+        currentQuestions=mathQuestions();
+    }
+
+    else if(subjectId==="evs"){
+        currentQuestions=evsQuestions();
+    }
+
+    else if(subjectId==="computer"){
+        currentQuestions=computerQuestions();
+    }
+
+    else if(subjectId==="gk"){
+        currentQuestions=gkQuestions();
+    }
+
+    else if(subjectId==="art"){
+        currentQuestions=artQuestions();
+    }
+
+    else if(subjectId==="moral"){
+        currentQuestions=moralQuestions();
+    }
+
+
+    /* Safety check */
+
+    if(currentQuestions.length!==90){
+
+        console.error(
+            "Question count:",
+            currentQuestions.length
+        );
+
+        alert(
+            "Question loading error. Please try again."
+        );
+
+        return;
+
+    }
+
+
+    selectedAnswers=
+        new Array(90).fill(null);
+
+    submitted=false;
+
+
+    document.getElementById("homeSection")
+        .classList.add("hidden");
+
+    document.getElementById("testSection")
+        .classList.remove("hidden");
+
+
+    document.getElementById("testTitle")
+        .textContent=
+        `Class 1 • ${subject.name}`;
+
+
+    document.getElementById("testSubtitle")
+        .textContent=
+        "90 Questions • सभी Questions एक साथ";
+
+
+    document.getElementById("result")
+        .style.display="none";
+
+
+    document.getElementById("testProgressBar")
+        .style.width="0%";
+
+
+    renderQuestions();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   RENDER QUESTIONS
+===================================================== */
+
+function renderQuestions(){
+
+    const box=
+        document.getElementById("questions");
+
+
+    box.innerHTML=
+
+        currentQuestions.map(
+            (q,index)=>`
+
+            <div
+                class="question"
+                id="question-${index}">
+
+                <div class="question-title">
+
+                    <div class="q-number">
+                        ${index+1}
+                    </div>
+
+                    <div>
+                        ${q.question}
+                    </div>
+
+                </div>
+
+
+                <div class="options">
+
+                    ${q.options.map(
+                        (option,optIndex)=>`
+
+                        <button
+                            class="option"
+                            id="option-${index}-${optIndex}"
+                            onclick="
+                                selectAnswer(
+                                    ${index},
+                                    ${optIndex}
+                                )
+                            ">
+
+                            ${String.fromCharCode(65+optIndex)}.
+                            ${option}
+
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+
+                <div
+                    class="feedback"
+                    id="feedback-${index}">
+                </div>
+
+            </div>
+
+        `
+        ).join("");
+
+}
+
+
+/* =====================================================
+   SELECT ANSWER
+===================================================== */
+
+function selectAnswer(
+    questionIndex,
+    optionIndex
+){
+
+    if(submitted)return;
+
+
+    selectedAnswers[questionIndex]=
+        optionIndex;
+
+
+    for(let i=0;i<4;i++){
+
+        const btn=
+            document.getElementById(
+                `option-${questionIndex}-${i}`
+            );
+
+        if(btn){
+
+            btn.classList.toggle(
+                "selected",
+                i===optionIndex
+            );
+
+        }
+
+    }
+
+
+    const answered=
+        selectedAnswers.filter(
+            x=>x!==null
+        ).length;
+
+
+    const percentage=
+        Math.round(
+            answered/90*100
+        );
+
+
+    document.getElementById(
+        "testProgressBar"
+    ).style.width=
+        percentage+"%";
+
+}
+
+
+/* =====================================================
+   SUBMIT TEST
+===================================================== */
+
+function submitTest(){
+
+    if(submitted)return;
+
+
+    submitted=true;
+
+
+    let correct=0;
+
+    let wrong=0;
+
+    let unanswered=0;
+
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+            const selected=
+                selectedAnswers[index];
+
+
+            const feedback=
+                document.getElementById(
+                    `feedback-${index}`
+                );
+
+
+            for(let i=0;i<4;i++){
+
+                const btn=
+                    document.getElementById(
+                        `option-${index}-${i}`
+                    );
+
+
+                if(btn){
+
+                    btn.disabled=true;
+
+
+                    if(i===q.answer){
+
+                        btn.classList.add(
+                            "correct-answer"
+                        );
+
+                    }
+
+
+                    if(
+                        selected!==null &&
+                        i===selected &&
+                        selected!==q.answer
+                    ){
+
+                        btn.classList.add(
+                            "wrong-answer"
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            if(selected===null){
+
+                unanswered++;
+
+
+                feedback.className=
+                    "feedback wrong";
+
+
+                feedback.innerHTML=
+                    `⚪ Unanswered<br>
+                    <strong>Correct Answer:</strong>
+                    ${q.options[q.answer]}<br>
+                    ${q.explanation}`;
+
+            }
+
+            else if(
+                selected===q.answer
+            ){
+
+                correct++;
+
+
+                feedback.className=
+                    "feedback correct";
+
+
+                feedback.innerHTML=
+                    `✅ Correct!<br>
+                    ${q.explanation}`;
+
+            }
+
+            else{
+
+                wrong++;
+
+
+                feedback.className=
+                    "feedback wrong";
+
+
+                feedback.innerHTML=
+                    `❌ Wrong<br>
+                    <strong>Correct Answer:</strong>
+                    ${q.options[q.answer]}<br>
+                    ${q.explanation}`;
+
+            }
+
+        }
+    );
+
+
+    const percentage=
+        Math.round(
+            correct/90*100
+        );
+
+
+    document.getElementById("score")
+        .textContent=
+        `${correct} / 90`;
+
+
+    document.getElementById("correct")
+        .textContent=
+        correct;
+
+
+    document.getElementById("wrong")
+        .textContent=
+        wrong;
+
+
+    document.getElementById("unanswered")
+        .textContent=
+        unanswered;
+
+
+    document.getElementById("percentage")
+        .textContent=
+        percentage+"%";
+
+
+    let message;
+
+
+    if(percentage>=90){
+
+        message=
+            "🏆 Excellent! तुम बहुत अच्छा कर रहे हो!";
+
+    }
+
+    else if(percentage>=75){
+
+        message=
+            "🌟 Very Good! थोड़ी और practice करो।";
+
+    }
+
+    else if(percentage>=50){
+
+        message=
+            "👍 Good! फिर से practice करके score बढ़ाओ।";
+
+    }
+
+    else{
+
+        message=
+            "💪 कोई बात नहीं! फिर से कोशिश करो।";
+
+    }
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent=
+        message;
+
+
+    document.getElementById(
+        "result"
+    ).style.display=
+        "block";
+
+
+    document.getElementById(
+        "testProgressBar"
+    ).style.width=
+        "100%";
+
+
+    /* Save score */
+
+    localStorage.setItem(
+        "studyIndiaClass1_"+currentSubject,
+        JSON.stringify({
+
+            score:correct,
+
+            wrong:wrong,
+
+            unanswered:unanswered,
+
+            percentage:percentage,
+
+            date:new Date().toISOString()
+
+        })
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            document.getElementById(
+                "result"
+            ).scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },
+        300
+    );
+
+}
+
+
+/* =====================================================
+   RETRY
+===================================================== */
+
+function retryTest(){
+
+    if(currentSubject){
+
+        openSubject(
+            currentSubject
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW HOME
+===================================================== */
+
+function showHome(){
+
+    document.getElementById(
+        "testSection"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "homeSection"
+    ).classList.remove("hidden");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   BACK TO LESSON / CLASS SELECTION
+===================================================== */
+
+function goToClasses(){
+
+    window.location.href=
+        "lesson.html";
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDark(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const enabled=
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        enabled
+    );
+
+
+    document.getElementById(
+        "darkBtn"
+    ).textContent=
+        enabled
+        ? "☀️"
+        : "🌙";
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+function toggleLanguage(){
+
+    const current=
+        localStorage.getItem(
+            "studyIndiaLanguage"
+        );
+
+
+    const hindi=
+        current!=="hi";
+
+
+    localStorage.setItem(
+        "studyIndiaLanguage",
+        hindi
+        ? "hi"
+        : "en"
+    );
+
+
+    document.getElementById(
+        "langBtn"
+    ).textContent=
+        hindi
+        ? "EN"
+        : "हि";
+
+
+    document.getElementById(
+        "teacherText"
+    ).textContent=
+
+        hindi
+        ?
+        "अपना subject चुनो और सीधे 90 questions का test शुरू करो।"
+        :
+        "Choose a subject and start your 90-question test.";
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+if(
+    localStorage.getItem(
+        "studyIndiaDark"
+    )==="true"
+){
+
+    document.body.classList.add(
+        "dark"
+    );
+
+
+    document.getElementById(
+        "darkBtn"
+    ).textContent=
+        "☀️";
+
+}
+
+
+document.getElementById(
+    "langBtn"
+).textContent=
+
+    localStorage.getItem(
+        "studyIndiaLanguage"
+    )==="hi"
+    ?
+    "EN"
+    :
+    "हि";
+
+
+renderSubjects();
+
+</script>
+
+</body>
+</html>

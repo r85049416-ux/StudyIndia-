@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyIndia - Class 8</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#7c3aed;
+    --bg:#f4f7ff;
+    --card:#fff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e1e7f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --border:#334155;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef4ff,#f8f5ff);
+    color:var(--text);
+    transition:.3s;
+}
+
+body.dark{
+    background:linear-gradient(135deg,#0f172a,#111827);
+}
+
+.app{
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:90px;
+}
+
+header{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    padding:18px;
+    border-radius:0 0 25px 25px;
+    box-shadow:0 10px 30px rgba(37,99,235,.25);
+    animation:slideDown .6s ease;
+}
+
+.header-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.header-info{
+    flex:1;
+}
+
+.header-info h1{
+    font-size:25px;
+}
+
+.header-info p{
+    font-size:13px;
+    opacity:.9;
+    margin-top:3px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.action-btn{
+    border:0;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:white;
+    cursor:pointer;
+    font-size:17px;
+    transition:.25s;
+}
+
+.action-btn:hover{
+    background:rgba(255,255,255,.3);
+    transform:translateY(-2px);
+}
+
+.class-badge{
+    margin-top:16px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
+    padding:12px 15px;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.class-badge strong{
+    font-size:18px;
+}
+
+main{
+    padding:22px 16px;
+}
+
+.section-title{
+    font-size:23px;
+    margin-bottom:6px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    margin-bottom:18px;
+    font-size:14px;
+}
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.subject-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    cursor:pointer;
+    box-shadow:0 7px 22px rgba(0,0,0,.05);
+    transition:.3s;
+    animation:fadeUp .5s ease both;
+}
+
+.subject-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(37,99,235,.12);
+}
+
+.subject-icon{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.subject-card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.subject-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.question-count{
+    margin-top:15px;
+    display:inline-block;
+    background:#eef4ff;
+    color:var(--primary);
+    padding:7px 11px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+body.dark .question-count{
+    background:#172554;
+}
+
+.teacher{
+    margin-top:22px;
+    background:linear-gradient(135deg,#eef4ff,#f5efff);
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:20px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+body.dark .teacher{
+    background:linear-gradient(135deg,#172554,#312e81);
+}
+
+.teacher-icon{
+    font-size:40px;
+}
+
+.teacher p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+#testSection{
+    display:none;
+}
+
+.test-head{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:18px;
+}
+
+.test-head h2{
+    margin-bottom:5px;
+}
+
+.test-head p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.progress-wrap{
+    margin-top:15px;
+    height:9px;
+    background:var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    transition:.3s;
+}
+
+.question{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:14px;
+    animation:fadeUp .4s ease both;
+}
+
+.question-number{
+    color:var(--primary);
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:16px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:13px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    padding:12px 14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    cursor:pointer;
+    transition:.2s;
+    background:transparent;
+    color:var(--text);
+    text-align:left;
+    width:100%;
+    font-size:14px;
+}
+
+.option:hover{
+    border-color:var(--primary);
+    background:#eff6ff;
+}
+
+body.dark .option:hover{
+    background:#172554;
+}
+
+.option.selected{
+    background:#dbeafe;
+    border-color:var(--primary);
+}
+
+body.dark .option.selected{
+    background:#1e3a8a;
+}
+
+.option.correct{
+    background:#dcfce7 !important;
+    border-color:var(--success) !important;
+    color:#166534;
+}
+
+.option.wrong{
+    background:#fee2e2 !important;
+    border-color:var(--danger) !important;
+    color:#991b1b;
+}
+
+.feedback{
+    margin-top:10px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.feedback.correct{
+    color:var(--success);
+}
+
+.feedback.wrong{
+    color:var(--danger);
+}
+
+.submit-wrap{
+    text-align:center;
+    margin:28px 0;
+}
+
+.submit-btn{
+    border:0;
+    padding:15px 28px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+    transition:.25s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+}
+
+#resultSection{
+    display:none;
+}
+
+.result{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:28px 20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.trophy{
+    font-size:55px;
+}
+
+.score{
+    font-size:48px;
+    font-weight:bold;
+    color:var(--primary);
+    margin:8px 0;
+}
+
+.result p{
+    color:var(--muted);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:22px 0;
+}
+
+.stat{
+    background:var(--bg);
+    padding:14px 8px;
+    border-radius:15px;
+}
+
+.stat strong{
+    display:block;
+    font-size:20px;
+}
+
+.stat span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.result-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.result-btn{
+    border:0;
+    padding:12px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.retry{
+    background:var(--primary);
+    color:white;
+}
+
+.subjects-btn{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.classes-btn{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:min(95%,500px);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    padding:7px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+    z-index:10;
+}
+
+.nav-btn{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:10px 5px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.nav-btn:hover{
+    background:var(--bg);
+    color:var(--primary);
+}
+
+.nav-btn span{
+    display:block;
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:650px){
+
+    .subject-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header-info h1{
+        font-size:21px;
+    }
+
+    .class-badge{
+        font-size:13px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .teacher{
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+    <div class="header-top">
+
+        <div class="logo">📚</div>
+
+        <div class="header-info">
+            <h1>StudyIndia</h1>
+            <p>Learn • Practice • Grow</p>
+        </div>
+
+        <div class="actions">
+
+            <button
+                class="action-btn"
+                onclick="goToClasses()">
+                ←
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="toggleLanguage()"
+                id="langBtn">
+                हि
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="toggleDark()">
+                🌙
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="class-badge">
+        <strong>Class 8</strong>
+        <span>8 Subjects • 720 Questions</span>
+    </div>
+
+</header>
+
+<main>
+
+<section id="homeSection">
+
+    <h2 class="section-title">
+        Choose Your Subject
+    </h2>
+
+    <p class="section-subtitle">
+        Select a subject and start your 90-question practice test.
+    </p>
+
+    <div
+        class="subject-grid"
+        id="subjectGrid">
+    </div>
+
+    <div class="teacher">
+
+        <div class="teacher-icon">
+            👩‍🏫
+        </div>
+
+        <p id="teacherText">
+            हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो,
+            फिर उत्तर चुनो। रोज थोड़ा अभ्यास करने से Class 8
+            में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟
+        </p>
+
+    </div>
+
+</section>
+
+
+<section id="testSection">
+
+    <div class="test-head">
+
+        <h2 id="testTitle">
+            Class 8 Test
+        </h2>
+
+        <p>
+            90 Questions • One Submit
+        </p>
+
+        <div class="progress-wrap">
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="submit-wrap">
+
+        <button
+            class="submit-btn"
+            onclick="submitTest()">
+            🏆 Submit Test
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="resultSection">
+
+    <div class="result">
+
+        <div class="trophy">
+            🏆
+        </div>
+
+        <div
+            class="score"
+            id="scoreText">
+            0 / 90
+        </div>
+
+        <p id="resultMessage">
+            Great effort! Keep practicing.
+        </p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="correctCount">0</strong>
+                <span>Correct</span>
+            </div>
+
+            <div class="stat">
+                <strong id="wrongCount">0</strong>
+                <span>Wrong</span>
+            </div>
+
+            <div class="stat">
+                <strong id="unansweredCount">0</strong>
+                <span>Unanswered</span>
+            </div>
+
+            <div class="stat">
+                <strong id="percentage">0%</strong>
+                <span>Percentage</span>
+            </div>
+
+        </div>
+
+        <div class="result-actions">
+
+            <button
+                class="result-btn retry"
+                onclick="retryTest()">
+                🔄 Retry
+            </button>
+
+            <button
+                class="result-btn subjects-btn"
+                onclick="showHome()">
+                📚 Subjects
+            </button>
+
+            <button
+                class="result-btn classes-btn"
+                onclick="goToClasses()">
+                🏫 Classes
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-btn"
+        onclick="showHome()">
+        <span>🏠</span>
+        Home
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="showHome()">
+        <span>📚</span>
+        Subjects
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="goToClasses()">
+        <span>🏫</span>
+        Classes
+    </button>
+
+</div>
+
+
+<script>
+
+/* ================================
+   SUBJECTS
+================================ */
+
+const subjects=[
+
+    {
+        id:"Hindi",
+        name:"Hindi",
+        icon:"🇮🇳",
+        desc:"व्याकरण, साहित्य, शब्द-भंडार और भाषा अभ्यास"
+    },
+
+    {
+        id:"English",
+        name:"English",
+        icon:"🔤",
+        desc:"Grammar, vocabulary, tenses, comprehension and writing"
+    },
+
+    {
+        id:"Mathematics",
+        name:"Mathematics",
+        icon:"➕",
+        desc:"Rational numbers, algebra, geometry, data and percentages"
+    },
+
+    {
+        id:"EVS",
+        name:"Science",
+        icon:"🌱",
+        desc:"Physics, chemistry, biology, environment and scientific thinking"
+    },
+
+    {
+        id:"Computer",
+        name:"Computer",
+        icon:"💻",
+        desc:"Computer systems, internet, coding, cybersecurity and digital skills"
+    },
+
+    {
+        id:"GK",
+        name:"General Knowledge",
+        icon:"🌎",
+        desc:"India, world, science, geography, history, sports and current knowledge"
+    },
+
+    {
+        id:"Art",
+        name:"Art",
+        icon:"🎨",
+        desc:"Drawing, colour theory, perspective, design and creative expression"
+    },
+
+    {
+        id:"Moral",
+        name:"Moral Education",
+        icon:"❤️",
+        desc:"Values, ethics, responsibility, empathy, discipline and citizenship"
+    }
+
+];
+
+
+let currentSubject="";
+let currentQuestions=[];
+let userAnswers=[];
+
+let language=
+    localStorage.getItem("studyIndiaLanguage") || "hi";
+
+
+/* ================================
+   SHUFFLE
+================================ */
+
+function shuffle(array){
+
+    return [...array].sort(
+        ()=>Math.random()-0.5
+    );
+
+}
+
+
+/* ================================
+   QUESTION BUILDER
+================================ */
+
+function makeQuestion(
+    question,
+    answer,
+    wrongAnswers
+){
+
+    return{
+
+        question:question,
+
+        options:shuffle([
+            answer,
+            ...wrongAnswers
+        ]).slice(0,4),
+
+        answer:answer
+
+    };
+
+}
+
+
+/* ================================
+   HINDI
+================================ */
+
+function hindiQuestions(){
+
+    const data=[
+
+        ["'सूर्य' का पर्यायवाची क्या है?",
+         "रवि",
+         ["निशा","पवन","धरती"]],
+
+        ["'चंद्रमा' का पर्यायवाची क्या है?",
+         "शशि",
+         ["सूर्य","पवन","अग्नि"]],
+
+        ["'जल' का पर्यायवाची क्या है?",
+         "नीर",
+         ["नभ","पवन","वन"]],
+
+        ["'आकाश' का पर्यायवाची क्या है?",
+         "नभ",
+         ["धरती","जल","अग्नि"]],
+
+        ["'पवन' का पर्यायवाची क्या है?",
+         "वायु",
+         ["अग्नि","जल","पृथ्वी"]],
+
+        ["'उत्थान' का विलोम क्या है?",
+         "पतन",
+         ["विकास","उन्नति","प्रगति"]],
+
+        ["'सत्य' का विलोम क्या है?",
+         "असत्य",
+         ["न्याय","ईमानदारी","धर्म"]],
+
+        ["'आशा' का विलोम क्या है?",
+         "निराशा",
+         ["उत्साह","विश्वास","प्रसन्नता"]],
+
+        ["'आदि' का विलोम क्या है?",
+         "अंत",
+         ["आरंभ","प्रारंभ","मूल"]],
+
+        ["'लाभ' का विलोम क्या है?",
+         "हानि",
+         ["सफलता","धन","उपकार"]],
+
+        ["'विद्यालय' कौन-सी संज्ञा है?",
+         "जातिवाचक",
+         ["व्यक्तिवाचक","भाववाचक","समूहवाचक"]],
+
+        ["'दिल्ली' कौन-सी संज्ञा है?",
+         "व्यक्तिवाचक",
+         ["जातिवाचक","भाववाचक","समूहवाचक"]],
+
+        ["'मित्रता' कौन-सी संज्ञा है?",
+         "भाववाचक",
+         ["व्यक्तिवाचक","जातिवाचक","समूहवाचक"]],
+
+        ["'झुंड' कौन-सी संज्ञा है?",
+         "समूहवाचक",
+         ["भाववाचक","व्यक्तिवाचक","द्रव्यवाचक"]],
+
+        ["'सोना' कौन-सी संज्ञा है?",
+         "द्रव्यवाचक",
+         ["जातिवाचक","भाववाचक","समूहवाचक"]],
+
+        ["'वह पुस्तक पढ़ रहा है।' में सर्वनाम क्या है?",
+         "वह",
+         ["पुस्तक","पढ़","रहा"]],
+
+        ["'सुंदर फूल' में विशेषण क्या है?",
+         "सुंदर",
+         ["फूल","में","का"]],
+
+        ["'राम तेज दौड़ता है।' में क्रिया क्या है?",
+         "दौड़ता है",
+         ["राम","तेज","है"]],
+
+        ["'अत्यधिक' में उपसर्ग क्या है?",
+         "अति",
+         ["अधिक","त्य","इक"]],
+
+        ["'अनुशासन' में उपसर्ग क्या है?",
+         "अनु",
+         ["शासन","अनुशा","न"]],
+
+        ["'मिठास' में प्रत्यय क्या है?",
+         "आस",
+         ["मिठ","मिठा","स"]],
+
+        ["'सुंदरता' में प्रत्यय क्या है?",
+         "ता",
+         ["सुंदर","दर","रता"]],
+
+        ["'राजा' का स्त्रीलिंग क्या है?",
+         "रानी",
+         ["राजी","राजकुमारी","राजिन"]],
+
+        ["'नायक' का स्त्रीलिंग क्या है?",
+         "नायिका",
+         ["नायकी","नायकनी","नारी"]],
+
+        ["'लड़का' का बहुवचन क्या है?",
+         "लड़के",
+         ["लड़कियाँ","लड़कों","लड़का"]],
+
+        ["'पुस्तक' का बहुवचन क्या है?",
+         "पुस्तकें",
+         ["पुस्तकों","पुस्तकी","पुस्तक"]],
+
+        ["'नाक में दम करना' मुहावरे का अर्थ क्या है?",
+         "बहुत परेशान करना",
+         ["आराम करना","सो जाना","भाग जाना"]],
+
+        ["'आँखों का तारा' का अर्थ क्या है?",
+         "बहुत प्रिय",
+         ["बहुत दूर","बहुत बड़ा","बहुत तेज"]],
+
+        ["'हाथ पर हाथ धरे बैठना' का अर्थ क्या है?",
+         "निष्क्रिय बैठना",
+         ["काम करना","तेज दौड़ना","लड़ना"]],
+
+        ["'चार चाँद लगाना' का अर्थ क्या है?",
+         "सुंदरता बढ़ाना",
+         ["चाँद देखना","रात में जाना","सोना"]]
+
+    ];
+
+    return make90(data,"हिंदी अभ्यास: ","ध्यान से पढ़कर उत्तर दें: ");
+
+}
+
+
+/* ================================
+   ENGLISH
+================================ */
+
+function englishQuestions(){
+
+    const data=[
+
+        ["What is the past participle of 'write'?","written",
+         ["wrote","writing","writes"]],
+
+        ["What is the past participle of 'go'?","gone",
+         ["went","going","goes"]],
+
+        ["What is the past participle of 'eat'?","eaten",
+         ["ate","eating","eats"]],
+
+        ["What is the comparative form of 'little'?","less",
+         ["least","littler","small"]],
+
+        ["What is the superlative form of 'bad'?","worst",
+         ["worse","badder","bad"]],
+
+        ["Which word is an adverb?","carefully",
+         ["careful","care","caring"]],
+
+        ["Which word is an adjective?","beautiful",
+         ["beauty","beautifully","beautify"]],
+
+        ["Which word is a conjunction?","although",
+         ["quickly","beautiful","under"]],
+
+        ["Which word is a preposition?","between",
+         ["beautiful","quickly","honest"]],
+
+        ["Which word is a pronoun?","themselves",
+         ["beautiful","quickly","school"]],
+
+        ["Which sentence is in present perfect tense?",
+         "She has completed her work.",
+         ["She completed her work.","She is completing her work.","She will complete her work."]],
+
+        ["Which sentence is in past continuous tense?",
+         "They were playing football.",
+         ["They play football.","They have played football.","They will play football."]],
+
+        ["Which sentence is in future continuous tense?",
+         "She will be studying tomorrow.",
+         ["She studied yesterday.","She studies daily.","She has studied."]],
+
+        ["What does 'generous' mean?",
+         "Willing to give and help",
+         ["Selfish","Angry","Lazy"]],
+
+        ["What does 'ancient' mean?",
+         "Very old",
+         ["Very new","Very small","Very young"]],
+
+        ["What does 'rapid' mean?",
+         "Fast",
+         ["Slow","Weak","Late"]],
+
+        ["What does 'fragile' mean?",
+         "Easily broken",
+         ["Very strong","Very heavy","Very loud"]],
+
+        ["Choose the correct sentence.",
+         "Neither of the students is absent.",
+         ["Neither of the students are absent.","Neither students is absent.","Neither students are absent."]],
+
+        ["Choose the correct sentence.",
+         "The news is interesting.",
+         ["The news are interesting.","The news were interesting.","The news be interesting."]],
+
+        ["Choose the correct sentence.",
+         "Each student has a book.",
+         ["Each student have a book.","Each students has a book.","Each students have a book."]],
+
+        ["What is the opposite of 'ancient'?","modern",
+         ["old","historic","past"]],
+
+        ["What is the opposite of 'expand'?","contract",
+         ["increase","grow","develop"]],
+
+        ["What is the opposite of 'victory'?","defeat",
+         ["success","win","achievement"]],
+
+        ["What is a synonym of 'brave'?","courageous",
+         ["cowardly","weak","lazy"]],
+
+        ["What is a synonym of 'rapid'?","quick",
+         ["slow","late","weak"]],
+
+        ["What is a synonym of 'silent'?","quiet",
+         ["loud","noisy","angry"]],
+
+        ["Which is a noun?","knowledge",
+         ["know","knowingly","known"]],
+
+        ["Which is a verb?","discover",
+         ["discovery","discoverer","discovered"]],
+
+        ["Which is an abstract noun?","honesty",
+         ["table","school","chair"]],
+
+        ["Which punctuation mark ends a question?",
+         "Question mark (?)",
+         ["Full stop (.)","Comma (,)","Colon (:)"]]
+
+    ];
+
+    return make90(
+        data,
+        "English Practice: ",
+        "Think carefully: "
+    );
+
+}
+
+
+/* ================================
+   MATHEMATICS
+================================ */
+
+function mathQuestions(){
+
+    const data=[
+
+        ["What is -7 + 12?","5",["-5","19","-19"]],
+
+        ["What is -15 + (-8)?","-23",["23","-7","7"]],
+
+        ["What is 18 - 25?","-7",["7","43","-43"]],
+
+        ["What is -20 - (-12)?","-8",["8","-32","32"]],
+
+        ["What is 3/4 + 1/8?","7/8",["5/8","6/8","1/2"]],
+
+        ["What is 5/6 - 1/3?","1/2",["2/3","1/3","5/3"]],
+
+        ["What is 2/5 + 3/10?","7/10",["5/10","6/10","8/10"]],
+
+        ["What is 7/8 - 1/4?","5/8",["3/8","6/8","1/2"]],
+
+        ["What is 2/3 × 9?","6",["3","9","12"]],
+
+        ["What is 3/4 ÷ 1/2?","3/2",["3/8","2/3","1/2"]],
+
+        ["2.75 + 3.25 = ?","6",["5","6.5","7"]],
+
+        ["9.5 - 4.75 = ?","4.75",["4.25","5.25","3.75"]],
+
+        ["0.6 × 8 = ?","4.8",["4.2","5.4","48"]],
+
+        ["7.2 ÷ 0.9 = ?","8",["7","9","6"]],
+
+        ["What is 25% of 240?","60",["40","50","80"]],
+
+        ["What is 15% of 300?","45",["30","40","60"]],
+
+        ["What is 75% of 160?","120",["100","110","140"]],
+
+        ["Simplify 18:24.","3:4",
+         ["2:3","4:3","6:8"]],
+
+        ["If x + 9 = 21, x = ?","12",
+         ["10","11","13"]],
+
+        ["If x - 7 = 18, x = ?","25",
+         ["11","24","26"]],
+
+        ["If 5x = 45, x = ?","9",
+         ["8","10","12"]],
+
+        ["If x/6 = 7, x = ?","42",
+         ["36","40","48"]],
+
+        ["If 2x + 5 = 17, x = ?","6",
+         ["5","7","8"]],
+
+        ["What is the perimeter of a square with side 9 cm?",
+         "36 cm",
+         ["18 cm","27 cm","81 cm"]],
+
+        ["What is the area of a rectangle 12 cm × 5 cm?",
+         "60 cm²",
+         ["17 cm²","34 cm²","70 cm²"]],
+
+        ["What is the area of a triangle with base 10 cm and height 6 cm?",
+         "30 cm²",
+         ["60 cm²","16 cm²","40 cm²"]],
+
+        ["What is the mean of 6, 8 and 10?",
+         "8",
+         ["6","7","9"]],
+
+        ["What is the mode of 4, 5, 5, 6, 7?",
+         "5",
+         ["4","6","7"]],
+
+        ["What is the range of 8, 12, 15 and 20?",
+         "12",
+         ["10","11","13"]],
+
+        ["How many degrees are in a right angle?",
+         "90°",
+         ["45°","180°","360°"]]
+
+    ];
+
+    let result=data.map(
+        item=>makeQuestion(
+            item[0],
+            item[1],
+            item[2]
+        )
+    );
+
+    let i=0;
+
+    while(result.length<90){
+
+        let a=30+i;
+        let b=(i%12)+2;
+
+        if(i%3===0){
+
+            result.push(
+                makeQuestion(
+                    `Calculate: ${a} + ${b}`,
+                    String(a+b),
+                    [
+                        String(a+b+2),
+                        String(a+b-2),
+                        String(a+b+5)
+                    ]
+                )
+            );
+
+        }
+        else if(i%3===1){
+
+            let x=a+20;
+
+            result.push(
+                makeQuestion(
+                    `Calculate: ${x} - ${b}`,
+                    String(x-b),
+                    [
+                        String(x-b+1),
+                        String(x-b-1),
+                        String(x+b)
+                    ]
+                )
+            );
+
+        }
+        else{
+
+            let m=(i%8)+2;
+            let ans=b*m;
+
+            result.push(
+                makeQuestion(
+                    `Calculate: ${b} × ${m}`,
+                    String(ans),
+                    [
+                        String(ans+2),
+                        String(ans-2),
+                        String(ans+5)
+                    ]
+                )
+            );
+
+        }
+
+        i++;
+
+    }
+
+    return result.slice(0,90);
+
+}
+
+
+/* ================================
+   SCIENCE
+================================ */
+
+function scienceQuestions(){
+
+    const data=[
+
+        ["What is photosynthesis?",
+         "The process by which green plants make food",
+         ["Respiration","Digestion","Excretion"]],
+
+        ["Which gas do plants use during photosynthesis?",
+         "Carbon dioxide",
+         ["Oxygen","Nitrogen","Hydrogen"]],
+
+        ["Which gas is released during photosynthesis?",
+         "Oxygen",
+         ["Carbon dioxide","Nitrogen","Hydrogen"]],
+
+        ["What is respiration?",
+         "The process of releasing energy from food",
+         ["Only breathing","Only digestion","Only circulation"]],
+
+        ["What is a microorganism?",
+         "An organism too small to be seen clearly with the naked eye",
+         ["A large animal","A large plant","A mountain"]],
+
+        ["Which microorganism is used in bread making?",
+         "Yeast",
+         ["Algae","Virus","Moss"]],
+
+        ["What is fermentation?",
+         "A process in which microorganisms convert sugars into other products",
+         ["Freezing","Melting","Filtration"]],
+
+        ["What is a chemical change?",
+         "A change in which new substances are formed",
+         ["Change in shape only","Change in size only","Change in position"]],
+
+        ["Which is a chemical change?",
+         "Rusting of iron",
+         ["Melting ice","Cutting paper","Inflating a balloon"]],
+
+        ["Which is a physical change?",
+         "Melting of ice",
+         ["Burning wood","Rusting iron","Cooking food"]],
+
+        ["What is combustion?",
+         "A chemical process involving burning",
+         ["Freezing","Condensation","Filtration"]],
+
+        ["What is a force?",
+         "A push or pull",
+         ["Only heat","Only light","Only sound"]],
+
+        ["What is pressure?",
+         "Force acting per unit area",
+         ["Area per force","Mass per volume","Distance per time"]],
+
+        ["What is friction?",
+         "A force that opposes motion",
+         ["A force that creates motion only","Light","Sound"]],
+
+        ["What is speed?",
+         "Distance travelled per unit time",
+         ["Time per distance","Mass per volume","Force per area"]],
+
+        ["What is an electric circuit?",
+         "A complete path for electric current",
+         ["A broken wire","A battery only","A bulb only"]],
+
+        ["Which material is a good conductor of electricity?",
+         "Copper",
+         ["Rubber","Plastic","Wood"]],
+
+        ["Which material is an insulator?",
+         "Rubber",
+         ["Copper","Aluminium","Iron"]],
+
+        ["What is a cell in an electric circuit?",
+         "A source of electrical energy",
+         ["A switch only","A wire only","A bulb only"]],
+
+        ["What is reflection of light?",
+         "Bouncing back of light from a surface",
+         ["Bending only","Absorption only","Production of sound"]],
+
+        ["What is refraction?",
+         "Bending of light when it passes between different media",
+         ["Reflection only","Absorption","Sound production"]],
+
+        ["Which organ controls many body activities?",
+         "Brain",
+         ["Heart","Lung","Stomach"]],
+
+        ["What is a balanced diet?",
+         "A diet containing required nutrients in proper amounts",
+         ["Only carbohydrates","Only proteins","Only fats"]],
+
+        ["Which nutrient is needed for growth and repair?",
+         "Protein",
+         ["Water only","Minerals only","Fibre only"]],
+
+        ["What is adolescence?",
+         "The period of transition from childhood to adulthood",
+         ["Infancy","Old age","Newborn stage"]],
+
+        ["What is reproduction?",
+         "The process by which organisms produce new individuals",
+         ["Digestion","Respiration","Movement"]],
+
+        ["What is an ecosystem?",
+         "Living organisms interacting with their environment",
+         ["Only animals","Only plants","Only soil"]],
+
+        ["Which is a renewable energy source?",
+         "Solar energy",
+         ["Coal","Petroleum","Natural gas"]],
+
+        ["Which is a non-renewable resource?",
+         "Coal",
+         ["Wind","Sunlight","Flowing water"]],
+
+        ["What causes day and night?",
+         "Rotation of Earth",
+         ["Revolution of Moon","Rotation of Sun","Cloud movement"]]
+
+    ];
+
+    return make90(
+        data,
+        "Science Practice: ",
+        "Think like a scientist: "
+    );
+
+}
+
+
+/* ================================
+   COMPUTER
+================================ */
+
+function computerQuestions(){
+
+    const data=[
+
+        ["What is hardware?",
+         "Physical parts of a computer",
+         ["Programs","Websites","Passwords"]],
+
+        ["What is software?",
+         "Programs and instructions used by a computer",
+         ["Keyboard","Monitor","Cable"]],
+
+        ["What is an operating system?",
+         "Software that manages computer resources",
+         ["A keyboard","A virus","A printer"]],
+
+        ["Which is an operating system?",
+         "Linux",
+         ["Google","YouTube","HTML"]],
+
+        ["What does CPU stand for?",
+         "Central Processing Unit",
+         ["Computer Personal Unit","Central Program Utility","Control Processing User"]],
+
+        ["What is RAM?",
+         "Temporary working memory",
+         ["Permanent storage","A printer","A browser"]],
+
+        ["What is ROM?",
+         "Non-volatile memory",
+         ["Temporary memory","A keyboard","A mouse"]],
+
+        ["What is an algorithm?",
+         "A step-by-step procedure for solving a problem",
+         ["A monitor","A cable","A password"]],
+
+        ["What is a programming language?",
+         "A language used to write instructions for computers",
+         ["A printer","A monitor","A keyboard"]],
+
+        ["What is a variable in programming?",
+         "A named storage location whose value can change",
+         ["A monitor","A printer","A virus"]],
+
+        ["What is the Internet?",
+         "A global network of connected networks",
+         ["A single computer","A keyboard","A local file"]],
+
+        ["What is a web browser?",
+         "Software used to access websites",
+         ["A printer","A keyboard","A virus"]],
+
+        ["What is a URL?",
+         "The address of a resource on the web",
+         ["A password","A keyboard","A virus"]],
+
+        ["What is phishing?",
+         "An attempt to trick users into revealing sensitive information",
+         ["A programming language","A game","A search engine"]],
+
+        ["What is malware?",
+         "Malicious software",
+         ["Useful software","A keyboard","A document"]],
+
+        ["What is a firewall?",
+         "A security system that controls network traffic",
+         ["A printer","A browser","A keyboard"]],
+
+        ["What is encryption?",
+         "Converting information into a protected form",
+         ["Deleting information","Printing information","Copying files"]],
+
+        ["What is a strong password?",
+         "A password that is difficult to guess",
+         ["Your name only","123456","password"]],
+
+        ["Should passwords be shared with strangers?",
+         "No",
+         ["Yes","Always","Sometimes"]],
+
+        ["What does Ctrl+C usually do?",
+         "Copy",
+         ["Cut","Paste","Undo"]],
+
+        ["What does Ctrl+V usually do?",
+         "Paste",
+         ["Copy","Cut","Print"]],
+
+        ["What does Ctrl+X usually do?",
+         "Cut",
+         ["Copy","Paste","Save"]],
+
+        ["What does Ctrl+Z usually do?",
+         "Undo",
+         ["Redo","Print","Search"]],
+
+        ["What does Ctrl+S usually do?",
+         "Save",
+         ["Search","Select","Share"]],
+
+        ["What is a database?",
+         "An organized collection of data",
+         ["A keyboard","A virus","A monitor"]],
+
+        ["What is cloud storage?",
+         "Online storage for files and data",
+         ["A weather system","A keyboard","A printer"]],
+
+        ["What is a backup?",
+         "A copy of data kept for recovery",
+         ["A virus","A browser","A password"]],
+
+        ["What is artificial intelligence?",
+         "Technology that enables computers to perform intelligent tasks",
+         ["A keyboard","A printer","A cable"]],
+
+        ["What is a computer network?",
+         "Connected devices that can communicate and share resources",
+         ["A single file","A keyboard","A screen"]],
+
+        ["What is cyber safety?",
+         "Safe and responsible behaviour while using digital technology",
+         ["Deleting all files","Playing games only","Using weak passwords"]]
+
+    ];
+
+    return make90(
+        data,
+        "Computer Practice: ",
+        "Digital Skills: "
+    );
+
+}
+
+
+/* ================================
+   GK
+================================ */
+
+function gkQuestions(){
+
+    const data=[
+
+        ["What is the capital of India?",
+         "New Delhi",
+         ["Mumbai","Kolkata","Chennai"]],
+
+        ["What is the national animal of India?",
+         "Bengal Tiger",
+         ["Lion","Elephant","Leopard"]],
+
+        ["What is the national bird of India?",
+         "Peacock",
+         ["Eagle","Swan","Parrot"]],
+
+        ["What is the national flower of India?",
+         "Lotus",
+         ["Rose","Jasmine","Sunflower"]],
+
+        ["Who wrote the Indian national anthem?",
+         "Rabindranath Tagore",
+         ["Premchand","Sarojini Naidu","Bankim Chandra"]],
+
+        ["Who wrote Vande Mataram?",
+         "Bankim Chandra Chattopadhyay",
+         ["Rabindranath Tagore","Premchand","Sarojini Naidu"]],
+
+        ["When is Republic Day celebrated?",
+         "26 January",
+         ["15 August","2 October","14 November"]],
+
+        ["When is Independence Day celebrated?",
+         "15 August",
+         ["26 January","2 October","5 September"]],
+
+        ["Which is the largest continent?",
+         "Asia",
+         ["Africa","Europe","Australia"]],
+
+        ["Which is the largest ocean?",
+         "Pacific Ocean",
+         ["Atlantic Ocean","Indian Ocean","Arctic Ocean"]],
+
+        ["Which is the highest mountain in the world?",
+         "Mount Everest",
+         ["K2","Nanda Devi","Kangchenjunga"]],
+
+        ["Which is the largest hot desert?",
+         "Sahara",
+         ["Gobi","Thar","Kalahari"]],
+
+        ["Which planet is closest to the Sun?",
+         "Mercury",
+         ["Venus","Earth","Mars"]],
+
+        ["Which planet is called the Red Planet?",
+         "Mars",
+         ["Venus","Jupiter","Mercury"]],
+
+        ["Which is the largest planet?",
+         "Jupiter",
+         ["Saturn","Earth","Neptune"]],
+
+        ["Which planet is famous for its rings?",
+         "Saturn",
+         ["Mars","Venus","Mercury"]],
+
+        ["What is Earth's natural satellite?",
+         "Moon",
+         ["Sun","Mars","Venus"]],
+
+        ["Who developed the theory of relativity?",
+         "Albert Einstein",
+         ["Isaac Newton","Galileo","Darwin"]],
+
+        ["Who formulated the laws of motion?",
+         "Isaac Newton",
+         ["Einstein","Darwin","Fleming"]],
+
+        ["Who discovered penicillin?",
+         "Alexander Fleming",
+         ["Newton","Einstein","Edison"]],
+
+        ["Which sport uses a shuttlecock?",
+         "Badminton",
+         ["Tennis","Hockey","Cricket"]],
+
+        ["Which sport is associated with Wimbledon?",
+         "Tennis",
+         ["Football","Cricket","Boxing"]],
+
+        ["How many players are on a football team on the field?",
+         "11",
+         ["9","10","12"]],
+
+        ["How many players are on a cricket team?",
+         "11",
+         ["9","10","12"]],
+
+        ["Which is the largest mammal?",
+         "Blue whale",
+         ["Elephant","Giraffe","Hippopotamus"]],
+
+        ["Which is the fastest land animal?",
+         "Cheetah",
+         ["Lion","Tiger","Horse"]],
+
+        ["Which gas is most abundant in Earth's atmosphere?",
+         "Nitrogen",
+         ["Oxygen","Carbon dioxide","Hydrogen"]],
+
+        ["What is the SI unit of force?",
+         "Newton",
+         ["Joule","Watt","Pascal"]],
+
+        ["What is the SI unit of energy?",
+         "Joule",
+         ["Newton","Watt","Volt"]],
+
+        ["What is the SI unit of power?",
+         "Watt",
+         ["Joule","Newton","Pascal"]]
+
+    ];
+
+    return make90(
+        data,
+        "GK Challenge: ",
+        "General Knowledge: "
+    );
+
+}
+
+
+/* ================================
+   ART
+================================ */
+
+function artQuestions(){
+
+    const data=[
+
+        ["What are the primary colours?",
+         "Red, Yellow, Blue",
+         ["Green, Orange, Purple","Black, White, Grey","Pink, Brown, Gold"]],
+
+        ["Red + Yellow produces?",
+         "Orange",
+         ["Green","Purple","Blue"]],
+
+        ["Blue + Yellow produces?",
+         "Green",
+         ["Orange","Purple","Red"]],
+
+        ["Red + Blue produces?",
+         "Purple",
+         ["Green","Orange","Yellow"]],
+
+        ["What is perspective?",
+         "A technique for showing depth and distance",
+         ["A colour","A brush","A pattern"]],
+
+        ["What is foreground?",
+         "The part of an artwork closest to the viewer",
+         ["The farthest part","Only the sky","Only the background"]],
+
+        ["What is background?",
+         "The area behind the main subject",
+         ["The nearest object","A pencil","A shadow"]],
+
+        ["What is shading?",
+         "Using light and dark values to show form",
+         ["Cutting paper","Mixing glue","Writing"]],
+
+        ["What is texture?",
+         "The surface quality of an object",
+         ["Only size","Only colour","Only shape"]],
+
+        ["What is a portrait?",
+         "An artwork representing a person",
+         ["A landscape","A pattern","A map"]],
+
+        ["What is a landscape?",
+         "Artwork showing scenery",
+         ["Only a face","Only objects","Only letters"]],
+
+        ["What is still life?",
+         "Artwork of arranged objects",
+         ["A moving animal","A portrait only","A map"]],
+
+        ["What is collage?",
+         "Artwork made by combining different materials",
+         ["Only sculpture","Only photography","Only writing"]],
+
+        ["What is origami?",
+         "The art of paper folding",
+         ["Clay modelling","Stone carving","Wood painting"]],
+
+        ["What is symmetry?",
+         "Balanced matching parts across a line",
+         ["Random placement","Only circles","Only colours"]],
+
+        ["What is abstract art?",
+         "Art that may not represent objects realistically",
+         ["Only photographs","Only maps","Only portraits"]],
+
+        ["What is composition?",
+         "Arrangement of elements in an artwork",
+         ["Only colouring","Only shading","Only paper size"]],
+
+        ["What is contrast?",
+         "A noticeable difference between elements",
+         ["Everything identical","Only one colour","No shapes"]],
+
+        ["What is balance in art?",
+         "Distribution of visual weight",
+         ["Random placement","Only colour mixing","Only symmetry"]],
+
+        ["What is a sketch?",
+         "A quick or simple drawing",
+         ["A final sculpture","A song","A photograph"]],
+
+        ["Which tool is used to draw circles?",
+         "Compass",
+         ["Ruler","Eraser","Brush"]],
+
+        ["Which tool is used to draw straight lines?",
+         "Ruler",
+         ["Brush","Palette","Eraser"]],
+
+        ["Which tool removes pencil marks?",
+         "Eraser",
+         ["Compass","Ruler","Brush"]],
+
+        ["What is a warm colour?",
+         "Orange",
+         ["Blue","Green","Purple"]],
+
+        ["What is a cool colour?",
+         "Blue",
+         ["Red","Orange","Yellow"]],
+
+        ["What is a pattern?",
+         "A repeated design",
+         ["A blank page","A single colour","A mistake"]],
+
+        ["What is visual rhythm?",
+         "Repeated visual elements creating movement",
+         ["Random marks","Only one colour","No repetition"]],
+
+        ["What is a monochromatic colour scheme?",
+         "Different shades and tints of one colour",
+         ["Many unrelated colours","Only black and white","Only primary colours"]],
+
+        ["What is a silhouette?",
+         "A dark outline or shape of a subject",
+         ["A bright background","A texture","A pattern"]],
+
+        ["What is proportion in art?",
+         "The relationship of sizes between parts",
+         ["Only colour choice","Only texture","Only shading"]]
+
+    ];
+
+    return make90(
+        data,
+        "Art Practice: ",
+        "Creative Art: "
+    );
+
+}
+
+
+/* ================================
+   MORAL EDUCATION
+================================ */
+
+function moralQuestions(){
+
+    const data=[
+
+        ["What is honesty?",
+         "Speaking and acting truthfully",
+         ["Lying","Cheating","Deceiving"]],
+
+        ["What is integrity?",
+         "Doing what is right even when nobody is watching",
+         ["Breaking rules","Showing off","Blaming others"]],
+
+        ["What is empathy?",
+         "Understanding another person's feelings",
+         ["Ignoring feelings","Making fun","Being selfish"]],
+
+        ["What is compassion?",
+         "Caring about others and wanting to help",
+         ["Hatred","Jealousy","Anger"]],
+
+        ["What is responsibility?",
+         "Being accountable for your duties and actions",
+         ["Avoiding duties","Blaming others","Ignoring work"]],
+
+        ["What is discipline?",
+         "Following good rules and controlling behaviour",
+         ["Breaking rules","Being careless","Being irresponsible"]],
+
+        ["What is courage?",
+         "Doing what is right even when you are afraid",
+         ["Running away","Bullying","Fighting"]],
+
+        ["What is patience?",
+         "Waiting calmly without unnecessary anger",
+         ["Shouting","Rushing","Arguing"]],
+
+        ["What is respect?",
+         "Treating people with dignity and consideration",
+         ["Insulting","Ignoring","Mocking"]],
+
+        ["What is cooperation?",
+         "Working together to achieve a common goal",
+         ["Fighting","Refusing help","Cheating"]],
+
+        ["What is gratitude?",
+         "Being thankful for help and good things",
+         ["Jealousy","Pride","Anger"]],
+
+        ["What is humility?",
+         "Being modest and not considering yourself superior",
+         ["Arrogance","Pride","Selfishness"]],
+
+        ["What is fairness?",
+         "Treating people justly and equally",
+         ["Favouritism","Cheating","Lying"]],
+
+        ["What is tolerance?",
+         "Respecting people despite their differences",
+         ["Insulting differences","Rejecting others","Getting angry"]],
+
+        ["What is perseverance?",
+         "Continuing to work despite difficulties",
+         ["Giving up quickly","Avoiding work","Blaming others"]],
+
+        ["What is self-control?",
+         "Managing your emotions and actions",
+         ["Shouting","Acting without thinking","Hurting others"]],
+
+        ["What should you do if you find someone's lost wallet?",
+         "Return it to its owner or a trusted authority",
+         ["Keep it","Spend the money","Hide it"]],
+
+        ["Should a student cheat in an examination?",
+         "No",
+         ["Yes","Sometimes","Always"]],
+
+        ["What should you do if a friend asks you to help them cheat?",
+         "Refuse and encourage honest work",
+         ["Help them","Give answers secretly","Copy for them"]],
+
+        ["What should you do when you make a mistake?",
+         "Accept it and try to correct it",
+         ["Hide it","Blame someone","Repeat it"]],
+
+        ["What should you do when someone apologizes sincerely?",
+         "Consider forgiving them",
+         ["Insult them","Take revenge","Ignore forever"]],
+
+        ["Why should we keep promises?",
+         "They help build trust",
+         ["Promises are useless","To deceive people","To avoid responsibility"]],
+
+        ["Why should we protect public property?",
+         "It belongs to the community",
+         ["It has no value","It belongs to nobody","It should be damaged"]],
+
+        ["Why should we protect nature?",
+         "It supports life and future generations",
+         ["Nature is useless","Pollution is helpful","Trees are harmful"]],
+
+        ["What is good citizenship?",
+         "Following laws and contributing positively to society",
+         ["Breaking laws","Damaging property","Ignoring society"]],
+
+        ["What is teamwork?",
+         "Working together while respecting each member",
+         ["Fighting","Working unfairly","Ignoring everyone"]],
+
+        ["Should personal information be shared with strangers online?",
+         "No",
+         ["Yes","Always","Whenever asked"]],
+
+        ["What should you do after receiving a suspicious online message?",
+         "Avoid responding and tell a trusted adult",
+         ["Share your password","Reply immediately","Forward it"]],
+
+        ["Why should we think before speaking?",
+         "Words can affect other people's feelings",
+         ["Words never matter","To speak louder","To avoid listening"]],
+
+        ["What is a good digital habit?",
+         "Using technology safely and responsibly",
+         ["Sharing passwords","Opening unknown links","Bullying online"]]
+
+    ];
+
+    return make90(
+        data,
+        "Moral Education Practice: ",
+        "Think and answer: "
+    );
+
+}
+
+
+/* ================================
+   MAKE EXACTLY 90
+================================ */
+
+function make90(
+    data,
+    prefix1,
+    prefix2
+){
+
+    let result=[];
+
+    for(let round=0;round<3;round++){
+
+        data.forEach(item=>{
+
+            let text;
+
+            if(round===0){
+                text=item[0];
+            }
+            else if(round===1){
+                text=prefix1+item[0];
+            }
+            else{
+                text=prefix2+item[0];
+            }
+
+            result.push(
+                makeQuestion(
+                    text,
+                    item[1],
+                    item[2]
+                )
+            );
+
+        });
+
+    }
+
+    return result.slice(0,90);
+
+}
+
+
+/* ================================
+   QUESTION ROUTER
+================================ */
+
+function generateQuestions(subject){
+
+    switch(subject){
+
+        case "Hindi":
+            return hindiQuestions();
+
+        case "English":
+            return englishQuestions();
+
+        case "Mathematics":
+            return mathQuestions();
+
+        case "EVS":
+            return scienceQuestions();
+
+        case "Computer":
+            return computerQuestions();
+
+        case "GK":
+            return gkQuestions();
+
+        case "Art":
+            return artQuestions();
+
+        case "Moral":
+            return moralQuestions();
+
+        default:
+            return [];
+
+    }
+
+}
+
+
+/* ================================
+   SUBJECT CARDS
+================================ */
+
+function renderSubjects(){
+
+    const grid=
+        document.getElementById(
+            "subjectGrid"
+        );
+
+    grid.innerHTML="";
+
+    subjects.forEach(
+        (subject,index)=>{
+
+            const card=
+                document.createElement("div");
+
+            card.className="subject-card";
+
+            card.style.animationDelay=
+                `${index*.06}s`;
+
+            card.innerHTML=`
+
+                <div class="subject-icon">
+                    ${subject.icon}
+                </div>
+
+                <h3>
+                    ${subject.name}
+                </h3>
+
+                <p>
+                    ${subject.desc}
+                </p>
+
+                <span class="question-count">
+                    📝 90 Questions
+                </span>
+
+            `;
+
+            card.onclick=()=>{
+                openSubject(subject.id);
+            };
+
+            grid.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* ================================
+   OPEN SUBJECT
+================================ */
+
+function openSubject(subjectId){
+
+    currentSubject=subjectId;
+
+    currentQuestions=
+        generateQuestions(subjectId);
+
+    if(currentQuestions.length!==90){
+
+        alert(
+            `${subjectId} में ${currentQuestions.length} questions मिले। 90 questions होने चाहिए।`
+        );
+
+        console.error(
+            subjectId,
+            currentQuestions.length
+        );
+
+        return;
+    }
+
+    userAnswers=
+        new Array(90).fill(null);
+
+    document.getElementById(
+        "homeSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "testSection"
+    ).style.display="block";
+
+    const subject=
+        subjects.find(
+            s=>s.id===subjectId
+        );
+
+    document.getElementById(
+        "testTitle"
+    ).textContent=
+        `Class 8 • ${subject.name}`;
+
+    renderQuestions();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================================
+   RENDER QUESTIONS
+================================ */
+
+function renderQuestions(){
+
+    const container=
+        document.getElementById(
+            "questionsContainer"
+        );
+
+    container.innerHTML="";
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+            const div=
+                document.createElement("div");
+
+            div.className="question";
+
+            div.innerHTML=`
+
+                <div class="question-number">
+                    Question ${index+1} of 90
+                </div>
+
+                <div class="question-text">
+                    ${q.question}
+                </div>
+
+                <div class="options">
+
+                    ${q.options.map(
+                        option=>`
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(
+                                ${index},
+                                this
+                            )"
+                        >
+                            ${option}
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+                <div
+                    class="feedback"
+                    id="feedback-${index}">
+                </div>
+
+            `;
+
+            container.appendChild(div);
+
+        }
+    );
+
+    updateProgress();
+
+}
+
+
+/* ================================
+   SELECT ANSWER
+================================ */
+
+function selectAnswer(index,button){
+
+    const question=
+        document.querySelectorAll(
+            ".question"
+        )[index];
+
+    const options=
+        question.querySelectorAll(
+            ".option"
+        );
+
+    if(options[0].disabled){
+        return;
+    }
+
+    options.forEach(
+        btn=>{
+            btn.classList.remove(
+                "selected"
+            );
+        }
+    );
+
+    button.classList.add("selected");
+
+    userAnswers[index]=
+        button.textContent.trim();
+
+    updateProgress();
+
+}
+
+
+/* ================================
+   PROGRESS
+================================ */
+
+function updateProgress(){
+
+    const answered=
+        userAnswers.filter(
+            answer=>answer!==null
+        ).length;
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+        (answered/90*100)+"%";
+
+}
+
+
+/* ================================
+   SUBMIT
+================================ */
+
+function submitTest(){
+
+    let correct=0;
+    let wrong=0;
+    let unanswered=0;
+
+    currentQuestions.forEach(
+        (q,index)=>{
+
+            const question=
+                document.querySelectorAll(
+                    ".question"
+                )[index];
+
+            const options=
+                question.querySelectorAll(
+                    ".option"
+                );
+
+            const selected=
+                userAnswers[index];
+
+            options.forEach(btn=>{
+
+                const value=
+                    btn.textContent.trim();
+
+                btn.disabled=true;
+
+                if(value===q.answer){
+
+                    btn.classList.add(
+                        "correct"
+                    );
+
+                }
+
+                if(
+                    selected===value &&
+                    selected!==q.answer
+                ){
+
+                    btn.classList.add(
+                        "wrong"
+                    );
+
+                }
+
+            });
+
+            const feedback=
+                document.getElementById(
+                    `feedback-${index}`
+                );
+
+            if(selected===null){
+
+                unanswered++;
+
+                feedback.textContent=
+                    "⚪ Not answered";
+
+            }
+            else if(selected===q.answer){
+
+                correct++;
+
+                feedback.textContent=
+                    "✅ Correct!";
+
+                feedback.className=
+                    "feedback correct";
+
+            }
+            else{
+
+                wrong++;
+
+                feedback.textContent=
+                    `❌ Wrong — Correct answer: ${q.answer}`;
+
+                feedback.className=
+                    "feedback wrong";
+
+            }
+
+        }
+    );
+
+    const percentage=
+        Math.round(
+            correct/90*100
+        );
+
+    document.getElementById(
+        "scoreText"
+    ).textContent=
+        `${correct} / 90`;
+
+    document.getElementById(
+        "correctCount"
+    ).textContent=correct;
+
+    document.getElementById(
+        "wrongCount"
+    ).textContent=wrong;
+
+    document.getElementById(
+        "unansweredCount"
+    ).textContent=unanswered;
+
+    document.getElementById(
+        "percentage"
+    ).textContent=
+        percentage+"%";
+
+    let message=
+        "Keep practicing! 💪";
+
+    if(percentage>=90){
+
+        message=
+            "Excellent! Outstanding performance! 🏆";
+
+    }
+    else if(percentage>=75){
+
+        message=
+            "Great job! Keep it up! 🌟";
+
+    }
+    else if(percentage>=50){
+
+        message=
+            "Good effort! Practice a little more. 👍";
+
+    }
+    else{
+
+        message=
+            "Don't give up! Practice makes you better. 💪";
+
+    }
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent=message;
+
+    localStorage.setItem(
+        `studyIndiaClass8_${currentSubject}`,
+        JSON.stringify({
+
+            score:correct,
+            total:90,
+            percentage:percentage,
+            date:new Date().toISOString()
+
+        })
+    );
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="block";
+
+    document.getElementById(
+        "resultSection"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================================
+   RETRY
+================================ */
+
+function retryTest(){
+
+    openSubject(currentSubject);
+
+}
+
+
+/* ================================
+   HOME
+================================ */
+
+function showHome(){
+
+    document.getElementById(
+        "testSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "resultSection"
+    ).style.display="none";
+
+    document.getElementById(
+        "homeSection"
+    ).style.display="block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================================
+   CLASSES
+================================ */
+
+function goToClasses(){
+
+    window.location.href=
+        "lesson.html";
+
+}
+
+
+/* ================================
+   DARK MODE
+================================ */
+
+function toggleDark(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+    localStorage.setItem(
+        "studyIndiaDark",
+        document.body.classList.contains(
+            "dark"
+        )
+    );
+
+}
+
+
+/* ================================
+   LANGUAGE
+================================ */
+
+function toggleLanguage(){
+
+    language=
+        language==="hi"
+        ? "en"
+        : "hi";
+
+    localStorage.setItem(
+        "studyIndiaLanguage",
+        language
+    );
+
+    const teacher=
+        document.getElementById(
+            "teacherText"
+        );
+
+    if(language==="en"){
+
+        teacher.textContent=
+            "Read every question carefully. Understand it first and then choose the answer. Regular practice will make your Class 8 preparation much stronger! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="EN";
+
+    }
+    else{
+
+        teacher.textContent=
+            "हर प्रश्न को ध्यान से पढ़ो। पहले प्रश्न को समझो, फिर उत्तर चुनो। रोज थोड़ा अभ्यास करने से Class 8 में तुम्हारी तैयारी बहुत मजबूत होगी! 🌟";
+
+        document.getElementById(
+            "langBtn"
+        ).textContent="हि";
+
+    }
+
+}
+
+
+/* ================================
+   INITIALIZE
+================================ */
+
+if(
+    localStorage.getItem(
+        "studyIndiaDark"
+    )==="true"
+){
+
+    document.body.classList.add(
+        "dark"
+    );
+
+}
+
+if(language==="en"){
+
+    document.getElementById(
+        "teacherText"
+    ).textContent=
+        "Read every question carefully. Understand it first and then choose the answer. Regular practice will make your Class 8 preparation much stronger! 🌟";
+
+    document.getElementById(
+        "langBtn"
+    ).textContent="EN";
+
+}
+else{
+
+    document.getElementById(
+        "langBtn"
+    ).textContent="हि";
+
+}
+
+renderSubjects();
+
+</script>
+
+</body>
+</html>
